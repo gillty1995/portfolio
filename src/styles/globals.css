@@ -63,3 +63,15 @@ body {
 .font-arial {
   font-family: Arial, Helvetica, sans-serif;
 }
+
+@media (max-width: 480px) {
+  .mobile-extra-mt {
+    margin-top: 3rem; /* or whatever value you need */
+  }
+}
+
+@media (max-width: 480px) {
+  .mobile-extra-pb {
+    padding-bottom: 3rem; /* or whatever value you need */
+  }
+}

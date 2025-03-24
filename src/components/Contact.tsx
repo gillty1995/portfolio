@@ -56,9 +56,9 @@ export default function Contact() {
           Contact Me
         </h2>
         <p className="text-center text-gray-700 mb-8">
-          Want to work together? Send me a message below if you'd like to
+          Want to work together? Send me a message below if you&apos;d like to
           collaborate on a website, are interested in music lessons, or have
-          something else on your mind. I'd love to connect!
+          something else on your mind. I&apos;d love to connect!
         </p>
         {status === "success" ? (
           <div className="text-center">

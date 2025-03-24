@@ -1,5 +1,6 @@
 // app/layout.tsx
 import "../styles/globals.css";
+import { NavProvider } from "@/components/NavContext";
 
 export default function RootLayout({
   children,
@@ -8,7 +9,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <NavProvider>{children}</NavProvider>
+      </body>
     </html>
   );
 }

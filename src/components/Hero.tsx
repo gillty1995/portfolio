@@ -1,9 +1,11 @@
 "use client";
 import { useRef, useEffect } from "react";
 import { motion } from "framer-motion";
+import { useNav } from "./NavContext";
 
 export default function Hero() {
   const videoRef = useRef<HTMLVideoElement | null>(null);
+  const { toggleMenu } = useNav();
 
   useEffect(() => {
     if (videoRef.current) {
@@ -29,9 +31,10 @@ export default function Hero() {
       {/* Responsive Animated Text */}
       <div className="absolute inset-0 flex flex-col lg:flex-row justify-center items-center">
         {textWords.map((word, index) => (
-          <motion.h1
+          <motion.button
             key={index}
-            className="lexend-extralight text-7xl md:text-8xl lg:text-6xl font-bold text-white mx-2 md:mx-5 my-1"
+            onClick={toggleMenu}
+            className="lexend-extralight text-7xl md:text-8xl lg:text-6xl font-bold text-white mx-2 md:mx-5 my-1 cursor-pointer"
             initial={{
               opacity: 0,
               filter: "blur(10px)",
@@ -55,7 +58,7 @@ export default function Hero() {
             }}
           >
             {word}
-          </motion.h1>
+          </motion.button>
         ))}
       </div>
     </section>

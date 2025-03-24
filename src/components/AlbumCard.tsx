@@ -1,5 +1,6 @@
 "use client";
 import { motion } from "framer-motion";
+/* eslint-disable @next/next/no-img-element */
 
 // Define the Album interface
 export interface Album {

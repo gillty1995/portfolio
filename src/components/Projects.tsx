@@ -47,7 +47,7 @@ export default function Projects() {
     <section
       id="projects"
       ref={sectionRef}
-      className="relative w-full h-[70vh] max-[380px]:h-[100vh] xl:h-screen bg-gradient-to-b from-neutral-200 to-gray-100 overflow-hidden"
+      className="relative w-full h-[70vh] max-[380px]:h-[100vh] xl:h-screen bg-gradient-to-b from-neutral-200 to-gray-100 overflow-hidden mobile-extra-pb"
     >
       {/* Desktop Parallax Layout (visible on xl and up) */}
       <div className="hidden xl:flex absolute inset-0 justify-center items-center">
@@ -92,7 +92,7 @@ export default function Projects() {
       </div>
 
       {/* Mobile/Tablet Carousel Layout (visible on screens below xl) */}
-      <div className="flex xl:hidden absolute inset-0 flex-col justify-center items-center max-[380px]:pb-8">
+      <div className="flex xl:hidden absolute inset-0 flex-col justify-center items-center max-[380px]:pb-8 max-[480px]:pt-8 mobile-extra-mt mobile-extra-pb">
         <motion.div
           key={projectsData[mobileIndex].id}
           className="mb-2 max-[380px]:mb-4"

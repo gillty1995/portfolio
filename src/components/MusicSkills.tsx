@@ -79,7 +79,7 @@ export default function MusicSkills() {
           className="text-2xl lg:text-5xl max-[380px]:text-xl font-bold mb-4 text-center lg:mb-10"
           initial={{ opacity: 0, y: -50 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1.5 }}
+          transition={{ duration: 2 }}
           viewport={{ once: false }}
         >
           Creating Musical Experiences
@@ -88,13 +88,14 @@ export default function MusicSkills() {
           className="text-sm lg:text-xl max-[380px]:text-xs mb-6 text-center max-w-full sm:max-w-3xl"
           initial={{ opacity: 0, x: -100 }}
           whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 1.5, delay: 0.5 }}
+          transition={{ duration: 2.5, delay: 0.5 }}
           viewport={{ once: false }}
         >
           Professional musician for over a decade, I write and arrange various
-          genres of music for streaming and sync licensing. I'm able to create
-          custom music for any occasion, and with over 6 years of teaching
-          experience, I bring a wealth of musical expertise to every lesson.
+          genres of music for streaming and sync licensing. I&apos;m able to
+          create custom music for any occasion, and with over 6 years of
+          teaching experience, I bring a wealth of musical expertise to every
+          lesson.
         </motion.p>
         <motion.div
           className="flex flex-col items-center space-y-4"

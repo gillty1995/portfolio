@@ -1,12 +1,10 @@
-// src/utils/ProjectData.ts
-
 export const projectsData = [
     {
       id: 1,
       title: "RSVPMe: Easy Event Planning",
       description:
         "Ever struggled to keep track of who’s coming to your events? RSVPMe makes event planning effortless by allowing users to create, manage, and track RSVPs—all in one place. Whether it’s a small gathering or a large party, RSVPMe ensures smooth coordination with built-in location services and real-time updates. ",
-      backgroundImage: "/images/rsvpme-image.png",  // Correct path to the image in the public folder
+      backgroundImage: "/images/rsvpme-image.png",  
       links: {
         "Live Site": "https://rsvpme.hec.to/",
         "Frontend Repository": "https://github.com/gillty1995/rsvpme",
@@ -155,7 +153,7 @@ export const projectsData = [
     id: 4,
     title: "FutbolRules: GenAI Soccer Assistant",
     description: "What the heck is an offside rule? What makes a foul a foul? 🤷‍♂️ FutbolRules will help you get accurate, real-time answers to any question about soccer rules using Generative AI. It’s a user-friendly platform where users can input their queries, and the AI-powered backend responds with detailed answers, helping users better understand the intricacies of the game.",
-    backgroundImage: "/images/futbolrules-image.png", // Correct path to the image for project 2
+    backgroundImage: "/images/futbolrules-image.png", 
     links: {
        "Live Site": "https://futbolrules.hec.to/",
        "Frontend Repository": "https://github.com/gillty1995/genai-soccer-assistant",

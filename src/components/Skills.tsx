@@ -234,7 +234,7 @@ export default function Skills() {
         ref={scrollContainerRef}
         className="flex overflow-x-auto space-x-8 px-10 py-5 pb-100"
       >
-        {techSkills.map((skill, index) =>
+        {techSkills.map((skill) =>
           renderCard(skill, techSkillsInfo[skill], 0.1)
         )}
         {coreCompetencies.map((competency, index) =>

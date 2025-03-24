@@ -1,4 +1,4 @@
-// src/components/ProjectCard.tsx
+"use client";
 
 interface ProjectCardProps {
   id: number;
@@ -11,39 +11,35 @@ interface ProjectCardProps {
   futureImprovements: string;
   finalThoughts: string;
   videoUrl: string;
-  backgroundImage: string; // Ensure backgroundImage is received as a prop
+  backgroundImage: string;
   onClick: () => void;
-  active?: boolean; // Optional prop to indicate the active card
+  active?: boolean;
 }
 
 const ProjectCard: React.FC<ProjectCardProps> = ({
-  id,
-  title,
-  description,
-  frontendFramework,
-  backendFramework,
-  links,
-  challengesFaced,
-  futureImprovements,
-  finalThoughts,
-  videoUrl,
   backgroundImage,
   onClick,
   active = false,
 }) => {
+  // Use different sizes for mobile vs. larger screens:
+  // For mobile, we use smaller fixed sizes.
+  // For larger screens, we use bigger sizes.
   return (
     <div
-      className={`relative text-white p-6 rounded-xl shadow-xl cursor-pointer hover:scale-105 transition-transform duration-300 ease-in-out ${
-        active ? "w-80 h-[32rem]" : "w-72 h-96"
-      }`}
+      onClick={onClick}
+      className={`relative text-white p-6 rounded-xl shadow-xl cursor-pointer hover:scale-105 transition-transform duration-300 ease-in-out 
+         ${
+           active
+             ? "w-64 h-80 md:w-80 md:h-[32rem]"
+             : "w-56 h-72 md:w-72 md:h-96"
+         }`}
       style={{
         backgroundImage: `url(${backgroundImage})`,
-        backgroundSize: "cover", // Make the image cover the entire card
-        backgroundPosition: "center", // Center the image
+        backgroundSize: "cover",
+        backgroundPosition: "center",
       }}
-      onClick={onClick}
     >
-      {/* Semi-transparent overlay for better text readability */}
+      {/* Optional: a semi-transparent overlay */}
       <div className="absolute inset-0 rounded-xl"></div>
     </div>
   );

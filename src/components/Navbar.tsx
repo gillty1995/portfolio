@@ -1,6 +1,7 @@
 "use client";
-import { useState, useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
+import { useNav } from "./NavContext";
 
 const navLinks = [
   { name: "Home", href: "#hero" },
@@ -30,7 +31,7 @@ const menuVariants = {
 };
 
 export default function Navbar() {
-  const [isOpen, setIsOpen] = useState(false);
+  const { isOpen, toggleMenu } = useNav();
   const [isDark, setIsDark] = useState(false);
   const hamburgerRef = useRef<HTMLButtonElement>(null);
 
@@ -69,7 +70,7 @@ export default function Navbar() {
     href: string
   ) => {
     e.preventDefault();
-    setIsOpen(false);
+    toggleMenu(); // <-- use toggleMenu from context
     const targetId = href.replace("#", "");
     const targetEl = document.getElementById(targetId);
     if (targetEl) {
@@ -82,8 +83,8 @@ export default function Navbar() {
       <div className="container mx-auto flex justify-between items-center">
         <button
           ref={hamburgerRef}
-          onClick={() => setIsOpen(!isOpen)}
-          className={`text-2xl focus:outline-none absolute top-4 right-4 ${
+          onClick={toggleMenu} // <-- use toggleMenu from context
+          className={`text-2xl focus:outline-none absolute top-4 right-4 cursor-pointer ${
             isDark ? "text-black" : "text-white"
           }`}
         >
@@ -95,7 +96,7 @@ export default function Navbar() {
         className="fixed top-0 left-0 w-full h-full flex justify-center items-center"
         style={{ backgroundColor: "rgba(17, 24, 39, 0.8)" }}
         initial="closed"
-        animate={isOpen ? "open" : "closed"}
+        animate={isOpen ? "open" : "closed"} // <-- use isOpen from context
         variants={menuVariants}
       >
         <div className="flex flex-col items-center space-y-6">
