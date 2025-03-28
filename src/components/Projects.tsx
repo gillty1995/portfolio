@@ -47,7 +47,7 @@ export default function Projects() {
     <section
       id="projects"
       ref={sectionRef}
-      className="relative w-full h-[70vh] max-[380px]:h-[100vh] xl:h-screen bg-gradient-to-b from-neutral-200 to-gray-100 overflow-hidden mobile-extra-pb"
+      className="relative w-full min-h-[80vh] lg:min-h-[65vh] xl:min-h-screen bg-gradient-to-b from-neutral-200 to-gray-100 overflow-auto mobile-extra-pb"
     >
       {/* Desktop Parallax Layout (visible on xl and up) */}
       <div className="hidden xl:flex absolute inset-0 justify-center items-center">
@@ -71,6 +71,7 @@ export default function Projects() {
                 boxShadow: "0px 20px 30px rgba(0, 0, 0, 0.1)",
                 transition: { duration: 0.3, ease: "easeInOut" },
               }}
+              className="overflow-hidden rounded-xl shadow-xl"
             >
               <ProjectCard
                 id={project.id}
@@ -92,10 +93,10 @@ export default function Projects() {
       </div>
 
       {/* Mobile/Tablet Carousel Layout (visible on screens below xl) */}
-      <div className="flex xl:hidden absolute inset-0 flex-col justify-center items-center max-[380px]:pb-8 max-[480px]:pt-8 mobile-extra-mt mobile-extra-pb">
+      <div className="flex xl:hidden absolute inset-0 flex-col justify-center items-center overflow-auto p-4">
         <motion.div
           key={projectsData[mobileIndex].id}
-          className="mb-2 max-[380px]:mb-4"
+          className="mb-4 w-full flex justify-center"
           initial={{ opacity: 0, x: 100 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
@@ -118,8 +119,8 @@ export default function Projects() {
             active={true}
           />
         </motion.div>
-        {/* Arrow Buttons container with reduced top margin */}
-        <div className="flex items-center justify-center space-x-4 mt-1 max-[380px]:mt-2 z-10">
+        {/* Arrow Buttons container */}
+        <div className="flex items-center justify-center space-x-4 mt-4 z-10">
           <button onClick={handlePrev} className="text-3xl text-gray-800 p-2">
             <FaArrowLeft />
           </button>

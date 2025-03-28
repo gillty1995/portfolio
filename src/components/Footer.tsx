@@ -4,9 +4,12 @@ import { FaGithub, FaLinkedin, FaTiktok, FaFileAlt } from "react-icons/fa";
 
 export default function Footer() {
   return (
-    <footer className="bg-gray-100 text-gray-700 py-8">
+    <footer id="footer" className="bg-gray-100 text-gray-700 py-8">
       <div className="container mx-auto flex flex-col md:flex-row justify-between items-center px-4">
-        <div className="flex space-x-6 mb-4 md:mb-0">
+        <div
+          id="social-icons"
+          className="flex space-x-6 mb-4 md:mb-0 transition-colors"
+        >
           <a
             href="https://github.com/gillty1995"
             target="_blank"

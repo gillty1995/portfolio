@@ -72,6 +72,42 @@ body {
 
 @media (max-width: 480px) {
   .mobile-extra-pb {
-    padding-bottom: 3rem; /* or whatever value you need */
+    padding-bottom: 3rem;
   }
+}
+
+@media (max-width: 1023px) and (orientation: landscape) {
+  section#projects {
+    min-height: 150vh !important;
+  }
+}
+
+@keyframes smoothBounceBig {
+  0% {
+    transform: scale(1);
+    animation-timing-function: ease-out;
+  }
+  20% {
+    transform: scale(1.25);
+    animation-timing-function: ease-in-out;
+  }
+  40% {
+    transform: scale(0.85);
+    animation-timing-function: ease-in-out;
+  }
+  60% {
+    transform: scale(1.2);
+    animation-timing-function: ease-in-out;
+  }
+  80% {
+    transform: scale(0.95);
+    animation-timing-function: ease-in-out;
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.highlight-socials a {
+  animation: smoothBounceBig 1.5s forwards;
 }

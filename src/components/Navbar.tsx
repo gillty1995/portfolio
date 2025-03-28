@@ -9,6 +9,7 @@ const navLinks = [
   { name: "Skills", href: "#skills" },
   { name: "Music", href: "#music" },
   { name: "Contact", href: "#contact" },
+  { name: "Socials", href: "#footer" },
 ];
 
 const menuVariants = {
@@ -75,6 +76,19 @@ export default function Navbar() {
     const targetEl = document.getElementById(targetId);
     if (targetEl) {
       targetEl.scrollIntoView({ behavior: "smooth" });
+    }
+    if (targetId === "footer") {
+      // Give a little delay to ensure the footer is in view
+      setTimeout(() => {
+        const socialsEl = document.getElementById("social-icons");
+        if (socialsEl) {
+          socialsEl.classList.add("highlight-socials");
+          // Remove the highlight after 2 seconds (adjust as needed)
+          setTimeout(() => {
+            socialsEl.classList.remove("highlight-socials");
+          }, 2000);
+        }
+      }, 500);
     }
   };
 
