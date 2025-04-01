@@ -7,6 +7,18 @@ import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 
 const albumsData: Album[] = [
   {
+    id: 0,
+    title: "Another Night",
+    coverImage: "/images/another-night-album.jpg",
+    links: {
+      spotify: "https://open.spotify.com/album/5pQFS1kEbaQL2Ud1K2IJgz",
+      apple:
+        "https://music.apple.com/us/album/another-night-beat-tape/1805667839",
+      youtube:
+        "https://www.youtube.com/watch?v=Fp-m4LRDQoY&list=OLAK5uy_mn-b9dbTOmA0air4HKXyDhO9MD6XVzjVM",
+    },
+  },
+  {
     id: 1,
     title: "Easy Beat Tape",
     coverImage: "/images/easybeattape-album.JPG",
