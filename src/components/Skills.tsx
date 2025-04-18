@@ -1,7 +1,8 @@
 "use client";
 
 import { motion, AnimatePresence, useScroll } from "framer-motion";
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
+import { FaArrowRight } from "react-icons/fa";
 
 // Define the tech skills and core competencies
 const techSkills = [
@@ -18,8 +19,8 @@ const techSkills = [
   "Python",
   "FastAPI",
   "GraphQL",
-  "AWS (EC2, S3, Security Groups)", // removed NGINX here
-  "NGINX", // added as its own card
+  "AWS (EC2, S3, Security Groups)",
+  "NGINX",
   "Google Cloud",
   "GenAI",
   "OpenAI API",
@@ -48,7 +49,6 @@ const coreCompetencies = [
   "Attention to Detail",
 ];
 
-// Extra information for each tech skill
 const techSkillsInfo: Record<string, string> = {
   "HTML/CSS":
     "I create responsive, accessible layouts using semantic HTML and modern CSS techniques.",
@@ -100,7 +100,6 @@ const techSkillsInfo: Record<string, string> = {
   Auth0: "I integrate Auth0 for secure, streamlined user authentication.",
 };
 
-// Extra information for each core competency
 const coreCompetenciesInfo: Record<string, string> = {
   Communication:
     "I clearly articulate ideas and listen actively to engage and inform others.",
@@ -124,18 +123,52 @@ const coreCompetenciesInfo: Record<string, string> = {
 export default function Skills() {
   const scrollContainerRef = useRef<HTMLDivElement | null>(null);
   const { scrollXProgress } = useScroll({ container: scrollContainerRef });
+  const [arrowDirection, setArrowDirection] = useState<"right" | "left">(
+    "right"
+  );
   const [clickedCard, setClickedCard] = useState<string | null>(null);
+
+  useEffect(() => {
+    const unsubscribe = scrollXProgress.on("change", (latest) => {
+      if (latest >= 0.99) {
+        setArrowDirection("left");
+      } else if (latest <= 0.01) {
+        setArrowDirection("right");
+      }
+    });
+    return () => unsubscribe();
+  }, [scrollXProgress]);
+
+  // Auto-close the open card after 7 seconds.
+  useEffect(() => {
+    let timeoutId: NodeJS.Timeout;
+    if (clickedCard !== null) {
+      timeoutId = setTimeout(() => {
+        setClickedCard(null);
+      }, 7000);
+    }
+    return () => {
+      clearTimeout(timeoutId);
+    };
+  }, [clickedCard]);
 
   const handleCardClick = (card: string) => {
     setClickedCard(card === clickedCard ? null : card);
   };
 
-  // Reusable card renderer wrapped in a fixed-size container
+  // Variants for the progress circle fade in:
+  const progressCircleVariants = {
+    initial: { opacity: 0 },
+    animate: { opacity: 1 },
+    exit: { opacity: 0 },
+  };
+
+  // Reusable card renderer wrapped in a fixed-size container.
   const renderCard = (card: string, info?: string, delay = 0) => (
     <div key={card} className="flex-none w-[300px] h-[150px]">
       <motion.div
         onClick={() => handleCardClick(card)}
-        className="w-full h-full p-6 bg-white rounded-lg shadow-lg flex flex-col items-center justify-center text-center cursor-pointer relative overflow-visible"
+        className="w-full h-full p-6 bg-white rounded-lg shadow-2xl flex flex-col items-center justify-center text-center cursor-pointer relative overflow-visible"
         initial={{ opacity: 0, x: 50 }}
         whileInView={{ opacity: 1, x: 0 }}
         animate={{
@@ -149,7 +182,6 @@ export default function Skills() {
         style={{ transformOrigin: "center" }}
       >
         {clickedCard === card ? (
-          // When open, display only the info text centered.
           <AnimatePresence>
             {info && (
               <motion.p
@@ -165,7 +197,6 @@ export default function Skills() {
             )}
           </AnimatePresence>
         ) : (
-          // When not clicked, display the title.
           <h4 className="text-lg font-semibold text-gray-800 overflow-hidden text-ellipsis">
             {card}
           </h4>
@@ -177,7 +208,7 @@ export default function Skills() {
   return (
     <motion.section
       id="skills"
-      className="relative py-20 h-[500px] bg-gradient-to-b from-gray-100 to-white"
+      className="relative py-20 h-[500px] bg-gradient-to-b from-gray-200 to-gray-100"
     >
       {/* Title and progress circle */}
       <div className="flex items-center justify-center mb-10">
@@ -199,47 +230,91 @@ export default function Skills() {
             </motion.span>
           ))}
         </motion.h2>
+        {/* Progress Circle with fade-in */}
         <div className="ml-4 flex-shrink-0">
-          <svg
-            width="40"
-            height="40"
-            viewBox="0 0 100 100"
-            xmlns="http://www.w3.org/2000/svg"
-            className="rotate-90"
-          >
-            <circle
-              cx="50"
-              cy="50"
-              r="45"
-              stroke="#e5e7eb"
-              strokeWidth="10"
-              fill="none"
-            />
-            <motion.circle
-              cx="50"
-              cy="50"
-              r="45"
-              stroke="#2d3748"
-              strokeWidth="10"
-              fill="none"
-              strokeDasharray="283"
-              style={{ pathLength: scrollXProgress }}
-            />
-          </svg>
+          <AnimatePresence mode="wait">
+            <motion.svg
+              key="progress-circle"
+              width="40"
+              height="40"
+              viewBox="0 0 100 100"
+              xmlns="http://www.w3.org/2000/svg"
+              className="rotate-90"
+              variants={progressCircleVariants}
+              initial="initial"
+              whileInView={"animate"}
+              exit="exit"
+              transition={{ duration: 2, delay: 1 }}
+            >
+              <circle
+                cx="50"
+                cy="50"
+                r="45"
+                stroke="#D1D5DB"
+                strokeWidth="10"
+                fill="none"
+              />
+              <motion.circle
+                cx="50"
+                cy="50"
+                r="45"
+                stroke="#2d3748"
+                strokeWidth="10"
+                fill="none"
+                strokeDasharray="283"
+                style={{ pathLength: scrollXProgress }}
+              />
+            </motion.svg>
+          </AnimatePresence>
         </div>
+
+        {/* Bouncing Arrow with fade and direction change */}
+        <motion.div
+          // Arrow fades in on mount
+          initial={{ opacity: 0 }}
+          whileInView={{
+            opacity: 1,
+            x: arrowDirection === "right" ? [0, -10, 0] : [0, 10, 0],
+          }}
+          transition={{
+            opacity: { duration: 1, delay: 1.3 }, // Fade in over 1 second
+            x: { duration: 2, repeat: Infinity, ease: "easeInOut" },
+          }}
+          className="ml-6 pointer-events-none"
+        >
+          <FaArrowRight
+            style={{
+              transform: arrowDirection === "left" ? "scaleX(-1)" : "none",
+            }}
+            className="text-gray-800 text-2xl"
+          />
+        </motion.div>
       </div>
 
-      {/* Cards container */}
-      <div
-        ref={scrollContainerRef}
-        className="flex overflow-x-auto space-x-8 px-10 py-5 pb-100"
-      >
-        {techSkills.map((skill) =>
-          renderCard(skill, techSkillsInfo[skill], 0.1)
-        )}
-        {coreCompetencies.map((competency, index) =>
-          renderCard(competency, coreCompetenciesInfo[competency], 0.1 * index)
-        )}
+      {/* Cards container with hidden scrollbar */}
+      <div className="relative">
+        <div
+          ref={scrollContainerRef}
+          className="flex overflow-x-auto space-x-8 px-10 py-5 pb-100 hide-scrollbar"
+        >
+          {techSkills.map((skill) =>
+            renderCard(skill, techSkillsInfo[skill], 0.1)
+          )}
+          {coreCompetencies.map((competency, index) =>
+            renderCard(
+              competency,
+              coreCompetenciesInfo[competency],
+              0.1 * index
+            )
+          )}
+        </div>
+        {/* Gradient overlay: fades from transparent to the background color */}
+        <div
+          className="absolute right-0 top-0 h-full w-12 pointer-events-none"
+          style={{
+            background: "linear-gradient(to left, #E5E7EB, transparent)",
+          }}
+        />
       </div>
     </motion.section>
   );

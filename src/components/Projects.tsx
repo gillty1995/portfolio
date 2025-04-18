@@ -1,7 +1,13 @@
 "use client";
 
 import React, { useState, useRef } from "react";
-import { motion, useScroll, useTransform, useSpring } from "framer-motion";
+import {
+  motion,
+  useScroll,
+  useTransform,
+  useSpring,
+  MotionValue,
+} from "framer-motion";
 import ProjectCard from "@/components/ProjectCard";
 import { projectsData } from "@/utils/ProjectData";
 import ProjectModal from "./ProjectModal";
@@ -14,9 +20,9 @@ export default function Projects() {
   const [selectedProject, setSelectedProject] = useState<ProjectType>(null);
   const sectionRef = useRef<HTMLElement | null>(null);
 
-  // Desktop parallax effect (for large screens)
+  // Scroll-based parallax effect:
   const { scrollYProgress } = useScroll();
-  const xRange = useTransform(scrollYProgress, [0, 1], [310, -1000]);
+  const xRange = useTransform(scrollYProgress, [0, 1], [1100, -1000]);
   const intersectionRatio = useIntersectionRatio(sectionRef);
   const smoothRatio = useSpring(intersectionRatio, {
     stiffness: 50,
@@ -27,12 +33,49 @@ export default function Projects() {
     ([val, r]) => (1 - (r as number)) * (val as number)
   );
 
+  // Spring for the additional arrow offset for smooth transitions.
+  const arrowOffset = useSpring(0, { stiffness: 300, damping: 30 });
+
+  // Combine xFinal and arrowOffset.
+  const finalX: MotionValue<number> = useTransform(
+    [xFinal, arrowOffset],
+    (values) => {
+      const [a, b] = values as [number, number];
+      return a + b;
+    }
+  );
+
   const handleCardClick = (projectId: number) => {
     const project = projectsData.find((p) => p.id === projectId);
     if (project) setSelectedProject(project);
   };
 
-  // Mobile/Tablet carousel state
+  // Define limits for the arrow offset.
+  const MAX_OFFSET = 100;
+  const MIN_OFFSET = -800;
+
+  // Arrow button handlers
+  const handleArrowRight = () => {
+    const newOffset = arrowOffset.get() - 800;
+    // Clamp newOffset to our min value.
+    if (newOffset < MIN_OFFSET) {
+      arrowOffset.set(MIN_OFFSET);
+    } else {
+      arrowOffset.set(newOffset);
+    }
+  };
+
+  const handleArrowLeft = () => {
+    const newOffset = arrowOffset.get() + 800;
+    // Clamp newOffset so that it doesn't go above 0.
+    if (newOffset > MAX_OFFSET) {
+      arrowOffset.set(MAX_OFFSET);
+    } else {
+      arrowOffset.set(newOffset);
+    }
+  };
+
+  // Mobile/Tablet carousel
   const [mobileIndex, setMobileIndex] = useState(0);
   const handleNext = () => {
     setMobileIndex((prev) => (prev + 1) % projectsData.length);
@@ -47,13 +90,54 @@ export default function Projects() {
     <section
       id="projects"
       ref={sectionRef}
-      className="relative w-full min-h-[80vh] lg:min-h-[65vh] xl:min-h-screen bg-gradient-to-b from-neutral-200 to-gray-100 overflow-auto mobile-extra-pb"
+      className="relative w-full min-h-[80vh] lg:min-h-[60vh] xl:pb-50 bg-gradient-to-b from-neutral-200 to-gray-200 overflow-y-auto overflow-x-hidden mobile-extra-pb px-4 py-8 md:px-8 lg:px-12"
     >
+      {/* Header placed close to the project cards */}
+      <div className="flex items-center justify-center mt-25 mb-25 mobile-less-p">
+        <motion.h2
+          className="text-4xl font-bold text-gray-800 text-center max-md:max-w-100"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 3.5 }}
+        >
+          {[
+            "D",
+            "i",
+            "v",
+            "e",
+            " ",
+            "i",
+            "n",
+            "t",
+            "o",
+            " ",
+            "m",
+            "y",
+            " ",
+            "W",
+            "o",
+            "r",
+            "k",
+          ].map((letter, index) => (
+            <motion.span
+              key={index}
+              className={letter === " " ? "inline-block mx-2" : "inline-block"}
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              transition={{ delay: index * 0.2 }}
+            >
+              {letter}
+            </motion.span>
+          ))}
+        </motion.h2>
+      </div>
+
       {/* Desktop Parallax Layout (visible on xl and up) */}
-      <div className="hidden xl:flex absolute inset-0 justify-center items-center">
+      <div className="hidden xl:flex justify-center items-center mt-4 relative">
+        {/* Combined x offset container */}
         <motion.div
           className="flex space-x-10"
-          style={{ x: xFinal }}
+          style={{ x: finalX }}
           transition={{ type: "spring", stiffness: 80, damping: 20 }}
         >
           {projectsData.map((project) => (
@@ -90,10 +174,27 @@ export default function Projects() {
             </motion.div>
           ))}
         </motion.div>
+        {/* Overlay arrow buttons */}
+        <div className="absolute left-4 top-1/2 transform -translate-y-1/2 z-20">
+          <button
+            onClick={handleArrowLeft}
+            className="shadow-xl text-3xl text-gray-800 p-2 bg-[rgba(255,255,255,0.3)] rounded-full transition-colors duration-500 ease-in-out hover:bg-[rgba(0,0,0,0.7)] hover:text-gray-100"
+          >
+            <FaArrowLeft />
+          </button>
+        </div>
+        <div className="absolute right-4 top-1/2 transform -translate-y-1/2 z-20">
+          <button
+            onClick={handleArrowRight}
+            className="shadow-xl text-3xl text-gray-800 p-2 bg-[rgba(255,255,255,0.3)] rounded-full transition-colors duration-500 ease-in-out hover:bg-[rgba(0,0,0,0.7)] hover:text-gray-100"
+          >
+            <FaArrowRight />
+          </button>
+        </div>
       </div>
 
       {/* Mobile/Tablet Carousel Layout (visible on screens below xl) */}
-      <div className="flex xl:hidden absolute inset-0 flex-col justify-center items-center overflow-auto p-4">
+      <div className="flex xl:hidden flex-col justify-center items-center overflow-auto p-4">
         <motion.div
           key={projectsData[mobileIndex].id}
           className="mb-4 w-full flex justify-center"
@@ -119,7 +220,7 @@ export default function Projects() {
             active={true}
           />
         </motion.div>
-        {/* Arrow Buttons container */}
+        {/* Arrow Buttons container for Mobile/Tablet */}
         <div className="flex items-center justify-center space-x-4 mt-4 z-10">
           <button onClick={handlePrev} className="text-3xl text-gray-800 p-2">
             <FaArrowLeft />

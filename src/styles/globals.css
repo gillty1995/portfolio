@@ -19,10 +19,12 @@
   }
 }
 
+html,
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+  overflow-x: hidden;
 }
 
 @font-face {
@@ -76,6 +78,13 @@ body {
   }
 }
 
+@media (max-width: 480px) {
+  .mobile-less-p {
+    margin-bottom: 3rem;
+    margin-top: 3rem;
+  }
+}
+
 @media (max-width: 1023px) and (orientation: landscape) {
   section#projects {
     min-height: 150vh !important;
@@ -110,4 +119,54 @@ body {
 
 .highlight-socials a {
   animation: smoothBounceBig 1.5s forwards;
+}
+
+/* Custom Landscape Adjustments for the MusicSkills Section on Small Devices */
+@media (max-width: 1023px) and (orientation: landscape) {
+  /* Adjust the overall section padding for the music section */
+  section#music {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+  }
+
+  /* Adjust heading styles for better readability */
+  section#music h1 {
+    font-size: 2rem !important;
+    line-height: 1.2;
+  }
+
+  /* Adjust paragraph styles so that text doesn’t get squished */
+  section#music p {
+    max-width: 90% !important; /* Narrow container to keep text from stretching too wide */
+    margin-left: auto !important;
+    margin-right: auto !important;
+    font-size: 1rem !important;
+    line-height: 1.4;
+    margin-bottom: 1rem !important;
+  }
+}
+
+@media (max-width: 1000px) and (orientation: landscape) {
+  /* Adjust the overall section padding for the music section */
+  .extra-space {
+    margin-top: 15px;
+  }
+}
+
+@media (max-width: 1000px) and (orientation: landscape) {
+  /* Adjust the overall section padding for the music section */
+  .smaller-text {
+    font-size: 30px;
+  }
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.hide-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }

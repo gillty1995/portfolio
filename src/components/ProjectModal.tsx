@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 
 interface ProjectModalProps {
@@ -19,7 +19,19 @@ interface ProjectModalProps {
   onClose: () => void;
 }
 
+const isDesktop = () => window.innerWidth > 768;
+
 const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
+  // autplay
+  const [shouldAutoplay, setShouldAutoplay] = useState(isDesktop());
+
+  useEffect(() => {
+    const handleResize = () => setShouldAutoplay(isDesktop());
+    window.addEventListener("resize", handleResize);
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   // Close modal on Escape key press
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -41,7 +53,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
 
   return (
     <motion.div
-      className="fixed inset-0 flex items-center justify-center z-50"
+      className="fixed inset-0 flex items-center justify-center z-[9999]"
       onClick={handleModalClick}
       style={{
         backgroundColor: "rgba(0, 0, 0, 0.7)", // Semi-transparent backdrop
@@ -80,8 +92,8 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
         </h2>
 
         {/* Video */}
-        <div className="mb-4 rounded-lg overflow-hidden">
-          <video width="100%" controls>
+        <div className="mb-4 rounded-lg overflow-hidden shadow-xl">
+          <video width="100%" controls autoPlay={shouldAutoplay}>
             <source
               src={project.videoUrl || "/path/to/placeholder-video.mp4"}
               type="video/mp4"
@@ -94,7 +106,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
 
         {/* Links */}
         <div className="mb-4">
-          <h3 className="text-lg font-semibold lexend">Links</h3>
+          <h3 className="text-xl font-semibold lexend mb-2 ml-[-10]">Links</h3>
           <div className="flex space-x-4">
             {Object.entries(project.links).map(([key, url]) => (
               <a
@@ -113,14 +125,18 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
         {/* Framework Info */}
         <div className="mb-4">
           <p className="lexend mb-2">
-            <strong>Frontend Framework:</strong>{" "}
+            <strong className="block text-xl mb-2 ml-[-10]">
+              Frontend Framework:
+            </strong>{" "}
             <span
               className="font-arial"
               dangerouslySetInnerHTML={{ __html: project.frontendFramework }}
             />
           </p>
           <p className="lexend mb-2">
-            <strong>Backend Framework:</strong>{" "}
+            <strong className="block text-xl mb-2 ml-[-10]">
+              Backend Framework:
+            </strong>{" "}
             <span
               className="font-arial"
               dangerouslySetInnerHTML={{ __html: project.backendFramework }}
@@ -130,7 +146,9 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
 
         {/* Details Section */}
         <div className="mb-4">
-          <h3 className="text-lg font-semibold lexend">Details</h3>
+          <h3 className="text-xl font-semibold lexend mb-2 ml-[-10]">
+            Details
+          </h3>
           <div
             className="font-arial mb-4"
             dangerouslySetInnerHTML={{ __html: project.details }}
@@ -139,13 +157,17 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
 
         {/* Challenges Faced */}
         <div className="mb-4">
-          <h3 className="text-lg font-semibold lexend">Challenges Faced</h3>
+          <h3 className="text-xl font-semibold lexend mb-2 ml-[-10]">
+            Challenges Faced
+          </h3>
           <p className="font-arial mb-4">{project.challengesFaced}</p>
         </div>
 
         {/* Future Improvements */}
         <div className="mb-4">
-          <h3 className="text-lg font-semibold lexend">Future Improvements</h3>
+          <h3 className="text-xl font-semibold lexend mb-2 ml-[-10]">
+            Future Improvements
+          </h3>
           <div
             className="font-arial mb-4"
             dangerouslySetInnerHTML={{ __html: project.futureImprovements }}
@@ -154,7 +176,9 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
 
         {/* Final Thoughts */}
         <div className="mb-4">
-          <h3 className="text-lg font-semibold lexend">Final Thoughts</h3>
+          <h3 className="text-xl font-semibold lexend mb-2 ml-[-10]">
+            Final Thoughts
+          </h3>
           <p className="font-arial mb-4">{project.finalThoughts}</p>
         </div>
       </motion.div>

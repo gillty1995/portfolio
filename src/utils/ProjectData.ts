@@ -1,7 +1,7 @@
 export const projectsData = [
     {
       id: 1,
-      title: "RSVPMe: Easy Event Planning",
+      title: "RSVPMe",
       description:
         "Ever struggled to keep track of who’s coming to your events? RSVPMe makes event planning effortless by allowing users to create, manage, and track RSVPs—all in one place. Whether it’s a small gathering or a large party, RSVPMe ensures smooth coordination with built-in location services and real-time updates. ",
       backgroundImage: "/images/rsvpme-image.png",  
@@ -58,7 +58,7 @@ export const projectsData = [
     },
     {
       id: 2,
-      title: "Futbol Scores",
+      title: "FutbolScores",
       description: "A football-themed web application that allows users to search for teams, view live games, and save their favorite matches. It integrates RapidAPI’s Football API to display real-time data. Users can create accounts, log in, and manage saved games.",
       backgroundImage: "/images/futbolscores-image.png", 
       links: {
@@ -104,7 +104,7 @@ export const projectsData = [
     },
     {      
     id: 3,
-    title: "Practibot: Music Chatbot",
+    title: "Practibot",
     description: "Ever wanted a music tutor at your fingertips? 🎶 Practibot is here to help you learn and improve your music skills with the power of AI! Designed for musicians and aspiring learners alike, Practibot offers detailed guidance on music theory, composition, and practice techniques through a conversational, user-friendly chatbot.",
     backgroundImage: "/images/practibot-image.png", 
     links: {
@@ -151,7 +151,7 @@ export const projectsData = [
     },
     {
     id: 4,
-    title: "FutbolRules: GenAI Soccer Assistant",
+    title: "FutbolRules",
     description: "What the heck is an offside rule? What makes a foul a foul? 🤷‍♂️ FutbolRules will help you get accurate, real-time answers to any question about soccer rules using Generative AI. It’s a user-friendly platform where users can input their queries, and the AI-powered backend responds with detailed answers, helping users better understand the intricacies of the game.",
     backgroundImage: "/images/futbolrules-image.png", 
     links: {
@@ -201,4 +201,82 @@ export const projectsData = [
       <li><strong>Security Groups</strong>: Managed security groups on EC2 to control access and restrict traffic based on IP addresses and ports.</li>
     </ul>`,
     },
+    {
+      id: 5,
+      title: "St. Louis Men's Soccer",
+      description: "I joined a local soccer club and noticed that their website was super outdated, so I decided to throw together a modernized website for them. The aim was to provide a cleaner, more pleasant layout along with an intuitive admin interface for easy schedule updates and content management. It was a fun experience incorporating all their data and meeting their requirements for a dynamic, user-friendly online presence.",
+      backgroundImage: "/images/stlsoccer-image.png", 
+      links: {
+        "Live Site": "https://www.example-stlmenssoccer.hec.to/",
+        "Frontend Repository": "https://github.com/gillty1995/stl-soccer-website"
+      },
+      frontendFramework: `<p>The frontend is developed using <strong>Next.js 13</strong> with the new App Router for dynamic routing and server-side rendering. The site is styled with <strong>Tailwind CSS</strong> to ensure a sleek, responsive design across all devices, and <strong>Framer Motion</strong> is used to add smooth, engaging animations.</p>
+    
+      <h4><strong>Technologies Used:</strong></h4>
+      <ul>
+        <li><strong>Next.js 13 (App Router)</strong>: Provides dynamic, scalable routing and server-side rendering.</li>
+        <li><strong>TypeScript</strong>: Ensures robust, maintainable code with static typing.</li>
+        <li><strong>Tailwind CSS</strong>: A utility-first framework for responsive and modern design.</li>
+        <li><strong>Framer Motion</strong>: Enhances user interactions with smooth animations.</li>
+      </ul>`,
+      backendFramework: `<p>The backend is built within Next.js using API routes to handle server-side operations. It leverages Node.js for file-based storage that manages schedule and season data. Integrated admin functionality allows club administrators to securely log in and update schedules and season results with ease.</p>
+    
+      <h4><strong>Technologies Used:</strong></h4>
+      <ul>
+        <li><strong>Next.js API Routes</strong>: For building scalable backend functionalities within the same framework.</li>
+        <li><strong>Node.js</strong>: Handles file system operations and server-side logic.</li>
+        <li><strong>TypeScript</strong>: Provides static typing across the backend codebase.</li>
+        <li><strong>File-Based Storage</strong>: Manages schedule and season data using JSON files.</li>
+        <li><strong>Admin Authentication</strong>: Secure token-based authentication for managing website content.</li>
+      </ul>`,
+      challengesFaced: "A fun challenge was implementing the admin features. Ensuring that the admin could easily update the schedule, manage seasons, and post results seamlessly—while maintaining secure authentication—required creative solutions and robust testing.",
+      futureImprovements: `
+      <ul>
+        <li><strong>SEO Optimization</strong>: Enhance the site's search engine ranking to boost online visibility.</li>
+        <li><strong>Enhanced Mobile Experience</strong>: Continue refining the mobile layout and performance based on user feedback.</li>
+      </ul>`,
+      finalThoughts: "Modernizing the club's outdated website was both challenging and rewarding. Integrating dynamic content management with a clean, modern design has not only enhanced the user experience but also provided the club with a platform that’s easier to update and maintain.",
+      videoUrl: "/videos/stlmenssoccer-video.mp4",
+      details: `<p><strong>St. Louis Men’s Soccer Website</strong> is a modern, responsive platform built for a local soccer club. The website offers a dynamic public-facing interface where fans can view schedules, season results, and club news, along with a secure admin panel for updating content.</p>
+      
+      <p>This project leverages the powerful features of <strong>Next.js 13</strong> combined with <strong>TypeScript</strong> for enhanced developer productivity and reliability. Styling is handled by <strong>Tailwind CSS</strong>, while <strong>Framer Motion</strong> adds engaging animations throughout the site.</p>
+
+      </ul>`
+    },    
+    {
+      id: 6,
+      title: "Around the U.S.",
+      description: "Around the U.S. is a responsive web project that adapts seamlessly to different screen sizes and devices. It includes JavaScript-powered interactivity for uploading and saving data to a server. This project was developed using modular components and follows best practices such as the BEM methodology and OOP principles to ensure clean, reusable code.",
+      backgroundImage: "/images/aroundtheus-image.png",
+      links: {
+        "Live Site": "https://gillty1995.github.io/se_project_aroundtheus/",
+        "Frontend Repository": "https://github.com/gillty1995/se_project_aroundtheus"
+      },
+      frontendFramework: `<p>This project was built with vanilla JavaScript and is organized into modular components for easy scalability and maintenance. The design adheres to BEM naming conventions, and all styles are carefully structured to maintain consistency and simplicity.</p>
+      
+      <h4><strong>Technologies Used:</strong></h4>
+      <ul>
+        <li><strong>JavaScript</strong>: Provides dynamic functionality and interactivity throughout the project.</li>
+        <li><strong>BEM</strong>: Ensures a clear, maintainable CSS structure that aligns with OOP principles.</li>
+        <li><strong>CSS</strong>: Custom styles built from scratch, optimized for readability and performance.</li>
+      </ul>`,
+      backendFramework: `<p>The backend is powered by a lightweight JavaScript API that interacts with a remote server to store and retrieve user data. It includes secure token-based authentication for safe data handling and makes use of asynchronous operations to ensure a smooth user experience.</p>
+      
+      <h4><strong>Technologies Used:</strong></h4>
+      <ul>
+        <li><strong>Custom API</strong>: A simple JavaScript-based API for communication with the server.</li>
+        <li><strong>Token-Based Authentication</strong>: Ensures that data operations are secure and verified.</li>
+      </ul>`,
+      challengesFaced: "One of the main challenges was organizing the codebase into reusable components while maintaining a clean and consistent style. Ensuring all data interactions were seamless and properly validated also required careful attention to detail.",
+      futureImprovements: `
+      <ul>
+        <li><strong>Enhanced User Experience</strong>: Add more interactive elements and animations to improve engagement.</li>
+        <li><strong>Refined Performance</strong>: Optimize the data fetching and rendering pipeline to reduce load times.</li>
+      </ul>`,
+      finalThoughts: "Around the U.S. was a rewarding project that allowed me to hone my modular JavaScript skills and create a polished, responsive design. By incorporating OOP and BEM principles, I built a codebase that’s not only functional but also maintainable and scalable.",
+      videoUrl: "/videos/aroundtheus-video.mp4",
+      details: `<p><strong>Around the U.S.</strong> is a responsive web project designed to display content seamlessly across all popular screen sizes. Using modular JavaScript components, I implemented features that allow users to interact with the interface in a dynamic, intuitive way.</p>
+      
+      <p>The project structure reflects a commitment to clean code practices, utilizing BEM for consistent styling and OOP principles to ensure maintainability. Through the use of an organized CSS structure and a JavaScript-based API, the site is not only visually appealing but also functional and user-friendly.</p>`
+    }
   ];

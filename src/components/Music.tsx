@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import AlbumCard, { Album } from "./AlbumCard";
 import MusicModal from "./MusicModal";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
@@ -68,21 +68,38 @@ const albumsData: Album[] = [
 
 export default function Music() {
   const [selectedAlbum, setSelectedAlbum] = useState<Album | null>(null);
+  const [showAll, setShowAll] = useState(false);
   const [mobileIndex, setMobileIndex] = useState(0);
 
+  // Split the data: first 4 albums always visible, extraAlbums for the toggle.
+  const firstAlbums = albumsData.slice(0, 4);
+  const extraAlbums = albumsData.slice(4);
+
+  // Mobile carousel arrow handlers
   const handleNext = () => {
     setMobileIndex((prev) => (prev + 1) % albumsData.length);
   };
-
   const handlePrev = () => {
     setMobileIndex(
       (prev) => (prev - 1 + albumsData.length) % albumsData.length
     );
   };
 
+  // Animation config for desktop album cards.
+  const getCardAnimation = (index: number) => ({
+    initial: { opacity: 0, y: index % 2 === 0 ? -50 : 50 },
+    whileInView: { opacity: 1, y: 0 },
+    viewport: { once: false, amount: 0.5 },
+    transition: { duration: 1, delay: index * 0.3 },
+  });
+
   return (
-    <section id="albums" className="relative py-20 bg-gray-50">
+    <section
+      id="albums"
+      className="relative py-20 bg-gradient-to-b from-gray-100 to-gray-50"
+    >
       <div className="container mx-auto px-4">
+        {/* Header */}
         <motion.h2
           className="text-4xl font-bold text-center text-gray-800 mb-20"
           initial={{ opacity: 0 }}
@@ -102,29 +119,66 @@ export default function Music() {
           ))}
         </motion.h2>
 
-        {/* Desktop Layout: Horizontal scroll container (visible on xl and up) */}
-        <div className="hidden xl:flex justify-center overflow-x-auto space-x-8 px-4 py-5 snap-x snap-mandatory">
-          {albumsData.map((album, index) => (
-            <motion.div
-              key={album.id}
-              className="snap-center flex-shrink-0 w-64"
-              initial={{ opacity: 0, y: index % 2 === 0 ? -50 : 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, delay: index * 0.3 }}
-              viewport={{ once: false, amount: 0.5 }}
-            >
-              <AlbumCard
-                album={album}
-                onClick={() => setSelectedAlbum(album)}
-              />
-            </motion.div>
-          ))}
+        {/* Desktop Layout: Grid for album cards (visible on xl and up) */}
+        <div className="hidden xl:block">
+          {/* Grid for the first 4 album cards, centered */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 justify-items-center">
+            {firstAlbums.map((album, index) => (
+              <motion.div key={album.id} {...getCardAnimation(index)}>
+                <AlbumCard
+                  album={album}
+                  onClick={() => setSelectedAlbum(album)}
+                />
+              </motion.div>
+            ))}
+          </div>
+
+          {/* Extra albums drop down (with alternating animations) */}
+          <AnimatePresence>
+            {showAll && extraAlbums.length > 0 && (
+              <motion.div
+                key="extra-albums"
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: "auto" }}
+                exit={{ opacity: 0, height: 0 }}
+                transition={{ duration: 0.8, ease: "easeOut" }}
+                className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 justify-items-center"
+              >
+                {extraAlbums.map((album, index) => (
+                  <motion.div
+                    key={album.id}
+                    {...getCardAnimation(index + 4)} // Continue delay count from the first grid
+                  >
+                    <AlbumCard
+                      album={album}
+                      onClick={() => setSelectedAlbum(album)}
+                    />
+                  </motion.div>
+                ))}
+              </motion.div>
+            )}
+          </AnimatePresence>
+
+          {/* Toggle Button for extra albums */}
+          {extraAlbums.length > 0 && (
+            <div className="mt-15 flex justify-center">
+              <motion.button
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => setShowAll((prev) => !prev)}
+                className="w-full max-w-xs px-6 py-3 bg-gray-300 text-gray-800 shadow-lg rounded-full hover:bg-gray-200 duration-500 ease-in-out transition-colors cursor-pointer"
+              >
+                {showAll ? "Show Less" : "Show More"}
+              </motion.button>
+            </div>
+          )}
         </div>
 
-        {/* Mobile/Tablet Layout: Carousel with arrow buttons (visible below xl) */}
+        {/* Mobile/Tablet Layout: Carousel (visible on screens below xl) */}
         <div className="flex xl:hidden flex-col items-center">
           <motion.div
             key={albumsData[mobileIndex].id}
+            className="mb-4 w-full flex justify-center"
             initial={{ opacity: 0, x: 100 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
@@ -136,8 +190,7 @@ export default function Music() {
               onClick={() => setSelectedAlbum(albumsData[mobileIndex])}
             />
           </motion.div>
-          {/* Arrow Buttons */}
-          <div className="flex items-center justify-center space-x-4 mt-4">
+          <div className="flex items-center justify-center space-x-4 mt-4 z-10">
             <button onClick={handlePrev} className="text-3xl text-gray-800 p-2">
               <FaArrowLeft />
             </button>
@@ -148,6 +201,7 @@ export default function Music() {
         </div>
       </div>
 
+      {/* Modal for Album Details */}
       {selectedAlbum && (
         <MusicModal
           album={selectedAlbum}
