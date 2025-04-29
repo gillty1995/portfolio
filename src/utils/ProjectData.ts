@@ -1,6 +1,62 @@
 export const projectsData = [
+  {
+    id: 1,
+    title: "Textile Poms",
+    description: 
+      "Textile Poms is a responsive Pomeranian adoption website showcasing healthy, AKC-registered puppies born and raised in St. Louis. Visitors can view detailed puppy profiles, read our blog, and get in touch via a contact form—everything in one adorable package!",
+    backgroundImage: "/images/textilepoms-image.png",
+    links: {
+      "Live Site": "https://textilepoms.com/",
+      "Frontend Repository": "https://github.com/gillty1995/puppy-website",
+    },
+    frontendFramework: `
+      <p><strong>Textile Poms’ frontend</strong> is built with <strong>Next.js, TypeScript, and Tailwind CSS</strong>, offering a <strong>fully responsive</strong>, <strong>server-side rendered</strong> experience that looks great on any device.</p>
+      <h4 class="font-semibold">Technologies Used:</h4>
+      <ul>
+        <li><strong>Next.js & TypeScript</strong> – Provides route-based code splitting and type safety.</li>
+        <li><strong>Tailwind CSS</strong> – Enables rapid styling with utility classes.</li>
+        <li><strong>Framer Motion</strong> – Adds smooth, interactive animations for hover effects and transitions.</li>
+        <li><strong>React Icons</strong> – Supplies a versatile set of SVG icons.</li>
+        <li><strong>Nodemailer</strong> – Powers the contact form submission with Gmail SMTP.</li>
+      </ul>
+    `,
+    backendFramework: `
+    <p><strong>Textile Poms’ backend</strong> runs entirely within <strong>Next.js API routes</strong> using <strong>TypeScript</strong>. It handles CRUD for blog posts, admin authentication, and email submissions via Nodemailer.</p>
+    <h4 class="font-semibold">Technologies Used:</h4>
+    <ul>
+      <li><strong>Next.js API Routes</strong> – Serverless endpoints for managing puppies, blog posts, and admin tasks.</li>
+      <li><strong>TypeScript</strong> – Ensures type safety across both frontend and API code.</li>
+      <li><strong>Nodemailer</strong> – Sends emails via Gmail SMTP for contact inquiries.</li>
+      <li><strong>AWS EC2, PM2, & Nginx</strong> – Hosts the Next.js application with process management and reverse proxy.</li>
+    </ul>
+  `,
+  challengesFaced: 
+  "The biggest challenge I faced was implementing a fixed header with a smooth collapsing effect on scroll, ensuring it functioned seamlessly across different screen sizes and performed smoothly was a fun challenge.",
+  futureImprovements: `
+      <p>Future enhancements for Textile Poms include:</p>
+      <ul>
+        <li><strong>Image Optimization</strong> – Integrate automatic image resizing and lazy loading with Next.js Image component for faster page loads.</li>
+        <li><strong>Puppy Filtering</strong> – Add search and filter options (age, color, gender) to help visitors find their perfect pup.</li>
+        <li><strong>Admin Roles</strong> – Expand admin functionality with role-based access, allowing content editors separate from full admins.</li>
+        <li><strong>Blog Categories</strong> – Implement tags and categories for blog posts to improve content organization.</li>
+      </ul>
+    `,
+    finalThoughts: 
+      "Textile Poms blends my love for design and development into a delightful adoption platform. It’s fully responsive, secure, and easy to manage—making both visitors and admins happy!",
+      videoUrl: "/videos/textilepoms-video.mp4",
+    details: `
+      <p><strong>Key Features:</strong></p>
+      <ul>
+        <li>🐾 <strong>Puppy Listings</strong> – Browse available Pomeranian puppies with images, age, color, and personality details.</li>
+        <li>🖼️ <strong>High-Quality Gallery</strong> – View full-screen puppy photos with lightbox support.</li>
+        <li>💻 <strong>Admin Dashboard</strong> – Secure login to create, edit, and delete listings or blog posts.</li>
+        <li>✉️ <strong>Contact Form</strong> – Visitors can send inquiries, and receive confirmation; powered by Nodemailer.</li>
+        <li>💬 <strong>Blog & Comments</strong> – Read and post comments to stay updated on puppy news.</li>
+      </ul>
+    `,
+  },
     {
-      id: 1,
+      id: 2,
       title: "RSVPMe",
       description:
         "Ever struggled to keep track of who’s coming to your events? RSVPMe makes event planning effortless by allowing users to create, manage, and track RSVPs—all in one place. Whether it’s a small gathering or a large party, RSVPMe ensures smooth coordination with built-in location services and real-time updates. ",
@@ -57,7 +113,7 @@ export const projectsData = [
     `,
     },
     {
-      id: 2,
+      id: 3,
       title: "FutbolScores",
       description: "A football-themed web application that allows users to search for teams, view live games, and save their favorite matches. It integrates RapidAPI’s Football API to display real-time data. Users can create accounts, log in, and manage saved games.",
       backgroundImage: "/images/futbolscores-image.png", 
@@ -103,7 +159,7 @@ export const projectsData = [
       details: "I’m a big soccer fan, so I’m constantly checking different websites and apps to see live scores or the time of an upcoming game. In my experience using the available apps out in the current market is that they’re very cluttered, albeit with useful data, but unnecessary to what I was looking to experience. I just want to know the score and know when the next game is. So I made a clean, simple to use, aesthetic application that users can use to look up their favorite teams, stay up to date on upcoming games, save games to their personal account, and even see the live scores. I also added a Live Now section that displays all the live games going on around the world so people can discover new teams.",
     },
     {      
-    id: 3,
+    id: 4,
     title: "Practibot",
     description: "Ever wanted a music tutor at your fingertips? 🎶 Practibot is here to help you learn and improve your music skills with the power of AI! Designed for musicians and aspiring learners alike, Practibot offers detailed guidance on music theory, composition, and practice techniques through a conversational, user-friendly chatbot.",
     backgroundImage: "/images/practibot-image.png", 
@@ -150,7 +206,7 @@ export const projectsData = [
     `,
     },
     {
-    id: 4,
+    id: 5,
     title: "FutbolRules",
     description: "What the heck is an offside rule? What makes a foul a foul? 🤷‍♂️ FutbolRules will help you get accurate, real-time answers to any question about soccer rules using Generative AI. It’s a user-friendly platform where users can input their queries, and the AI-powered backend responds with detailed answers, helping users better understand the intricacies of the game.",
     backgroundImage: "/images/futbolrules-image.png", 
@@ -202,7 +258,7 @@ export const projectsData = [
     </ul>`,
     },
     {
-      id: 5,
+      id: 6,
       title: "St. Louis Men's Soccer",
       description: "I joined a local soccer club and noticed that their website was super outdated, so I decided to throw together a modernized website for them. The aim was to provide a cleaner, more pleasant layout along with an intuitive admin interface for easy schedule updates and content management. It was a fun experience incorporating all their data and meeting their requirements for a dynamic, user-friendly online presence.",
       backgroundImage: "/images/stlsoccer-image.png", 
@@ -244,7 +300,7 @@ export const projectsData = [
       </ul>`
     },    
     {
-      id: 6,
+      id: 7,
       title: "Around the U.S.",
       description: "Around the U.S. is a responsive web project that adapts seamlessly to different screen sizes and devices. It includes JavaScript-powered interactivity for uploading and saving data to a server. This project was developed using modular components and follows best practices such as the BEM methodology and OOP principles to ensure clean, reusable code.",
       backgroundImage: "/images/aroundtheus-image.png",
