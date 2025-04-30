@@ -158,8 +158,50 @@ export const projectsData = [
       videoUrl: "/videos/futbolscores-video.mp4",
       details: "I’m a big soccer fan, so I’m constantly checking different websites and apps to see live scores or the time of an upcoming game. In my experience using the available apps out in the current market is that they’re very cluttered, albeit with useful data, but unnecessary to what I was looking to experience. I just want to know the score and know when the next game is. So I made a clean, simple to use, aesthetic application that users can use to look up their favorite teams, stay up to date on upcoming games, save games to their personal account, and even see the live scores. I also added a Live Now section that displays all the live games going on around the world so people can discover new teams.",
     },
+    {
+      id: 4,
+      title: "St. Louis Men's Soccer",
+      description: "I joined a local soccer club and noticed that their website was super outdated, so I decided to throw together a modernized website for them. The aim was to provide a cleaner, more pleasant layout along with an intuitive admin interface for easy schedule updates and content management. It was a fun experience incorporating all their data and meeting their requirements for a dynamic, user-friendly online presence.",
+      backgroundImage: "/images/stlsoccer-image.png", 
+      links: {
+        "Live Site": "https://www.example-stlmenssoccer.hec.to/",
+        "Frontend Repository": "https://github.com/gillty1995/stl-soccer-website"
+      },
+      frontendFramework: `<p>The frontend is developed using <strong>Next.js 13</strong> with the new App Router for dynamic routing and server-side rendering. The site is styled with <strong>Tailwind CSS</strong> to ensure a sleek, responsive design across all devices, and <strong>Framer Motion</strong> is used to add smooth, engaging animations.</p>
+    
+      <h4><strong>Technologies Used:</strong></h4>
+      <ul>
+        <li><strong>Next.js 13 (App Router)</strong>: Provides dynamic, scalable routing and server-side rendering.</li>
+        <li><strong>TypeScript</strong>: Ensures robust, maintainable code with static typing.</li>
+        <li><strong>Tailwind CSS</strong>: A utility-first framework for responsive and modern design.</li>
+        <li><strong>Framer Motion</strong>: Enhances user interactions with smooth animations.</li>
+      </ul>`,
+      backendFramework: `<p>The backend is built within Next.js using API routes to handle server-side operations. It leverages Node.js for file-based storage that manages schedule and season data. Integrated admin functionality allows club administrators to securely log in and update schedules and season results with ease.</p>
+    
+      <h4><strong>Technologies Used:</strong></h4>
+      <ul>
+        <li><strong>Next.js API Routes</strong>: For building scalable backend functionalities within the same framework.</li>
+        <li><strong>Node.js</strong>: Handles file system operations and server-side logic.</li>
+        <li><strong>TypeScript</strong>: Provides static typing across the backend codebase.</li>
+        <li><strong>File-Based Storage</strong>: Manages schedule and season data using JSON files.</li>
+        <li><strong>Admin Authentication</strong>: Secure token-based authentication for managing website content.</li>
+      </ul>`,
+      challengesFaced: "A fun challenge was implementing the admin features. Ensuring that the admin could easily update the schedule, manage seasons, and post results seamlessly—while maintaining secure authentication—required creative solutions and robust testing.",
+      futureImprovements: `
+      <ul>
+        <li><strong>SEO Optimization</strong>: Enhance the site's search engine ranking to boost online visibility.</li>
+        <li><strong>Enhanced Mobile Experience</strong>: Continue refining the mobile layout and performance based on user feedback.</li>
+      </ul>`,
+      finalThoughts: "Modernizing the club's outdated website was both challenging and rewarding. Integrating dynamic content management with a clean, modern design has not only enhanced the user experience but also provided the club with a platform that’s easier to update and maintain.",
+      videoUrl: "/videos/stlmenssoccer-video.mp4",
+      details: `<p><strong>St. Louis Men’s Soccer Website</strong> is a modern, responsive platform built for a local soccer club. The website offers a dynamic public-facing interface where fans can view schedules, season results, and club news, along with a secure admin panel for updating content.</p>
+      
+      <p>This project leverages the powerful features of <strong>Next.js 13</strong> combined with <strong>TypeScript</strong> for enhanced developer productivity and reliability. Styling is handled by <strong>Tailwind CSS</strong>, while <strong>Framer Motion</strong> adds engaging animations throughout the site.</p>
+
+      </ul>`
+    },  
     {      
-    id: 4,
+    id: 5,
     title: "Practibot",
     description: "Ever wanted a music tutor at your fingertips? 🎶 Practibot is here to help you learn and improve your music skills with the power of AI! Designed for musicians and aspiring learners alike, Practibot offers detailed guidance on music theory, composition, and practice techniques through a conversational, user-friendly chatbot.",
     backgroundImage: "/images/practibot-image.png", 
@@ -206,7 +248,7 @@ export const projectsData = [
     `,
     },
     {
-    id: 5,
+    id: 6,
     title: "FutbolRules",
     description: "What the heck is an offside rule? What makes a foul a foul? 🤷‍♂️ FutbolRules will help you get accurate, real-time answers to any question about soccer rules using Generative AI. It’s a user-friendly platform where users can input their queries, and the AI-powered backend responds with detailed answers, helping users better understand the intricacies of the game.",
     backgroundImage: "/images/futbolrules-image.png", 
@@ -256,49 +298,7 @@ export const projectsData = [
       <li><strong>Ubuntu Server</strong>: I used an Ubuntu server for hosting the application, adding additional experience to my skillset with Linux-based environments for deployment.</li>
       <li><strong>Security Groups</strong>: Managed security groups on EC2 to control access and restrict traffic based on IP addresses and ports.</li>
     </ul>`,
-    },
-    {
-      id: 6,
-      title: "St. Louis Men's Soccer",
-      description: "I joined a local soccer club and noticed that their website was super outdated, so I decided to throw together a modernized website for them. The aim was to provide a cleaner, more pleasant layout along with an intuitive admin interface for easy schedule updates and content management. It was a fun experience incorporating all their data and meeting their requirements for a dynamic, user-friendly online presence.",
-      backgroundImage: "/images/stlsoccer-image.png", 
-      links: {
-        "Live Site": "https://www.example-stlmenssoccer.hec.to/",
-        "Frontend Repository": "https://github.com/gillty1995/stl-soccer-website"
-      },
-      frontendFramework: `<p>The frontend is developed using <strong>Next.js 13</strong> with the new App Router for dynamic routing and server-side rendering. The site is styled with <strong>Tailwind CSS</strong> to ensure a sleek, responsive design across all devices, and <strong>Framer Motion</strong> is used to add smooth, engaging animations.</p>
-    
-      <h4><strong>Technologies Used:</strong></h4>
-      <ul>
-        <li><strong>Next.js 13 (App Router)</strong>: Provides dynamic, scalable routing and server-side rendering.</li>
-        <li><strong>TypeScript</strong>: Ensures robust, maintainable code with static typing.</li>
-        <li><strong>Tailwind CSS</strong>: A utility-first framework for responsive and modern design.</li>
-        <li><strong>Framer Motion</strong>: Enhances user interactions with smooth animations.</li>
-      </ul>`,
-      backendFramework: `<p>The backend is built within Next.js using API routes to handle server-side operations. It leverages Node.js for file-based storage that manages schedule and season data. Integrated admin functionality allows club administrators to securely log in and update schedules and season results with ease.</p>
-    
-      <h4><strong>Technologies Used:</strong></h4>
-      <ul>
-        <li><strong>Next.js API Routes</strong>: For building scalable backend functionalities within the same framework.</li>
-        <li><strong>Node.js</strong>: Handles file system operations and server-side logic.</li>
-        <li><strong>TypeScript</strong>: Provides static typing across the backend codebase.</li>
-        <li><strong>File-Based Storage</strong>: Manages schedule and season data using JSON files.</li>
-        <li><strong>Admin Authentication</strong>: Secure token-based authentication for managing website content.</li>
-      </ul>`,
-      challengesFaced: "A fun challenge was implementing the admin features. Ensuring that the admin could easily update the schedule, manage seasons, and post results seamlessly—while maintaining secure authentication—required creative solutions and robust testing.",
-      futureImprovements: `
-      <ul>
-        <li><strong>SEO Optimization</strong>: Enhance the site's search engine ranking to boost online visibility.</li>
-        <li><strong>Enhanced Mobile Experience</strong>: Continue refining the mobile layout and performance based on user feedback.</li>
-      </ul>`,
-      finalThoughts: "Modernizing the club's outdated website was both challenging and rewarding. Integrating dynamic content management with a clean, modern design has not only enhanced the user experience but also provided the club with a platform that’s easier to update and maintain.",
-      videoUrl: "/videos/stlmenssoccer-video.mp4",
-      details: `<p><strong>St. Louis Men’s Soccer Website</strong> is a modern, responsive platform built for a local soccer club. The website offers a dynamic public-facing interface where fans can view schedules, season results, and club news, along with a secure admin panel for updating content.</p>
-      
-      <p>This project leverages the powerful features of <strong>Next.js 13</strong> combined with <strong>TypeScript</strong> for enhanced developer productivity and reliability. Styling is handled by <strong>Tailwind CSS</strong>, while <strong>Framer Motion</strong> adds engaging animations throughout the site.</p>
-
-      </ul>`
-    },    
+    },  
     {
       id: 7,
       title: "Around the U.S.",
