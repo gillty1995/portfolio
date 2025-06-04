@@ -62,7 +62,7 @@ export const projectsData = [
         "Ever struggled to keep track of who’s coming to your events? RSVPMe makes event planning effortless by allowing users to create, manage, and track RSVPs—all in one place. Whether it’s a small gathering or a large party, RSVPMe ensures smooth coordination with built-in location services and real-time updates. ",
       backgroundImage: "/images/rsvpme-image.png",  
       links: {
-        "Live Site": "https://rsvpme.hec.to/",
+        "Live Site": "https://rsvpme.mine.bz/",
         "Frontend Repository": "https://github.com/gillty1995/rsvpme",
         "Backend Repository": "https://github.com/gillty1995/rsvpme_api",
       },
@@ -164,7 +164,7 @@ export const projectsData = [
       description: "I joined a local soccer club and noticed that their website was super outdated, so I decided to throw together a modernized website for them. The aim was to provide a cleaner, more pleasant layout along with an intuitive admin interface for easy schedule updates and content management. It was a fun experience incorporating all their data and meeting their requirements for a dynamic, user-friendly online presence.",
       backgroundImage: "/images/stlsoccer-image.png", 
       links: {
-        "Live Site": "https://www.example-stlmenssoccer.hec.to/",
+        "Live Site": "https://www.example-stlmenssoccer.mine.bz/",
         "Frontend Repository": "https://github.com/gillty1995/stl-soccer-website"
       },
       frontendFramework: `<p>The frontend is developed using <strong>Next.js 13</strong> with the new App Router for dynamic routing and server-side rendering. The site is styled with <strong>Tailwind CSS</strong> to ensure a sleek, responsive design across all devices, and <strong>Framer Motion</strong> is used to add smooth, engaging animations.</p>
@@ -206,7 +206,7 @@ export const projectsData = [
     description: "Ever wanted a music tutor at your fingertips? 🎶 Practibot is here to help you learn and improve your music skills with the power of AI! Designed for musicians and aspiring learners alike, Practibot offers detailed guidance on music theory, composition, and practice techniques through a conversational, user-friendly chatbot.",
     backgroundImage: "/images/practibot-image.png", 
     links: {
-      "Live Site": "https://practibot.hec.to/",
+      "Live Site": "https://practibot.mine.bz/",
       "Frontend Repository": "https://github.com/gillty1995/practibot-frontend",
       "Backend Repository": "https://github.com/gillty1995/practibot-backend",
     },
@@ -253,7 +253,7 @@ export const projectsData = [
     description: "What the heck is an offside rule? What makes a foul a foul? 🤷‍♂️ FutbolRules will help you get accurate, real-time answers to any question about soccer rules using Generative AI. It’s a user-friendly platform where users can input their queries, and the AI-powered backend responds with detailed answers, helping users better understand the intricacies of the game.",
     backgroundImage: "/images/futbolrules-image.png", 
     links: {
-       "Live Site": "https://futbolrules.hec.to/",
+       "Live Site": "https://futbolrules.mine.bz/",
        "Frontend Repository": "https://github.com/gillty1995/genai-soccer-assistant",
        "Backend Repository": "https://github.com/gillty1995/genai-soccer-assistant-backend",
     },
