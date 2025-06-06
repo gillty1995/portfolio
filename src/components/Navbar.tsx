@@ -11,6 +11,7 @@ const defaultNavLinks = [
   { name: "Skills", href: "#skills" },
   { name: "Contact", href: "#contact" },
   { name: "Socials", href: "#footer" },
+  { name: "Resume", href: "resume" },
   { name: "Music", href: "/musicskills" },
 ];
 
