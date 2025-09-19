@@ -7,11 +7,17 @@ import { FaArrowRight } from "react-icons/fa";
 // Define the tech skills and core competencies
 const techSkills = [
   "HTML/CSS",
+  "Tailwind CSS",
   "JavaScript",
   "TypeScript",
   "React (including Context API)",
   "Vite",
   "Next.js",
+  "tRPC",
+  "TanStack Query",
+  "shadcn/ui",
+  "Radix UI",
+  "Next-PWA",
   "Node.js",
   "Express.js",
   "MongoDB",
@@ -24,6 +30,8 @@ const techSkills = [
   "Google Cloud",
   "GenAI",
   "OpenAI API",
+  "Docker",
+  "Cloudflare",
   "JWT",
   "RESTful APIs",
   "CI/CD Pipelines",
@@ -52,6 +60,8 @@ const coreCompetencies = [
 const techSkillsInfo: Record<string, string> = {
   "HTML/CSS":
     "I create responsive, accessible layouts using semantic HTML and modern CSS techniques.",
+  "Tailwind CSS":
+    "I style UIs quickly and consistently using utility-first classes with Tailwind.",
   JavaScript:
     "I write clean, efficient JavaScript to build dynamic, interactive interfaces.",
   TypeScript:
@@ -60,7 +70,16 @@ const techSkillsInfo: Record<string, string> = {
     "I build interactive UIs with React and manage state effectively using the Context API.",
   Vite: "I utilize Vite for fast, efficient builds and a smooth development experience.",
   "Next.js":
-    "I develop server-rendered and static sites with Next.js for optimal performance.",
+    "I develop server-rendered and static sites with Next.js for optimal performance and routing.",
+  tRPC: "I build typesafe, end-to-end APIs with tRPC to eliminate client/server schema drift.",
+  "TanStack Query":
+    "I handle caching, background sync, and server state with TanStack Query for performant data fetching.",
+  "shadcn/ui":
+    "I use shadcn/ui for composable, well-designed components that speed up UI development.",
+  "Radix UI":
+    "I leverage Radix primitives to build accessible, unstyled UI foundations.",
+  "Next-PWA":
+    "I turn Next apps into installable PWAs with service worker support for offline and installability.",
   "Node.js": "I build scalable backend services using Node.js.",
   "Express.js":
     "I create RESTful APIs with Express.js for robust application backends.",
@@ -81,6 +100,10 @@ const techSkillsInfo: Record<string, string> = {
     "I explore generative AI technologies to build innovative applications.",
   "OpenAI API":
     "I integrate OpenAI's capabilities to add intelligent features to applications.",
+  Docker:
+    "I containerize apps with Docker for consistent builds and deployments.",
+  Cloudflare:
+    "I secure and accelerate deployments using Cloudflare for DNS, HTTPS, and edge features.",
   JWT: "I implement JWT authentication to secure API endpoints.",
   "RESTful APIs":
     "I design robust RESTful APIs for efficient communication between services.",

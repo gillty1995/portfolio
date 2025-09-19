@@ -1,9 +1,61 @@
 export const projectsData = [
   {
+      id: 0,
+      title: "Freekik",
+      description: "Freekik is a modern football match info app built to practice a modernized full-stack workflow — focused on fast, accessible live match data, search with recent history, and PWA support so you can follow games on the go.",
+      backgroundImage: "/images/freekik-image.png",
+      links: {
+        "Live Site": "https://freekik.net/",
+        "Frontend Repository": "https://github.com/gillty1995/freekik",
+      },
+      frontendFramework: `
+      <p><strong>Freekik’s frontend</strong> is built with <strong>Next.js</strong> and styled with <strong>Tailwind CSS</strong>, using <strong>shadcn/ui</strong> + <strong>Radix UI</strong> for accessible, composable components. The app is a Progressive Web App (Next-PWA) so you can install it on mobile or desktop for quick match checks while you're on the run.</p>
+      <h4 class="font-semibold">Technologies Used:</h4>
+      <ul>
+        <li><strong>Next.js</strong> – App framework and routing.</li>
+        <li><strong>shadcn/ui & Radix</strong> – Accessible, ready-made UI primitives and components.</li>
+        <li><strong>Tailwind CSS</strong> – Utility-first styling.</li>
+        <li><strong>TanStack Query</strong> – Data fetching, cache, and synchronization.</li>
+        <li><strong>Next-PWA</strong> – Installable PWA support for mobile/desktop.</li>
+      </ul>
+    `,
+      backendFramework: `
+    <p><strong>Freekik’s backend</strong> uses <strong>tRPC</strong> (typesafe APIs) alongside Next.js to provide strongly-typed endpoints. The stack is containerized with Docker and secured/deployed using Cloudflare for DNS and SSL.</p>
+    <h4 class="font-semibold">Technologies Used:</h4>
+    <ul>
+      <li><strong>tRPC</strong> – Typesafe, end-to-end typed APIs.</li>
+      <li><strong>TanStack Query</strong> – Client-side syncing with server state.</li>
+      <li><strong>Docker</strong> – Containerized deployment.</li>
+      <li><strong>Cloudflare</strong> – DNS, HTTPS, and edge security.</li>
+    </ul>
+  `,
+      challengesFaced: "Creating the formation pitch UI to accurately reflect a real soccer pitch and team formations — including incorporating incoming substitutions so the on-field formation stayed up-to-date during the match — was the biggest challenge.",
+      futureImprovements: `
+      <p>Planned improvements include:</p>
+      <ul>
+        <li><strong>Improved Pitch</strong> by adding additional updates to formation pitch section to include red card events.</li>
+        <li><strong>Push notifications</strong> for key match events to PWA users.</li>
+        <li><strong>Graph stats</strong> for improved UX of player performance and match analytics.</li>
+      </ul>
+    `,
+      finalThoughts: "Freekik was a great practice project to sharpen modern full-stack tools — especially tRPC, TanStack Query, shadcn/radix component work, Docker deployment, and Cloudflare. I built it as a PWA because I use my phone a lot to follow games while I'm on the run, so installability and fast access were priorities.",
+      videoUrl: "/videos/freekik-video.mp4",
+      details: `
+      <p><strong>Key Features:</strong></p>
+      <ul>
+        <li>Live football match info with formation visualization.</li>
+        <li>Search with recent history for quick lookups.</li>
+        <li>Responsive, accessible UI using shadcn/ui and Radix.</li>
+        <li>PWA support (installable) for mobile and desktop.</li>
+        <li>Deployed with Docker and secured via Cloudflare.</li>
+      </ul>
+    `,
+    },
+  {
     id: 1,
     title: "Textile Poms",
     description: 
-      "Textile Poms is a responsive Pomeranian adoption website showcasing healthy, AKC-registered puppies born and raised in St. Louis. Visitors can view detailed puppy profiles, read our blog, and get in touch via a contact form—everything in one adorable package!",
+      "Textile Poms is a responsive Pomeranian adoption website showcasing healthy, AKC-registered puppies born and raised in St. Louis. Visitors can view detailed puppy profiles, read our blog, and get in touch via a contact form — everything in one adorable package!",
     backgroundImage: "/images/textilepoms-image.png",
     links: {
       "Live Site": "https://textilepoms.com/",
@@ -42,7 +94,7 @@ export const projectsData = [
       </ul>
     `,
     finalThoughts: 
-      "Textile Poms blends my love for design and development into a delightful adoption platform. It’s fully responsive, secure, and easy to manage—making both visitors and admins happy!",
+      "Textile Poms blends my love for design and development into a delightful adoption platform. It’s fully responsive, secure, and easy to manage — making both visitors and admins happy!",
       videoUrl: "/videos/textilepoms-video.mp4",
     details: `
       <p><strong>Key Features:</strong></p>
@@ -59,8 +111,8 @@ export const projectsData = [
       id: 2,
       title: "RSVPMe",
       description:
-        "Ever struggled to keep track of who’s coming to your events? RSVPMe makes event planning effortless by allowing users to create, manage, and track RSVPs—all in one place. Whether it’s a small gathering or a large party, RSVPMe ensures smooth coordination with built-in location services and real-time updates. ",
-      backgroundImage: "/images/rsvpme-image.png",  
+        "Ever struggled to keep track of who’s coming to your events? RSVPMe makes event planning effortless by allowing users to create, manage, and track RSVPs — all in one place. Whether it’s a small gathering or a large party, RSVPMe ensures smooth coordination with built-in location services and real-time updates.",
+      backgroundImage: "/images/rsvpme-image.png",
       links: {
         "Live Site": "https://rsvpme.mine.bz/",
         "Frontend Repository": "https://github.com/gillty1995/rsvpme",
@@ -88,7 +140,7 @@ export const projectsData = [
     </ul>
   `,
       challengesFaced:
-       "One of the biggest challenges I faced was learning how to implement Auth0 for authentication, as I typically use JWT for user verification. Auth0 introduced a different approach to handling authentication, requiring me to understand how it manages user sessions, tokens, and API authorization. Initially, figuring out how to retrieve and manage user data across the frontend and backend was a bit of a learning curve. However, once I grasped the Auth0 flow—including login, logout, and token verification—it became much easier to integrate seamlessly into my application! ",
+       "One of the biggest challenges I faced was learning how to implement Auth0 for authentication, as I typically use JWT for user verification. Auth0 introduced a different approach to handling authentication, requiring me to understand how it manages user sessions, tokens, and API authorization. Initially, figuring out how to retrieve and manage user data across the frontend and backend was a bit of a learning curve. However, once I grasped the Auth0 flow — including login, logout, and token verification — it became much easier to integrate seamlessly into my application! ",
        futureImprovements: `
       <p>Here are several ideas for enhancing RSVPMe to make event planning even more user-friendly:</p>
       <ul>
@@ -186,7 +238,7 @@ export const projectsData = [
         <li><strong>File-Based Storage</strong>: Manages schedule and season data using JSON files.</li>
         <li><strong>Admin Authentication</strong>: Secure token-based authentication for managing website content.</li>
       </ul>`,
-      challengesFaced: "A fun challenge was implementing the admin features. Ensuring that the admin could easily update the schedule, manage seasons, and post results seamlessly—while maintaining secure authentication—required creative solutions and robust testing.",
+      challengesFaced: "A fun challenge was implementing the admin features. Ensuring that the admin could easily update the schedule, manage seasons, and post results seamlessly — while maintaining secure authentication — required creative solutions and robust testing.",
       futureImprovements: `
       <ul>
         <li><strong>SEO Optimization</strong>: Enhance the site's search engine ranking to boost online visibility.</li>
@@ -334,5 +386,5 @@ export const projectsData = [
       details: `<p><strong>Around the U.S.</strong> is a responsive web project designed to display content seamlessly across all popular screen sizes. Using modular JavaScript components, I implemented features that allow users to interact with the interface in a dynamic, intuitive way.</p>
       
       <p>The project structure reflects a commitment to clean code practices, utilizing BEM for consistent styling and OOP principles to ensure maintainability. Through the use of an organized CSS structure and a JavaScript-based API, the site is not only visually appealing but also functional and user-friendly.</p>`
-    }
+    },
   ];

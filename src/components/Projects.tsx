@@ -22,7 +22,7 @@ export default function Projects() {
 
   // Scroll-based parallax effect:
   const { scrollYProgress } = useScroll();
-  const xRange = useTransform(scrollYProgress, [0, 1], [1300, -1000]);
+  const xRange = useTransform(scrollYProgress, [0, 1], [2000, -1600]);
   const intersectionRatio = useIntersectionRatio(sectionRef);
   const smoothRatio = useSpring(intersectionRatio, {
     stiffness: 50,
@@ -52,11 +52,11 @@ export default function Projects() {
 
   // Define limits for the arrow offset.
   const MAX_OFFSET = 100;
-  const MIN_OFFSET = -1000;
+  const MIN_OFFSET = -1500;
 
   // Arrow button handlers
   const handleArrowRight = () => {
-    const newOffset = arrowOffset.get() - 1000;
+    const newOffset = arrowOffset.get() - 1200;
     // Clamp newOffset to our min value.
     if (newOffset < MIN_OFFSET) {
       arrowOffset.set(MIN_OFFSET);
@@ -66,7 +66,7 @@ export default function Projects() {
   };
 
   const handleArrowLeft = () => {
-    const newOffset = arrowOffset.get() + 1000;
+    const newOffset = arrowOffset.get() + 1200;
     // Clamp newOffset so that it doesn't go above 0.
     if (newOffset > MAX_OFFSET) {
       arrowOffset.set(MAX_OFFSET);
@@ -178,7 +178,7 @@ export default function Projects() {
         <div className="absolute left-4 top-1/2 transform -translate-y-1/2 z-20">
           <button
             onClick={handleArrowLeft}
-            className="shadow-xl text-3xl text-gray-800 p-2 bg-[rgba(255,255,255,0.3)] rounded-full transition-colors duration-500 ease-in-out hover:bg-[rgba(0,0,0,0.7)] hover:text-gray-100"
+            className="cursor-pointer shadow-xl text-3xl text-gray-800 p-2 bg-[rgba(255,255,255,0.3)] rounded-full transition-colors duration-500 ease-in-out hover:bg-[rgba(0,0,0,0.7)] hover:text-gray-100"
           >
             <FaArrowLeft />
           </button>
@@ -186,7 +186,7 @@ export default function Projects() {
         <div className="absolute right-4 top-1/2 transform -translate-y-1/2 z-20">
           <button
             onClick={handleArrowRight}
-            className="shadow-xl text-3xl text-gray-800 p-2 bg-[rgba(255,255,255,0.3)] rounded-full transition-colors duration-500 ease-in-out hover:bg-[rgba(0,0,0,0.7)] hover:text-gray-100"
+            className="cursor-pointer shadow-xl text-3xl text-gray-800 p-2 bg-[rgba(255,255,255,0.3)] rounded-full transition-colors duration-500 ease-in-out hover:bg-[rgba(0,0,0,0.7)] hover:text-gray-100"
           >
             <FaArrowRight />
           </button>
