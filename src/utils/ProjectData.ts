@@ -170,7 +170,7 @@ export const projectsData = [
       description: "A football-themed web application that allows users to search for teams, view live games, and save their favorite matches. It integrates RapidAPI’s Football API to display real-time data. Users can create accounts, log in, and manage saved games.",
       backgroundImage: "/images/futbolscores-image.png", 
       links: {
-        "Live Site": "https://www.futbolsc.fr.to/",
+        "Live Site": "https://www.futbolsc.mine.bz/",
         "Frontend Repository": "https://github.com/gillty1995/futbol-scores-frontend",
         "Backend Repository": "https://github.com/gillty1995/futbol-scores-backend",
       },

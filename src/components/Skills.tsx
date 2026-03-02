@@ -43,6 +43,16 @@ const techSkills = [
   "Postman",
   "Framer Motion",
   "Auth0",
+  "Cloudfront",
+  "Rust",
+  "Linear",
+  "Supabase",
+  "Vercel",
+  "Prisma",
+  "Zod",
+  "ESLint",
+  "Prettier",
+  "Stripe",
 ];
 
 const coreCompetencies = [
@@ -121,6 +131,24 @@ const techSkillsInfo: Record<string, string> = {
   "Framer Motion":
     "I create engaging animations and transitions with Framer Motion.",
   Auth0: "I integrate Auth0 for secure, streamlined user authentication.",
+  Cloudfront:
+    "I use CloudFront to deliver assets via a global CDN, optimizing latency and cache behavior for faster page loads.",
+  Rust: "I experiment with Rust for performance-critical tools and memory-safe systems programming.",
+  Linear:
+    "I use Linear for issue tracking and project planning to keep tasks organized and workflows efficient.",
+  Supabase:
+    "I use Supabase as an open-source Firebase alternative for hosted Postgres, auth, and realtime features.",
+  Vercel:
+    "I deploy Next.js apps on Vercel to leverage edge hosting, instant previews, and a fast global CDN.",
+  Prisma:
+    "I use Prisma as a type-safe ORM for schema-driven database access and clearer query code.",
+  Zod: "I validate and parse runtime data with Zod, pairing well with TypeScript for robust input validation.",
+  ESLint:
+    "I enforce code quality, consistency, and team rules using ESLint configurations and plugins.",
+  Prettier:
+    "I maintain consistent code formatting across the codebase using Prettier.",
+  Stripe:
+    "I integrate Stripe for payment processing, subscriptions, and secure transaction handling.",
 };
 
 const coreCompetenciesInfo: Record<string, string> = {

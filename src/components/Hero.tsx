@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import { useRef, useEffect, useState } from "react";
 import { motion } from "framer-motion";
@@ -79,7 +80,7 @@ export default function Hero() {
   const buttonHoverEffect = {
     scale: 1.1,
     textShadow: "4px 4px 15px rgba(0, 0, 0, 0.5)",
-    transition: { duration: 0.2, ease: "easeOut" },
+    transition: { duration: 0.2, ease: [0.22, 1, 0.36, 1] as any },
   };
 
   // Merge dynamicProps with the whileHover property.
@@ -118,8 +119,12 @@ export default function Hero() {
                 delay: index * baseDelay,
               }}
               whileHover={{
-                scale: 1.1,
-                textShadow: "4px 4px 15px rgba(0, 0, 0, 0.5)",
+                scale: 1.02,
+                textShadow: "0 0 8px rgba(0,0,0,0.12)",
+                transition: {
+                  duration: 0.15,
+                  ease: [0.22, 1, 0.36, 1] as any,
+                },
               }}
             >
               {word}
