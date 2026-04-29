@@ -93,12 +93,17 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
 
         {/* Video */}
         <div className="mb-4 rounded-lg overflow-hidden shadow-xl">
-          <video width="100%" controls autoPlay={shouldAutoplay}>
-            <source
-              src={project.videoUrl || "/path/to/placeholder-video.mp4"}
-              type="video/mp4"
-            />
-          </video>
+          {project.videoUrl ? (
+            <video width="100%" controls autoPlay={shouldAutoplay}>
+              <source src={project.videoUrl} type="video/mp4" />
+            </video>
+          ) : (
+            <div className="flex min-h-[220px] items-center justify-center bg-gray-100 px-6 text-center">
+              <p className="text-sm text-gray-600">
+                Video coming soon for this project.
+              </p>
+            </div>
+          )}
         </div>
 
         {/* Description */}

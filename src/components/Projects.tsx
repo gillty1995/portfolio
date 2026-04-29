@@ -22,7 +22,7 @@ export default function Projects() {
 
   // Scroll-based parallax effect:
   const { scrollYProgress } = useScroll();
-  const xRange = useTransform(scrollYProgress, [0, 1], [2000, -1600]);
+  const xRange = useTransform(scrollYProgress, [0, 1], [2000, -1300]);
   const intersectionRatio = useIntersectionRatio(sectionRef);
   const smoothRatio = useSpring(intersectionRatio, {
     stiffness: 50,

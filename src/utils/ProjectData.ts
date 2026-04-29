@@ -1,6 +1,68 @@
 export const projectsData = [
   {
-      id: 0,
+    id: 0,
+    title: "Clickk",
+    description:
+      "Clickk is a lead generation system that uses interactive offers, AI-powered insights, and optimized user flows to capture and qualify leads through content-driven engagement. I handle a broad mix of product work including features, bug fixes, chores, maintenance, and larger end-to-end flows across the frontend and backend. The examples below highlight some of the work I’ve owned, such as AI-driven lead insights, offer suggestions, lead pages, metrics auditing, quiz offers, mobile UX, and architectural refactors that improved consistency and reduced technical debt.",
+    backgroundImage: "/images/clickk-image.png",
+    links: {"Live Site": "https://www.clickk.com/",},
+    frontendFramework: `
+      <p><strong>Clickk’s frontend</strong> work focused on turning product requirements into polished, responsive experiences across lead pages, lead details, fan pages, user settings, and mobile interactions. As part of my broader full-stack role, I also handle feature work, bug fixes, chores, and ongoing maintenance across the product. The frontend stack included <strong>Next.js, TypeScript, Axios, and TanStack Query</strong>, and I used it to improve the mobile landscape layout and pagination/search UX so the app felt easier to use across screen sizes.</p>
+      <h4 class="font-semibold">Technologies Used:</h4>
+      <ul>
+        <li><strong>Next.js</strong> – App structure, routing, and page composition.</li>
+        <li><strong>TypeScript</strong> – Type-safe frontend development.</li>
+        <li><strong>Axios</strong> – API requests and client-server communication.</li>
+        <li><strong>TanStack Query</strong> – Server state, caching, and data synchronization.</li>
+        <li><strong>UI/UX Flow Ownership</strong> – Lead pages, lead details pages, user settings, fan page mobile design, and mobile landscape polish.</li>
+        <li><strong>Paginated Search</strong> – Improved search behavior across the site for smoother browsing and navigation.</li>
+        <li><strong>Responsive Design</strong> – Tuned layouts for mobile and tablet experiences.</li>
+        <li><strong>UX Refinement</strong> – Refined interactions to keep core workflows clear and fast.</li>
+      </ul>
+    `,
+    backendFramework: `
+      <p><strong>Clickk’s backend</strong> work centered on AI-powered and data-heavy product flows. As a full-stack engineer, I also contribute across the codebase through feature work, bug fixes, chores, maintenance, and refactors as needed. The backend stack included a <strong>Rust</strong> service layer, with infrastructure and deployment supported by <strong>AWS, Docker, and Kubernetes</strong>. I owned the lead insights pipeline, AI offer suggestions, AI image creation, the quiz offer feature, the metrics audit flow, and architecture-focused refactors that reduced technical debt and improved consistency.</p>
+      <h4 class="font-semibold">Technologies Used:</h4>
+      <ul>
+        <li><strong>Rust Backend</strong> – Core service logic and backend feature work.</li>
+        <li><strong>AWS</strong> – Cloud infrastructure and deployment support.</li>
+        <li><strong>Docker</strong> – Containerized development and deployment workflows.</li>
+        <li><strong>Kubernetes</strong> – Orchestration and production deployment management.</li>
+        <li><strong>AI Lead Insights</strong> – End-to-end frontend/backend flow for generated lead summaries and insights.</li>
+        <li><strong>AI Offer Suggestions</strong> – Built the offer suggestion flow across both the UI and backend services.</li>
+        <li><strong>AI Image Creation</strong> – Integrated image generation tooling into the product experience.</li>
+        <li><strong>Architecture & Refactoring</strong> – Refactored legacy code, followed architectural rules, and improved maintainability and optimization.</li>
+      </ul>
+    `,
+    challengesFaced:
+      "The biggest challenge at Clickk was balancing new feature delivery with deeper cleanup work. I had to keep AI-powered workflows, mobile UX, and legacy refactors aligned so the product stayed consistent, reliable, and easy to extend.",
+    futureImprovements: `
+      <p>Future improvements for Clickk could include:</p>
+      <ul>
+        <li><strong>Expanded AI workflows</strong> – Continue refining AI-assisted product features and automation.</li>
+        <li><strong>Additional UX polish</strong> – Keep iterating on edge-case layouts and mobile interactions.</li>
+        <li><strong>Performance tuning</strong> – Further optimize heavy pages and search flows as the product grows.</li>
+      </ul>
+    `,
+    finalThoughts:
+      "Clickk has been a strong opportunity to work as a full-stack engineer on a wide range of product work, from features and bug fixes to maintenance and deeper architecture improvements. It’s also pushed me to improve architectural discipline, keep code quality high, and reduce technical debt while moving fast.",
+    videoUrl: "/videos/clickk-video.m4v",
+    details: `
+      <p><strong>Key Contributions:</strong></p>
+      <ul>
+        <li>AI-powered lead insights across the frontend and backend.</li>
+        <li>AI-powered offer suggestion flow across the frontend and backend.</li>
+        <li>Lead pages, lead details pages, and UX improvements.</li>
+        <li>Metrics audit and quiz offer feature ownership.</li>
+        <li>Fan page mobile design and mobile landscape UX.</li>
+        <li>User settings page improvements and paginated search throughout the site.</li>
+        <li>Legacy refactors, architectural rule adherence, and technical debt reduction.</li>
+        <li>AI image creation feature integration.</li>
+      </ul>
+    `,
+  },
+  {
+      id: 1,
       title: "Freekik",
       description: "Freekik is a modern football match info app built to practice a modernized full-stack workflow — focused on fast, accessible live match data, search with recent history, and PWA support so you can follow games on the go.",
       backgroundImage: "/images/freekik-image.png",
@@ -52,17 +114,17 @@ export const projectsData = [
     `,
     },
   {
-    id: 1,
+    id: 2,
     title: "Textile Poms",
     description: 
-      "Textile Poms is a responsive Pomeranian adoption website showcasing healthy, AKC-registered puppies born and raised in St. Louis. Visitors can view detailed puppy profiles, read our blog, and get in touch via a contact form — everything in one adorable package!",
+      "Textile Poms is a responsive Pomeranian adoption website showcasing healthy, AKC-registered puppies born and raised in St. Louis. Visitors can view detailed puppy profiles, read the blog, and get in touch via a contact form, while admins manage content through a custom CMS with secure tools behind the scenes.",
     backgroundImage: "/images/textilepoms-image.png",
     links: {
       "Live Site": "https://textilepoms.com/",
       "Frontend Repository": "https://github.com/gillty1995/puppy-website",
     },
     frontendFramework: `
-      <p><strong>Textile Poms’ frontend</strong> is built with <strong>Next.js, TypeScript, and Tailwind CSS</strong>, offering a <strong>fully responsive</strong>, <strong>server-side rendered</strong> experience that looks great on any device.</p>
+      <p><strong>Textile Poms’ frontend</strong> is built with <strong>Next.js, TypeScript, and Tailwind CSS</strong>, offering a <strong>fully responsive</strong>, <strong>server-side rendered</strong> experience that looks great on any device. I also improved the blog experience to make reading, browsing, and content management feel smoother for both visitors and admins.</p>
       <h4 class="font-semibold">Technologies Used:</h4>
       <ul>
         <li><strong>Next.js & TypeScript</strong> – Provides route-based code splitting and type safety.</li>
@@ -73,17 +135,21 @@ export const projectsData = [
       </ul>
     `,
     backendFramework: `
-    <p><strong>Textile Poms’ backend</strong> runs entirely within <strong>Next.js API routes</strong> using <strong>TypeScript</strong>. It handles CRUD for blog posts, admin authentication, and email submissions via Nodemailer.</p>
+    <p><strong>Textile Poms’ backend</strong> runs entirely within <strong>Next.js API routes</strong> using <strong>TypeScript</strong>. It now functions more like a custom CMS, handling CRUD for blog posts and puppy content, secure admin login, image uploads, and payments for deposits and puppy purchases.</p>
     <h4 class="font-semibold">Technologies Used:</h4>
     <ul>
       <li><strong>Next.js API Routes</strong> – Serverless endpoints for managing puppies, blog posts, and admin tasks.</li>
       <li><strong>TypeScript</strong> – Ensures type safety across both frontend and API code.</li>
       <li><strong>Nodemailer</strong> – Sends emails via Gmail SMTP for contact inquiries.</li>
+      <li><strong>Clerk</strong> – Provides secure admin authentication and session handling.</li>
+      <li><strong>AWS S3</strong> – Stores and serves uploaded images for puppy and blog content.</li>
+      <li><strong>Stripe</strong> – Handles deposits and puppy payments through secure checkout flows.</li>
       <li><strong>AWS EC2, PM2, & Nginx</strong> – Hosts the Next.js application with process management and reverse proxy.</li>
+      <li><strong>Cloudflare</strong> – Adds security layers and firewall controls to help protect the site.</li>
     </ul>
   `,
   challengesFaced: 
-  "The biggest challenge I faced was implementing a fixed header with a smooth collapsing effect on scroll, ensuring it functioned seamlessly across different screen sizes and performed smoothly was a fun challenge.",
+  "The biggest challenge I faced was evolving the admin area from a basic dashboard into a more complete custom CMS while keeping the experience intuitive, secure, and responsive across different screen sizes.",
   futureImprovements: `
       <p>Future enhancements for Textile Poms include:</p>
       <ul>
@@ -94,21 +160,22 @@ export const projectsData = [
       </ul>
     `,
     finalThoughts: 
-      "Textile Poms blends my love for design and development into a delightful adoption platform. It’s fully responsive, secure, and easy to manage — making both visitors and admins happy!",
+      "Textile Poms blends my love for design and development into a delightful adoption platform. With the custom CMS, secure login, payments, image storage, and stronger security in place, it’s much easier to manage while staying polished for visitors.",
       videoUrl: "/videos/textilepoms-video.mp4",
     details: `
       <p><strong>Key Features:</strong></p>
       <ul>
         <li>🐾 <strong>Puppy Listings</strong> – Browse available Pomeranian puppies with images, age, color, and personality details.</li>
         <li>🖼️ <strong>High-Quality Gallery</strong> – View full-screen puppy photos with lightbox support.</li>
-        <li>💻 <strong>Admin Dashboard</strong> – Secure login to create, edit, and delete listings or blog posts.</li>
+        <li>💻 <strong>Custom CMS Admin</strong> – Secure login to create, edit, and delete listings, blog posts, and other site content.</li>
         <li>✉️ <strong>Contact Form</strong> – Visitors can send inquiries, and receive confirmation; powered by Nodemailer.</li>
-        <li>💬 <strong>Blog & Comments</strong> – Read and post comments to stay updated on puppy news.</li>
+        <li>💬 <strong>Blog UX</strong> – Read and browse updates with a smoother content experience for both visitors and admins.</li>
+        <li>💳 <strong>Payments</strong> – Collect deposits and puppy payments with Stripe.</li>
       </ul>
     `,
   },
     {
-      id: 2,
+      id: 3,
       title: "RSVPMe",
       description:
         "Ever struggled to keep track of who’s coming to your events? RSVPMe makes event planning effortless by allowing users to create, manage, and track RSVPs — all in one place. Whether it’s a small gathering or a large party, RSVPMe ensures smooth coordination with built-in location services and real-time updates.",
@@ -165,7 +232,7 @@ export const projectsData = [
     `,
     },
     {
-      id: 3,
+      id: 4,
       title: "FutbolScores",
       description: "A football-themed web application that allows users to search for teams, view live games, and save their favorite matches. It integrates RapidAPI’s Football API to display real-time data. Users can create accounts, log in, and manage saved games.",
       backgroundImage: "/images/futbolscores-image.png", 
@@ -211,7 +278,7 @@ export const projectsData = [
       details: "I’m a big soccer fan, so I’m constantly checking different websites and apps to see live scores or the time of an upcoming game. In my experience using the available apps out in the current market is that they’re very cluttered, albeit with useful data, but unnecessary to what I was looking to experience. I just want to know the score and know when the next game is. So I made a clean, simple to use, aesthetic application that users can use to look up their favorite teams, stay up to date on upcoming games, save games to their personal account, and even see the live scores. I also added a Live Now section that displays all the live games going on around the world so people can discover new teams.",
     },
     {
-      id: 4,
+      id: 5,
       title: "St. Louis Men's Soccer",
       description: "I joined a local soccer club and noticed that their website was super outdated, so I decided to throw together a modernized website for them. The aim was to provide a cleaner, more pleasant layout along with an intuitive admin interface for easy schedule updates and content management. It was a fun experience incorporating all their data and meeting their requirements for a dynamic, user-friendly online presence.",
       backgroundImage: "/images/stlsoccer-image.png", 
@@ -253,7 +320,7 @@ export const projectsData = [
       </ul>`
     },  
     {      
-    id: 5,
+    id: 6,
     title: "Practibot",
     description: "Ever wanted a music tutor at your fingertips? 🎶 Practibot is here to help you learn and improve your music skills with the power of AI! Designed for musicians and aspiring learners alike, Practibot offers detailed guidance on music theory, composition, and practice techniques through a conversational, user-friendly chatbot.",
     backgroundImage: "/images/practibot-image.png", 
@@ -300,7 +367,7 @@ export const projectsData = [
     `,
     },
     {
-    id: 6,
+    id: 7,
     title: "FutbolRules",
     description: "What the heck is an offside rule? What makes a foul a foul? 🤷‍♂️ FutbolRules will help you get accurate, real-time answers to any question about soccer rules using Generative AI. It’s a user-friendly platform where users can input their queries, and the AI-powered backend responds with detailed answers, helping users better understand the intricacies of the game.",
     backgroundImage: "/images/futbolrules-image.png", 
@@ -352,7 +419,7 @@ export const projectsData = [
     </ul>`,
     },  
     {
-      id: 7,
+      id: 8,
       title: "Around the U.S.",
       description: "Around the U.S. is a responsive web project that adapts seamlessly to different screen sizes and devices. It includes JavaScript-powered interactivity for uploading and saving data to a server. This project was developed using modular components and follows best practices such as the BEM methodology and OOP principles to ensure clean, reusable code.",
       backgroundImage: "/images/aroundtheus-image.png",

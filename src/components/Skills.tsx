@@ -22,20 +22,28 @@ const techSkills = [
   "Express.js",
   "MongoDB",
   "NoSQL",
+  "PostgreSQL",
   "Python",
   "FastAPI",
+  "Java",
+  "Spring Boot",
   "GraphQL",
   "AWS (EC2, S3, Security Groups)",
   "NGINX",
   "Google Cloud",
   "GenAI",
+  "AI-Assisted Development",
   "OpenAI API",
   "Docker",
   "Cloudflare",
   "JWT",
   "RESTful APIs",
   "CI/CD Pipelines",
+  "GitHub Actions",
+  "PM2",
   "Jest",
+  "Storybook",
+  "GSAP",
   "Git/GitHub",
   "CSS (BEM, Styled-Components)",
   "OOP",
@@ -95,8 +103,14 @@ const techSkillsInfo: Record<string, string> = {
     "I create RESTful APIs with Express.js for robust application backends.",
   MongoDB: "I use MongoDB for flexible, scalable NoSQL data storage.",
   NoSQL: "I work with NoSQL databases to manage diverse data models.",
+  PostgreSQL:
+    "I design relational data models and manage production databases with PostgreSQL.",
   Python:
     "I leverage Python for scripting, data processing, and building backend services.",
+  Java:
+    "I work with Java to support backend application development and service integrations.",
+  "Spring Boot":
+    "I build backend services with Spring Boot for structured, production-ready APIs.",
   FastAPI:
     "I build high-performance APIs with FastAPI, ensuring fast and efficient data exchange.",
   GraphQL: "I design flexible and efficient APIs using GraphQL.",
@@ -108,6 +122,8 @@ const techSkillsInfo: Record<string, string> = {
     "I harness Google Cloud’s services for reliable, scalable computing solutions.",
   GenAI:
     "I explore generative AI technologies to build innovative applications.",
+  "AI-Assisted Development":
+    "I use Codex, Claude, Copilot, and similar tools to accelerate development while keeping code clean, DRY, and well-reviewed.",
   "OpenAI API":
     "I integrate OpenAI's capabilities to add intelligent features to applications.",
   Docker:
@@ -119,7 +135,15 @@ const techSkillsInfo: Record<string, string> = {
     "I design robust RESTful APIs for efficient communication between services.",
   "CI/CD Pipelines":
     "I automate testing and deployment with efficient CI/CD pipelines.",
+  "GitHub Actions":
+    "I automate builds, checks, and deployments with GitHub Actions workflows.",
+  PM2:
+    "I use PM2 to keep Node.js processes managed and reliable in production environments.",
   Jest: "I write comprehensive tests using Jest to ensure code quality.",
+  Storybook:
+    "I build and document reusable UI components in Storybook with isolated states and mock data.",
+  GSAP:
+    "I create polished motion and interaction details with GSAP for more expressive UI experiences.",
   "Git/GitHub":
     "I manage code versioning and collaboration using Git and GitHub.",
   "CSS (BEM, Styled-Components)":
