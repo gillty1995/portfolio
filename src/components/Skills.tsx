@@ -7,60 +7,59 @@ import { FaArrowRight } from "react-icons/fa";
 // Define the tech skills and core competencies
 const techSkills = [
   "HTML/CSS",
-  "Tailwind CSS",
   "JavaScript",
   "TypeScript",
-  "React (including Context API)",
-  "Vite",
+  "React",
   "Next.js",
-  "tRPC",
+  "React Native",
+  "Expo",
+  "Vite",
+  "Tailwind CSS",
   "TanStack Query",
+  "tRPC",
   "shadcn/ui",
   "Radix UI",
-  "Next-PWA",
+  "Framer Motion",
+  "GSAP",
   "Node.js",
   "Express.js",
-  "MongoDB",
-  "NoSQL",
-  "PostgreSQL",
-  "Python",
-  "FastAPI",
   "Java",
   "Spring Boot",
+  "Python",
+  "FastAPI",
+  "Rust",
   "GraphQL",
-  "AWS (EC2, S3, Security Groups)",
-  "NGINX",
-  "Google Cloud",
-  "GenAI",
-  "AI-Assisted Development",
-  "OpenAI API",
-  "Docker",
-  "Cloudflare",
-  "JWT",
   "RESTful APIs",
+  "Zod",
+  "PostgreSQL",
+  "MongoDB",
+  "Prisma",
+  "Supabase",
+  "Auth0",
+  "JWT",
+  "Stripe",
+  "RevenueCat",
+  "OpenAI API",
+  "GenAI",
+  "AWS",
+  "Docker",
+  "Kubernetes",
+  "Cloudflare",
+  "CloudFront",
+  "Vercel",
+  "NGINX",
   "CI/CD Pipelines",
   "GitHub Actions",
-  "PM2",
   "Jest",
+  "Playwright",
   "Storybook",
-  "GSAP",
-  "Git/GitHub",
-  "CSS (BEM, Styled-Components)",
-  "OOP",
-  "Figma",
-  "Postman",
-  "Framer Motion",
-  "Auth0",
-  "Cloudfront",
-  "Rust",
-  "Linear",
-  "Supabase",
-  "Vercel",
-  "Prisma",
-  "Zod",
   "ESLint",
   "Prettier",
-  "Stripe",
+  "Git/GitHub",
+  "Linear",
+  "AI-Assisted Development",
+  "Figma",
+  "OOP",
 ];
 
 const coreCompetencies = [
@@ -78,101 +77,101 @@ const coreCompetencies = [
 const techSkillsInfo: Record<string, string> = {
   "HTML/CSS":
     "I create responsive, accessible layouts using semantic HTML and modern CSS techniques.",
-  "Tailwind CSS":
-    "I style UIs quickly and consistently using utility-first classes with Tailwind.",
   JavaScript:
     "I write clean, efficient JavaScript to build dynamic, interactive interfaces.",
   TypeScript:
     "I use type-safe code to ensure bug-free, production-ready applications.",
-  "React (including Context API)":
+  React:
     "I build interactive UIs with React and manage state effectively using the Context API.",
-  Vite: "I utilize Vite for fast, efficient builds and a smooth development experience.",
   "Next.js":
     "I develop server-rendered and static sites with Next.js for optimal performance and routing.",
-  tRPC: "I build typesafe, end-to-end APIs with tRPC to eliminate client/server schema drift.",
+  "React Native":
+    "I build cross-platform mobile applications with React Native using React and TypeScript patterns.",
+  Expo:
+    "I use Expo to build, test, configure, and ship React Native applications for iOS.",
+  Vite: "I utilize Vite for fast, efficient builds and a smooth development experience.",
+  "Tailwind CSS":
+    "I style UIs quickly and consistently using utility-first classes with Tailwind.",
   "TanStack Query":
     "I handle caching, background sync, and server state with TanStack Query for performant data fetching.",
+  tRPC: "I build typesafe, end-to-end APIs with tRPC to eliminate client/server schema drift.",
   "shadcn/ui":
     "I use shadcn/ui for composable, well-designed components that speed up UI development.",
   "Radix UI":
     "I leverage Radix primitives to build accessible, unstyled UI foundations.",
-  "Next-PWA":
-    "I turn Next apps into installable PWAs with service worker support for offline and installability.",
+  "Framer Motion":
+    "I create engaging animations and transitions with Framer Motion.",
+  GSAP:
+    "I create polished motion and interaction details with GSAP for more expressive UI experiences.",
   "Node.js": "I build scalable backend services using Node.js.",
   "Express.js":
     "I create RESTful APIs with Express.js for robust application backends.",
-  MongoDB: "I use MongoDB for flexible, scalable NoSQL data storage.",
-  NoSQL: "I work with NoSQL databases to manage diverse data models.",
-  PostgreSQL:
-    "I design relational data models and manage production databases with PostgreSQL.",
-  Python:
-    "I leverage Python for scripting, data processing, and building backend services.",
   Java:
     "I work with Java to support backend application development and service integrations.",
   "Spring Boot":
     "I build backend services with Spring Boot for structured, production-ready APIs.",
+  Python:
+    "I leverage Python for scripting, data processing, and building backend services.",
   FastAPI:
     "I build high-performance APIs with FastAPI, ensuring fast and efficient data exchange.",
+  Rust:
+    "I work within Rust backend services on production features, integrations, API flows, and maintenance.",
   GraphQL: "I design flexible and efficient APIs using GraphQL.",
-  "AWS (EC2, S3, Security Groups)":
-    "I deploy and manage scalable infrastructure on AWS with best practices in security.",
-  NGINX:
-    "I configure NGINX as a high-performance web server, reverse proxy, and load balancer.",
-  "Google Cloud":
-    "I harness Google Cloud’s services for reliable, scalable computing solutions.",
-  GenAI:
-    "I explore generative AI technologies to build innovative applications.",
-  "AI-Assisted Development":
-    "I use Codex, Claude, Copilot, and similar tools to accelerate development while keeping code clean, DRY, and well-reviewed.",
-  "OpenAI API":
-    "I integrate OpenAI's capabilities to add intelligent features to applications.",
-  Docker:
-    "I containerize apps with Docker for consistent builds and deployments.",
-  Cloudflare:
-    "I secure and accelerate deployments using Cloudflare for DNS, HTTPS, and edge features.",
-  JWT: "I implement JWT authentication to secure API endpoints.",
   "RESTful APIs":
     "I design robust RESTful APIs for efficient communication between services.",
+  Zod: "I validate and parse runtime data with Zod, pairing well with TypeScript for robust input validation.",
+  PostgreSQL:
+    "I design relational data models and manage production databases with PostgreSQL.",
+  MongoDB: "I use MongoDB for flexible, scalable NoSQL data storage.",
+  Prisma:
+    "I use Prisma as a type-safe ORM for schema-driven database access and clearer query code.",
+  Supabase:
+    "I use Supabase as an open-source Firebase alternative for hosted Postgres, auth, and realtime features.",
+  Auth0: "I integrate Auth0 for secure, streamlined user authentication.",
+  JWT: "I implement JWT authentication to secure API endpoints.",
+  Stripe:
+    "I integrate Stripe for payment processing, subscriptions, and secure transaction handling.",
+  RevenueCat:
+    "I integrate RevenueCat to manage mobile subscriptions, entitlements, and in-app purchase access.",
+  "OpenAI API":
+    "I integrate OpenAI's capabilities to add intelligent features to applications.",
+  GenAI:
+    "I build production features that integrate generative AI into real product workflows.",
+  AWS:
+    "I work with AWS services including EC2, S3, CloudFront, security configuration, and production infrastructure.",
+  Docker:
+    "I containerize apps with Docker for consistent builds and deployments.",
+  Kubernetes:
+    "I work with Kubernetes-based production environments for containerized application deployment and service configuration.",
+  Cloudflare:
+    "I secure and accelerate deployments using Cloudflare for DNS, HTTPS, and edge features.",
+  CloudFront:
+    "I use CloudFront to deliver assets via a global CDN, optimizing latency and cache behavior for faster page loads.",
+  Vercel:
+    "I deploy Next.js apps on Vercel to leverage edge hosting, instant previews, and a fast global CDN.",
+  NGINX:
+    "I configure NGINX as a high-performance web server, reverse proxy, and load balancer.",
   "CI/CD Pipelines":
     "I automate testing and deployment with efficient CI/CD pipelines.",
   "GitHub Actions":
     "I automate builds, checks, and deployments with GitHub Actions workflows.",
-  PM2:
-    "I use PM2 to keep Node.js processes managed and reliable in production environments.",
   Jest: "I write comprehensive tests using Jest to ensure code quality.",
+  Playwright:
+    "I write end-to-end tests with Playwright to validate critical user flows and catch regressions.",
   Storybook:
     "I build and document reusable UI components in Storybook with isolated states and mock data.",
-  GSAP:
-    "I create polished motion and interaction details with GSAP for more expressive UI experiences.",
-  "Git/GitHub":
-    "I manage code versioning and collaboration using Git and GitHub.",
-  "CSS (BEM, Styled-Components)":
-    "I apply modular CSS techniques for scalable and maintainable styles.",
-  OOP: "I use object-oriented programming principles to write scalable, maintainable code.",
-  Figma: "I design and prototype user interfaces in Figma.",
-  Postman:
-    "I thoroughly test APIs with Postman to ensure smooth data interactions.",
-  "Framer Motion":
-    "I create engaging animations and transitions with Framer Motion.",
-  Auth0: "I integrate Auth0 for secure, streamlined user authentication.",
-  Cloudfront:
-    "I use CloudFront to deliver assets via a global CDN, optimizing latency and cache behavior for faster page loads.",
-  Rust: "I experiment with Rust for performance-critical tools and memory-safe systems programming.",
-  Linear:
-    "I use Linear for issue tracking and project planning to keep tasks organized and workflows efficient.",
-  Supabase:
-    "I use Supabase as an open-source Firebase alternative for hosted Postgres, auth, and realtime features.",
-  Vercel:
-    "I deploy Next.js apps on Vercel to leverage edge hosting, instant previews, and a fast global CDN.",
-  Prisma:
-    "I use Prisma as a type-safe ORM for schema-driven database access and clearer query code.",
-  Zod: "I validate and parse runtime data with Zod, pairing well with TypeScript for robust input validation.",
   ESLint:
     "I enforce code quality, consistency, and team rules using ESLint configurations and plugins.",
   Prettier:
     "I maintain consistent code formatting across the codebase using Prettier.",
-  Stripe:
-    "I integrate Stripe for payment processing, subscriptions, and secure transaction handling.",
+  "Git/GitHub":
+    "I manage code versioning and collaboration using Git and GitHub.",
+  Linear:
+    "I use Linear for issue tracking and project planning to keep tasks organized and workflows efficient.",
+  "AI-Assisted Development":
+    "I use Codex, Claude, Copilot, and similar tools to accelerate development while keeping code clean, DRY, and well-reviewed.",
+  Figma: "I design and prototype user interfaces in Figma.",
+  OOP: "I use object-oriented programming principles to write scalable, maintainable code.",
 };
 
 const coreCompetenciesInfo: Record<string, string> = {

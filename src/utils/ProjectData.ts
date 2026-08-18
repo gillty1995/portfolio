@@ -1,6 +1,70 @@
 export const projectsData = [
   {
     id: 0,
+    title: "LeapLogger",
+    description:
+      "LeapLogger is a full-stack SaaS writing and note-taking platform I designed, built, and soft-launched independently. It combines a focused writing experience with rich-text editing, grammar assistance, organization tools, account management, and subscription-based access. I owned the product end-to-end, from architecture and UI/UX through authentication, billing, third-party integrations, deployment, and production polish.",
+    backgroundImage: "/images/leaplogger-image.png",
+    links: {
+      "Live Site": "https://leaplogger.com/",
+    },
+    frontendFramework: `
+      <p><strong>LeapLogger’s frontend</strong> is built with <strong>Next.js, TypeScript, Tailwind CSS, and TipTap</strong>, with a focus on creating a clean, distraction-free writing experience. I built the product from the ground up, including the note editor, account flows, subscription experiences, responsive layouts, and the surrounding product UI.</p>
+
+      <h4 class="font-semibold">Technologies Used:</h4>
+      <ul>
+        <li><strong>Next.js</strong> – Application framework, routing, server rendering, and product architecture.</li>
+        <li><strong>TypeScript</strong> – Type-safe development across the application.</li>
+        <li><strong>Tailwind CSS</strong> – Responsive styling and reusable UI patterns.</li>
+        <li><strong>TipTap</strong> – Rich-text editing and structured writing experiences.</li>
+        <li><strong>Responsive UI</strong> – Built the writing and account experiences to work across desktop and mobile layouts.</li>
+        <li><strong>Product UX</strong> – Designed workflows for writing, editing, subscriptions, authentication, and account management.</li>
+      </ul>
+    `,
+    backendFramework: `
+      <p><strong>LeapLogger’s backend</strong> supports authentication, persistent note storage, subscriptions, grammar assistance, email workflows, security, and account management. I designed the application as a full SaaS product rather than a standalone demo, integrating production services for billing, data storage, email delivery, caching, security, and infrastructure.</p>
+
+      <h4 class="font-semibold">Technologies Used:</h4>
+      <ul>
+        <li><strong>Prisma & PostgreSQL</strong> – Persistent application data and relational data modeling.</li>
+        <li><strong>Java / Spring Boot</strong> – Backend services and application logic.</li>
+        <li><strong>Stripe</strong> – Subscription billing across three pricing tiers, checkout, recurring payments, and access controls.</li>
+        <li><strong>Brevo</strong> – Transactional email delivery and product communication.</li>
+        <li><strong>Redis</strong> – Caching and supporting application performance.</li>
+        <li><strong>Cloudflare & Turnstile</strong> – DNS, security, bot protection, and production infrastructure.</li>
+        <li><strong>LanguageTool</strong> – Grammar and writing assistance inside the editor.</li>
+      </ul>
+    `,
+    challengesFaced:
+      "The biggest challenge with LeapLogger was building the product entirely end-to-end while keeping the architecture maintainable as the scope grew. Features like rich-text editing, subscription access, authentication, grammar assistance, and third-party services all needed to work together without making the core writing experience feel complicated. Taking the product from an idea to a live SaaS application pushed me to think beyond individual features and make decisions around architecture, UX, reliability, security, and maintainability as a whole.",
+    futureImprovements: `
+      <p>Planned improvements for LeapLogger include:</p>
+      <ul>
+        <li><strong>Writing experience</strong> – Continue refining the editor, organization tools, and overall writing workflow based on real usage.</li>
+        <li><strong>AI-assisted features</strong> – Explore useful writing assistance without distracting from the core note-taking experience.</li>
+        <li><strong>Performance & reliability</strong> – Continue optimizing production performance as usage grows.</li>
+        <li><strong>Product iteration</strong> – Use feedback from the soft launch to prioritize new workflows and usability improvements.</li>
+      </ul>
+    `,
+    finalThoughts:
+      "LeapLogger has been my most complete independent SaaS project to date. Building and soft-launching it required me to work across product design, frontend and backend architecture, authentication, payments, integrations, infrastructure, and production deployment. More than anything, it gave me experience making the kinds of tradeoffs that come with owning a real product rather than simply completing individual features.",
+    videoUrl: "/videos/leaplogger-video.mov",
+    details: `
+      <p><strong>Key Features:</strong></p>
+      <ul>
+        <li><strong>Rich-Text Note Editor</strong> – Structured writing and editing experience powered by TipTap.</li>
+        <li><strong>Grammar Assistance</strong> – Integrated writing feedback and grammar tools directly into the product.</li>
+        <li><strong>Subscription Billing</strong> – Three Stripe-powered pricing tiers with recurring billing and feature access controls.</li>
+        <li><strong>Authentication & Accounts</strong> – Secure user authentication and account management workflows.</li>
+        <li><strong>Persistent Notes</strong> – PostgreSQL-backed note storage and user data management through Prisma.</li>
+        <li><strong>Email Workflows</strong> – Transactional communication and account emails powered by Brevo.</li>
+        <li><strong>Production Security</strong> – Cloudflare and Turnstile integration for infrastructure and bot protection.</li>
+        <li><strong>End-to-End Product Ownership</strong> – Independently designed, developed, deployed, and soft-launched the platform.</li>
+      </ul>
+    `,
+  },
+  {
+    id: 1,
     title: "Clickk",
     description:
       "Clickk is a lead generation system that uses interactive offers, AI-powered insights, and optimized user flows to capture and qualify leads through content-driven engagement. I handle a broad mix of product work including features, bug fixes, chores, maintenance, and larger end-to-end flows across the frontend and backend. The examples below highlight some of the work I’ve owned, such as AI-driven lead insights, offer suggestions, lead pages, metrics auditing, quiz offers, mobile UX, and architectural refactors that improved consistency and reduced technical debt.",
@@ -46,7 +110,7 @@ export const projectsData = [
     `,
     finalThoughts:
       "Clickk has been a strong opportunity to work as a full-stack engineer on a wide range of product work, from features and bug fixes to maintenance and deeper architecture improvements. It’s also pushed me to improve architectural discipline, keep code quality high, and reduce technical debt while moving fast.",
-    videoUrl: "/videos/clickk-video.m4v",
+    videoUrl: "/videos/clickk-video.mov",
     details: `
       <p><strong>Key Contributions:</strong></p>
       <ul>
@@ -62,7 +126,7 @@ export const projectsData = [
     `,
   },
   {
-      id: 1,
+      id: 2,
       title: "Freekik",
       description: "Freekik is a modern football match info app built to practice a modernized full-stack workflow — focused on fast, accessible live match data, search with recent history, and PWA support so you can follow games on the go.",
       backgroundImage: "/images/freekik-image.png",
@@ -114,7 +178,7 @@ export const projectsData = [
     `,
     },
   {
-    id: 2,
+    id: 3,
     title: "Textile Poms",
     description: 
       "Textile Poms is a responsive Pomeranian adoption website showcasing healthy, AKC-registered puppies born and raised in St. Louis. Visitors can view detailed puppy profiles, read the blog, and get in touch via a contact form, while admins manage content through a custom CMS with secure tools behind the scenes.",
@@ -175,7 +239,7 @@ export const projectsData = [
     `,
   },
     {
-      id: 3,
+      id: 4,
       title: "RSVPMe",
       description:
         "Ever struggled to keep track of who’s coming to your events? RSVPMe makes event planning effortless by allowing users to create, manage, and track RSVPs — all in one place. Whether it’s a small gathering or a large party, RSVPMe ensures smooth coordination with built-in location services and real-time updates.",
@@ -232,7 +296,7 @@ export const projectsData = [
     `,
     },
     {
-      id: 4,
+      id: 5,
       title: "FutbolScores",
       description: "A football-themed web application that allows users to search for teams, view live games, and save their favorite matches. It integrates RapidAPI’s Football API to display real-time data. Users can create accounts, log in, and manage saved games.",
       backgroundImage: "/images/futbolscores-image.png", 
@@ -278,7 +342,7 @@ export const projectsData = [
       details: "I’m a big soccer fan, so I’m constantly checking different websites and apps to see live scores or the time of an upcoming game. In my experience using the available apps out in the current market is that they’re very cluttered, albeit with useful data, but unnecessary to what I was looking to experience. I just want to know the score and know when the next game is. So I made a clean, simple to use, aesthetic application that users can use to look up their favorite teams, stay up to date on upcoming games, save games to their personal account, and even see the live scores. I also added a Live Now section that displays all the live games going on around the world so people can discover new teams.",
     },
     {
-      id: 5,
+    id: 6,
       title: "St. Louis Men's Soccer",
       description: "I joined a local soccer club and noticed that their website was super outdated, so I decided to throw together a modernized website for them. The aim was to provide a cleaner, more pleasant layout along with an intuitive admin interface for easy schedule updates and content management. It was a fun experience incorporating all their data and meeting their requirements for a dynamic, user-friendly online presence.",
       backgroundImage: "/images/stlsoccer-image.png", 
@@ -320,7 +384,7 @@ export const projectsData = [
       </ul>`
     },  
     {      
-    id: 6,
+    id: 7,
     title: "Practibot",
     description: "Ever wanted a music tutor at your fingertips? 🎶 Practibot is here to help you learn and improve your music skills with the power of AI! Designed for musicians and aspiring learners alike, Practibot offers detailed guidance on music theory, composition, and practice techniques through a conversational, user-friendly chatbot.",
     backgroundImage: "/images/practibot-image.png", 
@@ -367,7 +431,7 @@ export const projectsData = [
     `,
     },
     {
-    id: 7,
+    id: 8,
     title: "FutbolRules",
     description: "What the heck is an offside rule? What makes a foul a foul? 🤷‍♂️ FutbolRules will help you get accurate, real-time answers to any question about soccer rules using Generative AI. It’s a user-friendly platform where users can input their queries, and the AI-powered backend responds with detailed answers, helping users better understand the intricacies of the game.",
     backgroundImage: "/images/futbolrules-image.png", 
@@ -419,7 +483,7 @@ export const projectsData = [
     </ul>`,
     },  
     {
-      id: 8,
+      id: 9,
       title: "Around the U.S.",
       description: "Around the U.S. is a responsive web project that adapts seamlessly to different screen sizes and devices. It includes JavaScript-powered interactivity for uploading and saving data to a server. This project was developed using modular components and follows best practices such as the BEM methodology and OOP principles to ensure clean, reusable code.",
       backgroundImage: "/images/aroundtheus-image.png",
