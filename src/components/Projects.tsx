@@ -22,7 +22,7 @@ export default function Projects() {
 
   // Scroll-based parallax effect:
   const { scrollYProgress } = useScroll();
-  const xRange = useTransform(scrollYProgress, [0, 1], [2000, -800]);
+  const xRange = useTransform(scrollYProgress, [0, 1], [2000, -380]);
   const intersectionRatio = useIntersectionRatio(sectionRef);
   const smoothRatio = useSpring(intersectionRatio, {
     stiffness: 50,
@@ -52,7 +52,7 @@ export default function Projects() {
 
   // Define limits for the arrow offset.
   const MAX_OFFSET = 100;
-  const MIN_OFFSET = -1500;
+  const MIN_OFFSET = -2200;
 
   // Arrow button handlers
   const handleArrowRight = () => {

@@ -1,6 +1,75 @@
 export const projectsData = [
   {
     id: 0,
+    title: "Picio",
+    description:
+      "Picio is an iOS meal and activity tracker I designed and built to make nutrition logging faster, clearer, and easier to repeat. Users can photograph a meal, review and correct an AI-generated nutrition estimate, save it to their daily log, track workouts, receive customizable meal reminders, review historical entries, and see weekly progress. A differentiating workflow suggests encouraging cardio options when a user goes over their maintenance calories, helping them understand practical ways to balance the day without guilt-driven messaging.",
+    backgroundImage: "/images/picio-image.png",
+    links: {
+      "Live Site": "https://www.getpicio.com/",
+      "App Store": "https://apps.apple.com/us/app/picio/id6781760563",
+    },
+    frontendFramework: `
+      <p><strong>Picio’s mobile app</strong> is built with <strong>React Native, Expo, TypeScript, and Expo Router</strong>, with a polished iOS-first interface and a platform-aware navigation experience. I designed and implemented the complete product workflow, including onboarding, meal photography, AI result review, daily progress, backlog logging, workout logging, reminders, settings, and weekly summaries.</p>
+
+      <h4 class="font-semibold">Technologies Used:</h4>
+      <ul>
+        <li><strong>React Native & Expo</strong> – Cross-platform mobile foundation with an iOS-focused product experience.</li>
+        <li><strong>TypeScript</strong> – Type-safe development across the mobile application.</li>
+        <li><strong>Expo Router</strong> – File-based routing and navigation structure.</li>
+        <li><strong>NativeWind</strong> – Consistent styling and reusable visual patterns.</li>
+        <li><strong>Expo Camera & Image Picker</strong> – Meal photography and saved-photo workflows.</li>
+        <li><strong>React Hook Form & Zod</strong> – Structured, validated input flows across onboarding and editing.</li>
+        <li><strong>TanStack Query</strong> – Server-state fetching, caching, and mutations.</li>
+        <li><strong>iOS Native Tabs</strong> – Native tab presentation with platform-aware glass-effect support and accessible fallbacks.</li>
+      </ul>
+    `,
+    backendFramework: `
+      <p><strong>Picio’s backend</strong> is built with <strong>Next.js API routes, Prisma, and PostgreSQL</strong>. The backend owns authentication-aware data access, nutrition analysis, meal persistence, activity tracking, reminder configuration, progress calculations, and subscription-related workflows. The AI pipeline runs on the server so provider credentials and business logic remain outside the mobile client.</p>
+
+      <h4 class="font-semibold">Technologies Used:</h4>
+      <ul>
+        <li><strong>Next.js API Routes</strong> – Validated HTTP endpoints for the mobile application.</li>
+        <li><strong>Prisma & PostgreSQL</strong> – Relational data modeling and persistent user data.</li>
+        <li><strong>Auth0</strong> – Authentication and identity management.</li>
+        <li><strong>OpenAI Vision</strong> – Server-side meal-image analysis and nutrition estimation.</li>
+        <li><strong>AWS S3</strong> – Secure image storage and upload workflows.</li>
+        <li><strong>RevenueCat</strong> – Subscription and entitlement management.</li>
+        <li><strong>Supabase-hosted PostgreSQL</strong> – Production database hosting with Row-Level Security enabled on public tables.</li>
+        <li><strong>Zod validation</strong> – Request and AI-response validation at the backend boundary.</li>
+      </ul>
+    `,
+    challengesFaced:
+      "The biggest challenge with Picio was making an AI-assisted nutrition workflow feel useful without making it feel opaque or overly complicated. The analysis needs to be fast enough to encourage repeated use, but the result also needs to be editable and transparent so users can correct assumptions before saving. I also had to coordinate camera behavior, loading states, keyboard handling, reminders, historical logging, nutrition calculations, workout suggestions, subscriptions, and platform-specific navigation into one consistent mobile experience.",
+    futureImprovements: `
+      <p>Planned improvements for Picio include:</p>
+      <ul>
+        <li><strong>Faster repeat logging</strong> – Continue reducing the number of steps required for common meals and saved foods.</li>
+        <li><strong>Smarter personalization</strong> – Use a user’s history to improve meal corrections and workout suggestions over time.</li>
+        <li><strong>Progress insights</strong> – Expand weekly trends while keeping the experience simple and encouraging.</li>
+        <li><strong>Reliability and accessibility</strong> – Continue improving edge cases, offline behavior, accessibility states, and cross-device polish.</li>
+      </ul>
+    `,
+    finalThoughts:
+      "Picio is a complete independent mobile product that brought together product design, React Native development, backend architecture, AI integration, authentication, subscriptions, data security, and App Store distribution. The project pushed me to think carefully about how to make a technically complex workflow feel calm, understandable, and genuinely useful in everyday life.",
+    videoUrl: "/videos/picio-video.mp4",
+    details: `
+      <p><strong>Key Features:</strong></p>
+      <ul>
+        <li><strong>AI Meal Analyzer</strong> – Photograph a meal and receive an editable nutrition estimate.</li>
+        <li><strong>Meal Review</strong> – Review detected items, correct details, re-analyze, and save with confidence.</li>
+        <li><strong>Daily Meal Reminders</strong> – Configure separate breakfast, lunch, and dinner reminder times.</li>
+        <li><strong>Backlog Logging</strong> – Add past meals from a description or saved photo.</li>
+        <li><strong>Workout Logging</strong> – Track activities and calories burned alongside meals.</li>
+        <li><strong>Over-Maintenance Suggestions</strong> – Get practical cardio suggestions when daily intake exceeds maintenance.</li>
+        <li><strong>Weekly Progress</strong> – Review activity, nutrition, consistency, and balance trends.</li>
+        <li><strong>Secure Production Architecture</strong> – Authenticated server access, validated AI responses, protected database tables, and subscription entitlements.</li>
+        <li><strong>End-to-End Product Ownership</strong> – Independently designed, developed, deployed, secured, and published to the App Store.</li>
+      </ul>
+    `,
+  },
+  {
+    id: 1,
     title: "LeapLogger",
     description:
       "LeapLogger is a full-stack SaaS writing and note-taking platform I designed, built, and soft-launched independently. It combines a focused writing experience with rich-text editing, grammar assistance, organization tools, account management, and subscription-based access. I owned the product end-to-end, from architecture and UI/UX through authentication, billing, third-party integrations, deployment, and production polish.",
@@ -64,7 +133,7 @@ export const projectsData = [
     `,
   },
   {
-    id: 1,
+    id: 2,
     title: "Clickk",
     description:
       "Clickk is a lead generation system that uses interactive offers, AI-powered insights, and optimized user flows to capture and qualify leads through content-driven engagement. I handle a broad mix of product work including features, bug fixes, chores, maintenance, and larger end-to-end flows across the frontend and backend. The examples below highlight some of the work I’ve owned, such as AI-driven lead insights, offer suggestions, lead pages, metrics auditing, quiz offers, mobile UX, and architectural refactors that improved consistency and reduced technical debt.",
@@ -126,7 +195,7 @@ export const projectsData = [
     `,
   },
   {
-      id: 2,
+      id: 3,
       title: "Freekik",
       description: "Freekik is a modern football match info app built to practice a modernized full-stack workflow — focused on fast, accessible live match data, search with recent history, and PWA support so you can follow games on the go.",
       backgroundImage: "/images/freekik-image.png",
@@ -178,7 +247,7 @@ export const projectsData = [
     `,
     },
   {
-    id: 3,
+    id: 4,
     title: "Textile Poms",
     description: 
       "Textile Poms is a responsive Pomeranian adoption website showcasing healthy, AKC-registered puppies born and raised in St. Louis. Visitors can view detailed puppy profiles, read the blog, and get in touch via a contact form, while admins manage content through a custom CMS with secure tools behind the scenes.",
@@ -239,7 +308,7 @@ export const projectsData = [
     `,
   },
     {
-      id: 4,
+    id: 5,
       title: "RSVPMe",
       description:
         "Ever struggled to keep track of who’s coming to your events? RSVPMe makes event planning effortless by allowing users to create, manage, and track RSVPs — all in one place. Whether it’s a small gathering or a large party, RSVPMe ensures smooth coordination with built-in location services and real-time updates.",
@@ -296,7 +365,7 @@ export const projectsData = [
     `,
     },
     {
-      id: 5,
+    id: 6,
       title: "FutbolScores",
       description: "A football-themed web application that allows users to search for teams, view live games, and save their favorite matches. It integrates RapidAPI’s Football API to display real-time data. Users can create accounts, log in, and manage saved games.",
       backgroundImage: "/images/futbolscores-image.png", 
@@ -342,7 +411,7 @@ export const projectsData = [
       details: "I’m a big soccer fan, so I’m constantly checking different websites and apps to see live scores or the time of an upcoming game. In my experience using the available apps out in the current market is that they’re very cluttered, albeit with useful data, but unnecessary to what I was looking to experience. I just want to know the score and know when the next game is. So I made a clean, simple to use, aesthetic application that users can use to look up their favorite teams, stay up to date on upcoming games, save games to their personal account, and even see the live scores. I also added a Live Now section that displays all the live games going on around the world so people can discover new teams.",
     },
     {
-    id: 6,
+    id: 7,
       title: "St. Louis Men's Soccer",
       description: "I joined a local soccer club and noticed that their website was super outdated, so I decided to throw together a modernized website for them. The aim was to provide a cleaner, more pleasant layout along with an intuitive admin interface for easy schedule updates and content management. It was a fun experience incorporating all their data and meeting their requirements for a dynamic, user-friendly online presence.",
       backgroundImage: "/images/stlsoccer-image.png", 
@@ -384,7 +453,7 @@ export const projectsData = [
       </ul>`
     },  
     {      
-    id: 7,
+    id: 8,
     title: "Practibot",
     description: "Ever wanted a music tutor at your fingertips? 🎶 Practibot is here to help you learn and improve your music skills with the power of AI! Designed for musicians and aspiring learners alike, Practibot offers detailed guidance on music theory, composition, and practice techniques through a conversational, user-friendly chatbot.",
     backgroundImage: "/images/practibot-image.png", 
@@ -431,7 +500,7 @@ export const projectsData = [
     `,
     },
     {
-    id: 8,
+    id: 9,
     title: "FutbolRules",
     description: "What the heck is an offside rule? What makes a foul a foul? 🤷‍♂️ FutbolRules will help you get accurate, real-time answers to any question about soccer rules using Generative AI. It’s a user-friendly platform where users can input their queries, and the AI-powered backend responds with detailed answers, helping users better understand the intricacies of the game.",
     backgroundImage: "/images/futbolrules-image.png", 
@@ -483,7 +552,7 @@ export const projectsData = [
     </ul>`,
     },  
     {
-      id: 9,
+      id: 10,
       title: "Around the U.S.",
       description: "Around the U.S. is a responsive web project that adapts seamlessly to different screen sizes and devices. It includes JavaScript-powered interactivity for uploading and saving data to a server. This project was developed using modular components and follows best practices such as the BEM methodology and OOP principles to ensure clean, reusable code.",
       backgroundImage: "/images/aroundtheus-image.png",
