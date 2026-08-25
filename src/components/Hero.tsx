@@ -99,14 +99,14 @@ export default function Hero() {
       />
 
       {/* Animated Text Container */}
-      <div className="absolute inset-0 flex flex-col justify-center items-center space-y-4">
+      <div className="absolute inset-0 flex flex-col justify-center items-center gap-6">
         {/* Header Section */}
         <div className="flex flex-wrap justify-center items-center">
           {headerWords.map((word, index) => (
             <motion.button
               key={`${index}-${animateKey}`}
               onClick={toggleMenu}
-              className="lexend-extralight text-5xl md:text-8xl lg:text-6xl font-bold text-white mx-2 my-1 cursor-pointer smaller-text"
+              className="lexend-extralight text-5xl md:text-8xl lg:text-6xl font-bold text-white mx-2 cursor-pointer smaller-text"
               {...dynamicProps}
               transition={{
                 duration: transitionDuration,
@@ -133,7 +133,7 @@ export default function Hero() {
             <motion.button
               key={`${headerWords.length + index}-${animateKey}`}
               onClick={toggleMenu}
-              className="lexend-extralight text-xl md:text-2xl lg:text-xl text-white mx-1 my-1 cursor-pointer"
+              className="lexend-extralight text-2xl md:text-4xl lg:text-3xl text-white mx-1 cursor-pointer"
               {...dynamicProps}
               transition={{
                 duration: transitionDuration,
@@ -170,7 +170,7 @@ export default function Hero() {
             <motion.button
               key={`${headerWords.length + index}-${animateKey}`}
               onClick={toggleMenu}
-              className="lexend-extralight text-xl md:text-2xl lg:text-xl text-white mx-1 my-1 cursor-pointer max-sm:text-sm"
+              className="lexend-extralight text-xl md:text-2xl lg:text-xl text-white mx-1 cursor-pointer max-sm:text-sm"
               variants={{
                 hidden: { opacity: 0, x: -10 },
                 visible: { opacity: 1, x: 0 },
@@ -190,7 +190,7 @@ export default function Hero() {
         </motion.div>
 
         {/* Call to Action Buttons */}
-        <div className="flex mt-8 space-x-6">
+        <div className="flex space-x-6">
           {/* Work Button with Down Arrow */}
           <motion.button
             onClick={scrollToProjects}
