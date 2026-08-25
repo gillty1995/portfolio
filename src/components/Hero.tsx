@@ -42,13 +42,8 @@ export default function Hero() {
   const taglineWords = [
     "Software",
     "Engineer",
-    "|",
-    "Sound",
-    "Engineer",
-    "|",
-    "Musician",
   ];
-  const taglineWords2 = ["Software.", "Sound.", "Solutions."];
+  const taglineWords2 = ["Design.", "Build.", "Ship."];
 
   const initialAnim = {
     opacity: 0,
@@ -196,7 +191,7 @@ export default function Hero() {
 
         {/* Call to Action Buttons */}
         <div className="flex mt-8 space-x-6">
-          {/* Software Button with Down Arrow */}
+          {/* Work Button with Down Arrow */}
           <motion.button
             onClick={scrollToProjects}
             {...buttonDynamicProps}
@@ -207,7 +202,7 @@ export default function Hero() {
             }}
             className="cursor-pointer max-sm:text-white text-gray-800 px-4 sm:px-6 py-2 sm:py-3 md:px-10 md:py-4 bg-[rgba(229,229,229,0.44)] hover:bg-[rgba(229,229,229,1)] transition-colors duration-500 rounded-full text-sm sm:text-base md:text-xl flex items-center"
           >
-            Software
+            View My Work
             <svg
               className="w-6 h-6 ml-2"
               fill="none"
