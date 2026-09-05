@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { useSearchParams, useRouter } from "next/navigation";
 import AnimatedInput from "@/components/AnimatedInput";
+import LoadingScreen from "@/components/LoadingScreen";
 
 export default function Contact() {
   const searchParams = useSearchParams();
@@ -65,11 +66,7 @@ export default function Contact() {
 
   return (
     <Suspense
-      fallback={
-        <div className="flex justify-center items-center min-h-screen text-center">
-          Loading...
-        </div>
-      }
+      fallback={<LoadingScreen />}
     >
       <section
         id="contact"

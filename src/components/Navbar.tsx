@@ -7,6 +7,7 @@ import { usePathname, useRouter } from "next/navigation";
 
 const defaultNavLinks = [
   { name: "Home", href: "#hero" },
+  { name: "Featured", href: "#featured-work" },
   { name: "Projects", href: "#projects" },
   { name: "Skills", href: "#skills" },
   { name: "Contact", href: "#contact" },
@@ -17,13 +18,13 @@ const defaultNavLinks = [
 
 export default function Navbar() {
   const { isOpen, toggleMenu } = useNav();
-  const [isDark, setIsDark] = useState(false);
   const hamburgerRef = useRef<HTMLButtonElement>(null);
 
   const router = useRouter();
   const pathname = usePathname();
 
   const isMusicPage = pathname.startsWith("/musicskills");
+  const [isDark, setIsDark] = useState(true);
 
   const navLinks = isMusicPage
     ? [
@@ -42,18 +43,27 @@ export default function Navbar() {
 
       let sections: HTMLElement[] = [];
       if (isMusicPage) {
+        const musicHeroSection = document.getElementById("music");
         const instrumentsSection = document.getElementById("musicinstruments");
         const albumsSection = document.getElementById("albums");
         const contactSection = document.getElementById("contact");
-        sections = [instrumentsSection, albumsSection, contactSection].filter(
-          (section): section is HTMLElement => section !== null
-        );
+        sections = [
+          musicHeroSection,
+          instrumentsSection,
+          albumsSection,
+          contactSection,
+        ].filter((section): section is HTMLElement => section !== null);
       } else {
+        const heroSection = document.getElementById("hero");
+        const featuredProjectsSection =
+          document.getElementById("featured-work");
         const projectsSection = document.getElementById("projects");
         const skillsSection = document.getElementById("skills");
         const albumSection = document.getElementById("albums");
         const contactSection = document.getElementById("contact");
         sections = [
+          heroSection,
+          featuredProjectsSection,
           projectsSection,
           skillsSection,
           albumSection,
@@ -72,9 +82,17 @@ export default function Navbar() {
     };
 
     window.addEventListener("scroll", handleScroll);
-    // Run once on mount
+    window.addEventListener("resize", handleScroll);
+    // Run on mount and again after the page sections have completed layout.
     handleScroll();
-    return () => window.removeEventListener("scroll", handleScroll);
+    const frameId = window.requestAnimationFrame(handleScroll);
+    const settledLayoutTimer = window.setTimeout(handleScroll, 250);
+    return () => {
+      window.cancelAnimationFrame(frameId);
+      window.clearTimeout(settledLayoutTimer);
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleScroll);
+    };
   }, [isMusicPage]);
 
   const handleNavClick = (
@@ -114,7 +132,7 @@ export default function Navbar() {
         <button
           ref={hamburgerRef}
           onClick={toggleMenu}
-          className={`text-2xl focus:outline-none absolute top-4 right-4 cursor-pointer ${
+          className={`absolute top-4 right-4 cursor-pointer text-2xl transition-colors duration-300 focus:outline-none ${
             isDark ? "text-black" : "text-white"
           }`}
         >
