@@ -24,7 +24,7 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 @font-face {
@@ -169,4 +169,101 @@ body {
 .hide-scrollbar {
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
+}
+
+.grid-stack {
+  display: grid;
+  place-items: center;
+}
+
+.grid-stack > * {
+  grid-area: 1 / 1;
+}
+
+.liquid-hero-background {
+  position: absolute;
+  inset: 0;
+  isolation: isolate;
+  overflow: hidden;
+  background: #f0f1f1;
+}
+
+.liquid-hero-canvas {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.liquid-hero-sheen {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 50% 44%, rgba(255, 255, 255, 0.14), transparent 28%),
+    radial-gradient(circle at 18% 12%, rgba(255, 255, 255, 0.1), transparent 30%);
+}
+
+.liquid-hero-grain {
+  position: absolute;
+  inset: 0;
+  opacity: 0.018;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='.32'/%3E%3C/svg%3E");
+  background-size: 180px 180px;
+  mix-blend-mode: multiply;
+}
+
+.liquid-hero-bottom-blend {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 24vh;
+  background: linear-gradient(to bottom, rgba(229, 229, 229, 0), #e5e5e5 92%);
+}
+
+.music-pulse-background {
+  position: absolute;
+  inset: 0;
+  isolation: isolate;
+  overflow: hidden;
+  background: #f7f7f7;
+}
+
+.music-pulse-canvas {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.music-pulse-sheen {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 50% 44%, rgba(255, 255, 255, 0.2), transparent 27%),
+    radial-gradient(circle at 18% 14%, rgba(255, 255, 255, 0.14), transparent 28%);
+  pointer-events: none;
+}
+
+.music-pulse-bottom-blend {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 24vh;
+  background: linear-gradient(to bottom, rgba(229, 231, 235, 0), #e5e7eb 92%);
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

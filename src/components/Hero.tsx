@@ -1,13 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
-import { useRef, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { useNav } from "./NavContext";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
+import LiquidHeroBackground from "./LiquidHeroBackground";
 
 export default function Hero() {
-  const videoRef = useRef<HTMLVideoElement | null>(null);
   const { toggleMenu } = useNav();
   const pathname = usePathname();
 
@@ -24,17 +24,13 @@ export default function Hero() {
     return () => clearTimeout(timer);
   }, [pathname]);
 
-  useEffect(() => {
-    if (videoRef.current) {
-      videoRef.current.play();
-    }
-  }, []);
-
   // Scroll to projects button functionality
   const scrollToProjects = () => {
-    const projectsSection = document.getElementById("projects");
-    if (projectsSection) {
-      projectsSection.scrollIntoView({ behavior: "smooth" });
+    const workSection =
+      document.getElementById("featured-work") ??
+      document.getElementById("projects");
+    if (workSection) {
+      workSection.scrollIntoView({ behavior: "smooth" });
     }
   };
 
@@ -58,6 +54,10 @@ export default function Hero() {
     scale: 1,
     textShadow: "0px 0px 2px rgba(0, 0, 0, 0.1)",
   };
+  const headerAnimateAnim = {
+    ...animateAnim,
+    textShadow: "0px 8px 26px rgba(15, 23, 42, 0.24)",
+  };
   const transitionDuration = 2;
   const baseDelay = 0.1;
   // const secondaryDelay = 1;
@@ -68,6 +68,15 @@ export default function Hero() {
     : {
         initial: initialAnim,
         whileInView: animateAnim,
+        viewport: { once: false },
+        onViewportLeave: () => setAnimateKey((prev) => prev + 1),
+      };
+
+  const headerDynamicProps = immediateAnimate
+    ? { initial: initialAnim, animate: headerAnimateAnim }
+    : {
+        initial: initialAnim,
+        whileInView: headerAnimateAnim,
         viewport: { once: false },
         onViewportLeave: () => setAnimateKey((prev) => prev + 1),
       };
@@ -86,17 +95,7 @@ export default function Hero() {
 
   return (
     <section id="hero" className="relative w-full h-screen overflow-hidden">
-      {/* Video Background */}
-      <video
-        ref={videoRef}
-        className="absolute top-0 left-0 w-full h-full object-cover"
-        style={{ transform: "scale(1.05)", backfaceVisibility: "hidden" }}
-        src="/videos/hero-bg.mp4"
-        autoPlay
-        loop
-        muted
-        playsInline
-      />
+      <LiquidHeroBackground />
 
       {/* Animated Text Container */}
       <div className="absolute inset-0 flex flex-col justify-center items-center gap-6">
@@ -106,8 +105,8 @@ export default function Hero() {
             <motion.button
               key={`${index}-${animateKey}`}
               onClick={toggleMenu}
-              className="lexend-extralight text-5xl md:text-8xl lg:text-6xl font-bold text-white mx-2 cursor-pointer smaller-text"
-              {...dynamicProps}
+              className="lexend-extralight text-5xl md:text-8xl lg:text-6xl font-bold text-slate-800 mx-2 cursor-pointer smaller-text"
+              {...headerDynamicProps}
               transition={{
                 duration: transitionDuration,
                 ease: "easeOut",
@@ -133,7 +132,7 @@ export default function Hero() {
             <motion.button
               key={`${headerWords.length + index}-${animateKey}`}
               onClick={toggleMenu}
-              className="lexend-extralight text-2xl md:text-4xl lg:text-3xl text-white mx-1 cursor-pointer"
+              className="lexend-extralight text-2xl md:text-4xl lg:text-3xl text-slate-700 mx-1 cursor-pointer"
               {...dynamicProps}
               transition={{
                 duration: transitionDuration,
@@ -170,7 +169,7 @@ export default function Hero() {
             <motion.button
               key={`${headerWords.length + index}-${animateKey}`}
               onClick={toggleMenu}
-              className="lexend-extralight text-xl md:text-2xl lg:text-xl text-white mx-1 cursor-pointer max-sm:text-sm"
+              className="lexend-extralight text-xl md:text-2xl lg:text-xl text-slate-700 mx-1 cursor-pointer max-sm:text-sm"
               variants={{
                 hidden: { opacity: 0, x: -10 },
                 visible: { opacity: 1, x: 0 },
@@ -200,7 +199,7 @@ export default function Hero() {
               ease: "easeOut",
               delay: 0,
             }}
-            className="cursor-pointer max-sm:text-white text-gray-800 px-4 sm:px-6 py-2 sm:py-3 md:px-10 md:py-4 bg-[rgba(229,229,229,0.44)] hover:bg-[rgba(229,229,229,1)] transition-colors duration-500 rounded-full text-sm sm:text-base md:text-xl flex items-center"
+            className="flex cursor-pointer items-center rounded-full border border-white/70 bg-white/55 px-4 py-2 text-sm text-slate-800 shadow-[0_14px_45px_rgba(71,85,105,0.12)] backdrop-blur-md transition-colors duration-500 hover:bg-white/90 sm:px-6 sm:py-3 sm:text-base md:px-10 md:py-4 md:text-xl"
           >
             View My Work
             <svg
@@ -228,7 +227,7 @@ export default function Hero() {
                 ease: "easeOut",
                 delay: 0,
               }}
-              className="cursor-pointer max-sm:text-white text-gray-800 px-4 sm:px-6 py-2 sm:py-3 md:px-10 md:py-4 bg-[rgba(229,229,229,0.44)] hover:bg-[rgba(229,229,229,1)] transition-colors duration-500 rounded-full text-sm sm:text-base md:text-xl flex items-center"
+              className="flex cursor-pointer items-center rounded-full border border-white/70 bg-white/55 px-4 py-2 text-sm text-slate-800 shadow-[0_14px_45px_rgba(71,85,105,0.12)] backdrop-blur-md transition-colors duration-500 hover:bg-white/90 sm:px-6 sm:py-3 sm:text-base md:px-10 md:py-4 md:text-xl"
             >
               Music
               <svg

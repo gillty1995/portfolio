@@ -1,12 +1,12 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { useNav } from "./NavContext";
+import MusicPulseBackground from "./MusicPulseBackground";
 
 export default function MusicSkills() {
-  const videoRef = useRef<HTMLVideoElement | null>(null);
   const [animateKey, setAnimateKey] = useState(0);
   const [immediateAnimate, setImmediateAnimate] = useState(true);
   const { toggleMenu } = useNav();
@@ -17,14 +17,6 @@ export default function MusicSkills() {
     }, 3500);
 
     return () => clearTimeout(timer);
-  }, []);
-
-  useEffect(() => {
-    if (videoRef.current) {
-      videoRef.current.play().catch(() => {
-        // Autoplay can be blocked in some browsers; the video still renders as a background.
-      });
-    }
   }, []);
 
   const scrollToAlbums = () => {
@@ -67,28 +59,16 @@ export default function MusicSkills() {
       id="music"
       className="relative w-full min-h-screen overflow-hidden"
     >
-      <video
-        ref={videoRef}
-        className="absolute top-0 left-0 w-full h-full object-cover pointer-events-none"
-        style={{ transform: "scale(1.05)", backfaceVisibility: "hidden" }}
-        src="/videos/music-bg2.mp4"
-        autoPlay
-        loop
-        muted
-        playsInline
-        preload="auto"
-      />
+      <MusicPulseBackground />
 
-      <div className="absolute inset-0 bg-black/35" />
-
-      <div className="absolute inset-0 flex flex-col items-center justify-center px-4 text-white">
+      <div className="absolute inset-0 flex flex-col items-center justify-center px-4 text-slate-800">
         <div className="flex flex-col items-center justify-center w-full max-w-none">
           <div className="flex flex-wrap justify-center items-center max-w-none">
             {headerWords.map((word, index) => (
               <motion.button
                 key={`${word}-${animateKey}`}
                 onClick={toggleMenu}
-                className="lexend-extralight text-4xl sm:text-5xl md:text-7xl lg:text-6xl font-bold text-white mx-1.5 my-1 cursor-pointer smaller-text"
+                className="lexend-extralight text-4xl sm:text-5xl md:text-7xl lg:text-6xl font-bold text-slate-800 mx-1.5 my-1 cursor-pointer smaller-text"
                 {...dynamicProps}
                 transition={{
                   duration: 1.8,
@@ -97,7 +77,7 @@ export default function MusicSkills() {
                 }}
                 whileHover={{
                   scale: 1.02,
-                  textShadow: "0 0 10px rgba(255,255,255,0.12)",
+                  textShadow: "0 8px 24px rgba(15,23,42,0.18)",
                   transition: {
                     duration: 0.15,
                     ease: [0.22, 1, 0.36, 1] as const,
@@ -124,7 +104,7 @@ export default function MusicSkills() {
           >
             <motion.button
               onClick={toggleMenu}
-              className="lexend-extralight text-center whitespace-normal text-sm sm:text-lg md:text-2xl lg:text-xl text-white/95 mx-1 cursor-pointer leading-snug max-w-xs sm:max-w-none md:max-w-none"
+              className="lexend-extralight text-center whitespace-normal text-sm sm:text-lg md:text-2xl lg:text-xl text-slate-700 mx-1 cursor-pointer leading-snug max-w-xs sm:max-w-none md:max-w-none"
               variants={{
                 hidden: { opacity: 0, x: -10 },
                 visible: { opacity: 1, x: 0 },
@@ -142,7 +122,7 @@ export default function MusicSkills() {
         </div>
 
         <motion.p
-          className="mt-5 max-w-2xl text-center text-xs sm:text-sm md:text-base text-white/90 leading-relaxed"
+          className="mt-5 max-w-2xl text-center text-xs sm:text-sm md:text-base text-slate-700 leading-relaxed"
           initial={{ opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.6 }}
@@ -162,7 +142,7 @@ export default function MusicSkills() {
               ease: "easeOut",
               delay: 0.15,
             }}
-            className="cursor-pointer text-gray-900 px-5 sm:px-7 py-3 sm:py-4 md:px-10 md:py-4 bg-[rgba(245,245,245,0.86)] hover:bg-white transition-colors duration-300 rounded-full text-sm sm:text-base md:text-xl flex items-center justify-center min-w-[140px]"
+            className="cursor-pointer text-slate-800 px-5 sm:px-7 py-3 sm:py-4 md:px-10 md:py-4 border border-white/70 bg-white/65 shadow-[0_14px_45px_rgba(71,85,105,0.12)] backdrop-blur-md hover:bg-white transition-colors duration-300 rounded-full text-sm sm:text-base md:text-xl flex items-center justify-center min-w-[140px]"
           >
             Listen
             <svg
@@ -190,7 +170,7 @@ export default function MusicSkills() {
                 ease: "easeOut",
                 delay: 0.25,
               }}
-              className="cursor-pointer text-white px-5 sm:px-7 py-3 sm:py-4 md:px-10 md:py-4 border border-white/70 bg-white/10 hover:bg-white/20 transition-colors duration-300 rounded-full text-sm sm:text-base md:text-xl min-w-[140px]"
+              className="cursor-pointer text-slate-800 px-5 sm:px-7 py-3 sm:py-4 md:px-10 md:py-4 border border-white/70 bg-white/45 shadow-[0_14px_45px_rgba(71,85,105,0.1)] backdrop-blur-md hover:bg-white/80 transition-colors duration-300 rounded-full text-sm sm:text-base md:text-xl min-w-[140px]"
             >
               Work With Me
             </motion.button>

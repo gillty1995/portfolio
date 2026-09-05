@@ -22,7 +22,7 @@ export default function Projects() {
 
   // Scroll-based parallax effect:
   const { scrollYProgress } = useScroll();
-  const xRange = useTransform(scrollYProgress, [0, 1], [2000, -380]);
+  const xRange = useTransform(scrollYProgress, [0, 1], [2000, 680]);
   const intersectionRatio = useIntersectionRatio(sectionRef);
   const smoothRatio = useSpring(intersectionRatio, {
     stiffness: 50,
@@ -30,7 +30,7 @@ export default function Projects() {
   });
   const xFinal = useTransform(
     [xRange, smoothRatio],
-    ([val, r]) => (1 - (r as number)) * (val as number)
+    ([val, r]) => (1 - (r as number)) * (val as number),
   );
 
   // Spring for the additional arrow offset for smooth transitions.
@@ -42,7 +42,7 @@ export default function Projects() {
     (values) => {
       const [a, b] = values as [number, number];
       return a + b;
-    }
+    },
   );
 
   const handleCardClick = (projectId: number) => {
@@ -82,7 +82,7 @@ export default function Projects() {
   };
   const handlePrev = () => {
     setMobileIndex(
-      (prev) => (prev - 1 + projectsData.length) % projectsData.length
+      (prev) => (prev - 1 + projectsData.length) % projectsData.length,
     );
   };
 

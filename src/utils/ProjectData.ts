@@ -1,16 +1,25 @@
+export const featuredProjectIds = [0, 1, 4, 3] as const;
+
+export const featuredProjectImages: Record<number, string> = {
+  0: "/images/picio-featured.png",
+  1: "/images/leaplogger-featured.png",
+  3: "/images/freekik-featured.png",
+  4: "/images/textilepoms-featured.png",
+};
+
 export const projectsData = [
   {
     id: 0,
     title: "Picio",
     description:
-      "Picio is an iOS meal and activity tracker I designed and built to make nutrition logging faster, clearer, and easier to repeat. Users can photograph a meal, review and correct an AI-generated nutrition estimate, save it to their daily log, track workouts, receive customizable meal reminders, review historical entries, and see weekly progress. A differentiating workflow suggests encouraging cardio options when a user goes over their maintenance calories, helping them understand practical ways to balance the day without guilt-driven messaging.",
+      "Picio is an iOS meal and activity tracker I designed and built to make nutrition logging faster, clearer, and easier to repeat. Users can photograph a meal, review and correct an AI-generated nutrition estimate, save it to their daily log, track workouts, receive customizable meal reminders, review historical entries, and see weekly progress. I also implemented Apple’s Liquid Glass UI for the app’s navigation bar, giving the primary navigation a native, modern iOS feel while preserving accessible fallbacks. A differentiating workflow suggests encouraging cardio options when a user goes over their maintenance calories, helping them understand practical ways to balance the day without guilt-driven messaging.",
     backgroundImage: "/images/picio-image.png",
     links: {
       "Live Site": "https://www.getpicio.com/",
       "App Store": "https://apps.apple.com/us/app/picio/id6781760563",
     },
     frontendFramework: `
-      <p><strong>Picio’s mobile app</strong> is built with <strong>React Native, Expo, TypeScript, and Expo Router</strong>, with a polished iOS-first interface and a platform-aware navigation experience. I designed and implemented the complete product workflow, including onboarding, meal photography, AI result review, daily progress, backlog logging, workout logging, reminders, settings, and weekly summaries.</p>
+      <p><strong>Picio’s mobile app</strong> is built with <strong>React Native, Expo, TypeScript, and Expo Router</strong>, with a polished iOS-first interface. I implemented <strong>Apple’s Liquid Glass UI</strong> for the navigation bar, integrating the native visual treatment into the app’s primary navigation while maintaining platform-aware, accessible fallbacks. I also designed and implemented the complete product workflow, including onboarding, meal photography, AI result review, daily progress, backlog logging, workout logging, reminders, settings, and weekly summaries.</p>
 
       <h4 class="font-semibold">Technologies Used:</h4>
       <ul>
@@ -21,7 +30,7 @@ export const projectsData = [
         <li><strong>Expo Camera & Image Picker</strong> – Meal photography and saved-photo workflows.</li>
         <li><strong>React Hook Form & Zod</strong> – Structured, validated input flows across onboarding and editing.</li>
         <li><strong>TanStack Query</strong> – Server-state fetching, caching, and mutations.</li>
-        <li><strong>iOS Native Tabs</strong> – Native tab presentation with platform-aware glass-effect support and accessible fallbacks.</li>
+        <li><strong>Apple Liquid Glass Navigation</strong> – A native Liquid Glass navigation bar with platform-aware behavior and accessible fallbacks.</li>
       </ul>
     `,
     backendFramework: `
@@ -63,6 +72,7 @@ export const projectsData = [
         <li><strong>Workout Logging</strong> – Track activities and calories burned alongside meals.</li>
         <li><strong>Over-Maintenance Suggestions</strong> – Get practical cardio suggestions when daily intake exceeds maintenance.</li>
         <li><strong>Weekly Progress</strong> – Review activity, nutrition, consistency, and balance trends.</li>
+        <li><strong>Liquid Glass Navigation</strong> – Apple’s Liquid Glass UI applied to the app’s native navigation bar.</li>
         <li><strong>Secure Production Architecture</strong> – Authenticated server access, validated AI responses, protected database tables, and subscription entitlements.</li>
         <li><strong>End-to-End Product Ownership</strong> – Independently designed, developed, deployed, secured, and published to the App Store.</li>
       </ul>
