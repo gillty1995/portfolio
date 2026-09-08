@@ -161,20 +161,22 @@ export default function MusicSkills() {
             </svg>
           </motion.button>
 
-          <Link href="/?contactFromMusic=true#contact">
-            <motion.button
-              {...dynamicProps}
-              whileHover={buttonHoverEffect}
-              transition={{
-                duration: 1.2,
-                ease: "easeOut",
-                delay: 0.25,
-              }}
-              className="cursor-pointer text-slate-800 px-5 sm:px-7 py-3 sm:py-4 md:px-10 md:py-4 border border-white/70 bg-white/45 shadow-[0_14px_45px_rgba(71,85,105,0.1)] backdrop-blur-md hover:bg-white/80 transition-colors duration-300 rounded-full text-sm sm:text-base md:text-xl min-w-[140px]"
+          <motion.div
+            {...dynamicProps}
+            whileHover={buttonHoverEffect}
+            transition={{
+              duration: 1.2,
+              ease: "easeOut",
+              delay: 0.25,
+            }}
+          >
+            <Link
+              href="/?contactFromMusic=true#contact"
+              className="cursor-pointer text-slate-800 px-5 sm:px-7 py-3 sm:py-4 md:px-10 md:py-4 border border-white/70 bg-white/45 shadow-[0_14px_45px_rgba(71,85,105,0.1)] backdrop-blur-md hover:bg-white/80 transition-colors duration-300 rounded-full text-sm sm:text-base md:text-xl min-w-[140px] flex items-center justify-center"
             >
-              Work With Me
-            </motion.button>
-          </Link>
+              Let&apos;s Talk
+            </Link>
+          </motion.div>
         </div>
       </div>
     </section>
