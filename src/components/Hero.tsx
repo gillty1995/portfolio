@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { useNav } from "./NavContext";
 import { usePathname } from "next/navigation";
-import Link from "next/link";
 import LiquidHeroBackground from "./LiquidHeroBackground";
 
 export default function Hero() {
@@ -31,6 +30,13 @@ export default function Hero() {
       document.getElementById("projects");
     if (workSection) {
       workSection.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
+  const scrollToContact = () => {
+    const contactSection = document.getElementById("contact");
+    if (contactSection) {
+      contactSection.scrollIntoView({ behavior: "smooth" });
     }
   };
 
@@ -82,15 +88,8 @@ export default function Hero() {
       };
 
   const buttonHoverEffect = {
-    scale: 1.1,
-    textShadow: "4px 4px 15px rgba(0, 0, 0, 0.5)",
+    scale: 1.04,
     transition: { duration: 0.2, ease: [0.22, 1, 0.36, 1] as any },
-  };
-
-  // Merge dynamicProps with the whileHover property.
-  const buttonDynamicProps = {
-    ...dynamicProps,
-    whileHover: buttonHoverEffect,
   };
 
   return (
@@ -189,19 +188,20 @@ export default function Hero() {
         </motion.div>
 
         {/* Call to Action Buttons */}
-        <div className="flex space-x-6">
+        <div className="mt-8 flex flex-col sm:flex-row gap-4 sm:gap-6">
           {/* Work Button with Down Arrow */}
           <motion.button
             onClick={scrollToProjects}
-            {...buttonDynamicProps}
+            {...dynamicProps}
+            whileHover={buttonHoverEffect}
             transition={{
-              duration: transitionDuration,
+              duration: 1.2,
               ease: "easeOut",
-              delay: 0,
+              delay: 0.15,
             }}
-            className="flex cursor-pointer items-center rounded-full border border-white/70 bg-white/55 px-4 py-2 text-sm text-slate-800 shadow-[0_14px_45px_rgba(71,85,105,0.12)] backdrop-blur-md transition-colors duration-500 hover:bg-white/90 sm:px-6 sm:py-3 sm:text-base md:px-10 md:py-4 md:text-xl"
+            className="cursor-pointer text-slate-800 px-5 sm:px-7 py-3 sm:py-4 md:px-10 md:py-4 border border-white/70 bg-white/65 shadow-[0_14px_45px_rgba(71,85,105,0.12)] backdrop-blur-md hover:bg-white transition-colors duration-300 rounded-full text-sm sm:text-base md:text-xl flex items-center justify-center min-w-[140px]"
           >
-            View My Work
+            View Projects
             <svg
               className="w-6 h-6 ml-2"
               fill="none"
@@ -218,34 +218,20 @@ export default function Hero() {
             </svg>
           </motion.button>
 
-          {/* Music Button with Right Arrow */}
-          <Link href="/musicskills">
-            <motion.button
-              {...buttonDynamicProps}
-              transition={{
-                duration: transitionDuration,
-                ease: "easeOut",
-                delay: 0,
-              }}
-              className="flex cursor-pointer items-center rounded-full border border-white/70 bg-white/55 px-4 py-2 text-sm text-slate-800 shadow-[0_14px_45px_rgba(71,85,105,0.12)] backdrop-blur-md transition-colors duration-500 hover:bg-white/90 sm:px-6 sm:py-3 sm:text-base md:px-10 md:py-4 md:text-xl"
-            >
-              Music
-              <svg
-                className="w-6 h-6 ml-2"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M9 5l7 7-7 7"
-                />
-              </svg>
-            </motion.button>
-          </Link>
+          {/* Contact Button */}
+          <motion.button
+            onClick={scrollToContact}
+            {...dynamicProps}
+            whileHover={buttonHoverEffect}
+            transition={{
+              duration: 1.2,
+              ease: "easeOut",
+              delay: 0.25,
+            }}
+            className="cursor-pointer text-slate-800 px-5 sm:px-7 py-3 sm:py-4 md:px-10 md:py-4 border border-white/70 bg-white/45 shadow-[0_14px_45px_rgba(71,85,105,0.1)] backdrop-blur-md hover:bg-white/80 transition-colors duration-300 rounded-full text-sm sm:text-base md:text-xl min-w-[140px]"
+          >
+            Let&apos;s Talk
+          </motion.button>
         </div>
       </div>
     </section>
