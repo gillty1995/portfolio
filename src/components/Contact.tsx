@@ -3,6 +3,7 @@ import React, { Suspense } from "react";
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { useSearchParams, useRouter } from "next/navigation";
+import { FiArrowUpRight } from "react-icons/fi";
 import AnimatedInput from "@/components/AnimatedInput";
 import LoadingScreen from "@/components/LoadingScreen";
 
@@ -70,56 +71,67 @@ export default function Contact() {
     >
       <section
         id="contact"
-        className="min-h-screen bg-gradient-to-b from-gray-100 to-white flex flex-col items-center justify-center py-20 px-4"
+        className="contact-section flex min-h-[64dvh] items-start justify-center px-5 pt-8 pb-14 sm:px-8 sm:pt-10 sm:pb-16"
       >
         <motion.div
-          className="w-full max-w-2xl p-8 shadow-lg rounded-lg bg-white"
-          initial={{ opacity: 0, y: 50 }}
+          className="w-full max-w-3xl"
+          initial={{ opacity: 0, y: 32 }}
           {...motionProps}
-          transition={{ duration: 1 }}
+          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
         >
-          <h2 className="text-3xl text-gray-800 font-bold mb-4 text-center">
-            Contact Me
-          </h2>
-          <p className="text-center text-gray-700 mb-8">
-            Want to work together? Send me a message below if you&apos;d like to
-            collaborate on a website, are interested in music lessons, or have
-            something else on your mind. I&apos;d love to connect!
-          </p>
+          <h2 className="sr-only">Contact</h2>
           {status === "success" ? (
-            <div className="text-center">
-              <p className="text-green-600 font-bold mb-4">
-                Message sent successfully!
+            <div
+              role="status"
+              aria-live="polite"
+              className="flex min-h-72 flex-col items-center justify-center px-6 py-12 text-center sm:min-h-80"
+            >
+              <p className="mb-6 text-sm font-light tracking-[-0.03em] text-slate-700 sm:text-base">
+                Message sent. Thank you.
               </p>
               <button
                 onClick={resetForm}
-                className="px-6 py-3 bg-gray-300 text-white rounded-full hover:bg-gray-400 duration-300 ease-in-out transition-colors"
+                className="rounded-full border border-slate-300/80 bg-white/50 px-5 py-2.5 text-xs font-light text-slate-700 transition-colors duration-300 hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-400"
               >
-                Send Another Message
+                Send another
               </button>
             </div>
           ) : (
-            <form onSubmit={handleSubmit} className="text-gray-800 space-y-6">
-              <AnimatedInput
-                label="Your Email"
-                id="email"
-                type="email"
-                required
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-              <AnimatedInput
-                label="Subject"
-                id="subject"
-                type="text"
-                required
-                value={subject}
-                onChange={(e) => setSubject(e.target.value)}
-              />
-              <div className="relative mb-4">
+            <form onSubmit={handleSubmit} className="text-slate-800">
+              <div className="grid gap-4 sm:grid-cols-2">
+                <div className="contact-field px-5 py-4 sm:px-6">
+                  <AnimatedInput
+                    label="Email"
+                    hideLabel
+                    id="email"
+                    type="email"
+                    required
+                    autoComplete="email"
+                    placeholder="Email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    className="w-full bg-transparent font-light tracking-[-0.025em] text-slate-800 outline-none placeholder:text-slate-500"
+                  />
+                </div>
+                <div className="contact-field px-5 py-4 sm:px-6">
+                  <AnimatedInput
+                    label="Subject"
+                    hideLabel
+                    id="subject"
+                    type="text"
+                    required
+                    placeholder="Subject"
+                    value={subject}
+                    onChange={(e) => setSubject(e.target.value)}
+                    className="w-full bg-transparent font-light tracking-[-0.025em] text-slate-800 outline-none placeholder:text-slate-500"
+                  />
+                </div>
+              </div>
+
+              <div className="contact-field relative mt-4 p-2 sm:p-3">
                 <label
                   htmlFor="message"
-                  className="block text-sm font-medium text-gray-700 mb-1"
+                  className="sr-only"
                 >
                   Message
                 </label>
@@ -128,22 +140,37 @@ export default function Contact() {
                   required
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
-                  rows={5}
-                  className="bg-gray-100 text-gray-800 mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  rows={6}
+                  placeholder="Write a message..."
+                  className="relative z-[1] block min-h-44 w-full resize-none rounded-[1.3rem] border border-transparent bg-transparent px-4 py-4 text-sm font-light leading-relaxed tracking-[-0.025em] text-slate-800 outline-none placeholder:text-slate-500 sm:min-h-52 sm:px-5 sm:text-base"
                 />
               </div>
-              <button
-                type="submit"
-                disabled={status === "sending"}
-                className="w-full px-6 py-3 !bg-gray-300 text-gray-800 shadow-lg rounded-full hover:!bg-gray-200 duration-500 ease-in-out transition-colors cursor-pointer"
-              >
-                {status === "sending" ? "Sending..." : "Send"}
-              </button>
-              {status === "error" && (
-                <p className="text-center text-red-600">
-                  There was an error sending your message. Please try again.
-                </p>
-              )}
+
+              <div className="mt-4 flex min-h-12 items-center justify-between">
+                <div aria-live="polite" className="min-w-0 pr-4">
+                  {status === "error" && (
+                    <p className="text-[0.65rem] font-light leading-relaxed text-red-700 sm:text-xs">
+                      Couldn&apos;t send. Please try again.
+                    </p>
+                  )}
+                  {status === "sending" && (
+                    <p className="text-[0.65rem] font-light text-slate-500 sm:text-xs">
+                      Sending...
+                    </p>
+                  )}
+                </div>
+                <button
+                  type="submit"
+                  disabled={status === "sending"}
+                  aria-label={status === "sending" ? "Sending message" : "Send message"}
+                  className="group flex h-11 w-11 shrink-0 cursor-pointer items-center justify-center rounded-full border border-slate-400/70 bg-slate-800 text-white shadow-[0_8px_24px_rgba(15,23,42,0.12)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-slate-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-400 focus-visible:ring-offset-2 disabled:cursor-wait disabled:opacity-50 sm:h-12 sm:w-12"
+                >
+                  <FiArrowUpRight
+                    aria-hidden="true"
+                    className="text-lg transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                  />
+                </button>
+              </div>
             </form>
           )}
         </motion.div>

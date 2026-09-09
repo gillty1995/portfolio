@@ -1,10 +1,152 @@
-export const featuredProjectIds = [0, 1, 4, 3] as const;
+export const featuredProjectIds = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10] as const;
 
 export const featuredProjectImages: Record<number, string> = {
   0: "/images/picio-featured.png",
   1: "/images/leaplogger-featured.png",
+  2: "/images/device-mockups/retry/clickk-macbook-v2.png",
   3: "/images/freekik-featured.png",
   4: "/images/textilepoms-featured.png",
+  5: "/images/device-mockups/regenerated/rsvpme-v3.png",
+  6: "/images/device-mockups/regenerated/futbolscores-v6.png",
+  7: "/images/device-mockups/regenerated/stlsoccer-studio-display-v8.png",
+  8: "/images/device-mockups/regenerated/practibot-dual-phones-v6.png",
+  9: "/images/device-mockups/regenerated/futbolrules-macbook-v8.png",
+  10: "/images/device-mockups/regenerated/aroundtheus-v3.png",
+};
+
+export interface ProjectCaseStudySummary {
+  category: string;
+  tagline: string;
+  role: string;
+  stack: string[];
+  highlights: string[];
+}
+
+export const projectCaseStudySummaries: Record<
+  number,
+  ProjectCaseStudySummary
+> = {
+  0: {
+    category: "Mobile product",
+    tagline: "AI-assisted nutrition and activity tracking built for everyday use.",
+    role: "Product designer & full-stack engineer",
+    stack: ["React Native", "Expo", "Next.js", "PostgreSQL", "OpenAI"],
+    highlights: [
+      "Designed the complete mobile experience from onboarding through weekly progress.",
+      "Built an editable AI meal-analysis workflow with secure server-side processing.",
+      "Shipped authentication, subscriptions, reminders, and an App Store release.",
+    ],
+  },
+  1: {
+    category: "SaaS product",
+    tagline: "A focused writing workspace with production-ready account and billing flows.",
+    role: "Independent product designer & full-stack engineer",
+    stack: ["Next.js", "TypeScript", "Spring Boot", "PostgreSQL", "Stripe"],
+    highlights: [
+      "Created a distraction-free rich-text writing and organization experience.",
+      "Integrated subscriptions, authentication, grammar assistance, and email workflows.",
+      "Designed, deployed, and soft-launched the complete product independently.",
+    ],
+  },
+  2: {
+    category: "Production platform",
+    tagline: "Interactive lead-generation workflows powered by product data and AI.",
+    role: "Full-stack engineer",
+    stack: ["Next.js", "TypeScript", "Rust", "AWS", "Kubernetes"],
+    highlights: [
+      "Delivered AI lead insights, offer suggestions, and image-generation workflows.",
+      "Owned quiz offers, lead pages, metrics auditing, and responsive product UX.",
+      "Reduced technical debt through architecture-focused refactors and shared patterns.",
+    ],
+  },
+  3: {
+    category: "Progressive web app",
+    tagline: "Fast, accessible football match information for supporters on the move.",
+    role: "Full-stack engineer",
+    stack: ["Next.js", "tRPC", "TanStack Query", "Docker", "Cloudflare"],
+    highlights: [
+      "Built live match views with an evolving formation-pitch visualization.",
+      "Created typed data flows, recent search history, and accessible UI primitives.",
+      "Delivered installable PWA support with containerized production deployment.",
+    ],
+  },
+  4: {
+    category: "Client platform",
+    tagline: "A polished adoption website paired with a secure custom content system.",
+    role: "Designer & full-stack engineer",
+    stack: ["Next.js", "TypeScript", "AWS", "Stripe", "Clerk"],
+    highlights: [
+      "Built responsive puppy listings, galleries, blog content, and inquiry flows.",
+      "Created a custom CMS for listings, posts, images, and administrative work.",
+      "Integrated secure authentication, payments, cloud storage, and deployment.",
+    ],
+  },
+  5: {
+    category: "Full-stack web app",
+    tagline: "A streamlined way to create events and coordinate attendance.",
+    role: "Full-stack engineer",
+    stack: ["React", "TypeScript", "Express", "MongoDB", "Auth0"],
+    highlights: [
+      "Designed event creation and RSVP tracking around a low-friction workflow.",
+      "Integrated maps, authentication, email communication, and real-time updates.",
+      "Deployed a separated frontend and API with production process management.",
+    ],
+  },
+  6: {
+    category: "Full-stack web app",
+    tagline: "Live football scores and saved matches without the usual visual clutter.",
+    role: "Full-stack engineer",
+    stack: ["React", "Express", "MongoDB", "JWT", "Football API"],
+    highlights: [
+      "Built live, upcoming, and saved-match experiences around real-time football data.",
+      "Implemented account authentication, protected routes, and persistent favorites.",
+      "Created reusable match interactions across search, live, and profile surfaces.",
+    ],
+  },
+  7: {
+    category: "Client website",
+    tagline: "A modern club website with simple tools for schedules and results.",
+    role: "Designer & full-stack engineer",
+    stack: ["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion", "Node.js"],
+    highlights: [
+      "Reworked an outdated club experience into a clear responsive website.",
+      "Built schedule, season, rules, field, and contact information around club needs.",
+      "Added secure administrative tools for maintaining schedules and results.",
+    ],
+  },
+  8: {
+    category: "AI product",
+    tagline: "A conversational music tutor for theory, technique, and tablature.",
+    role: "Full-stack engineer",
+    stack: ["React", "TypeScript", "Python", "FastAPI", "OpenAI"],
+    highlights: [
+      "Created a mobile-first conversational interface for practical music questions.",
+      "Built an asynchronous Python API for reliable AI-assisted responses.",
+      "Formatted custom tablature and music concepts into readable learning material.",
+    ],
+  },
+  9: {
+    category: "AI product",
+    tagline: "Clear, immediate explanations for questions about football rules.",
+    role: "Full-stack engineer",
+    stack: ["React", "Express", "OpenAI", "AWS", "Nginx"],
+    highlights: [
+      "Built a focused question-and-answer flow around generative AI responses.",
+      "Added validation, rate limiting, logging, and secure HTTP configuration.",
+      "Provisioned and deployed the application on AWS infrastructure.",
+    ],
+  },
+  10: {
+    category: "Frontend project",
+    tagline: "A responsive photo-sharing experience built with modular JavaScript.",
+    role: "Frontend developer",
+    stack: ["JavaScript", "CSS", "BEM", "OOP", "REST API"],
+    highlights: [
+      "Built responsive layouts and interactive photo-card experiences from scratch.",
+      "Organized the interface into reusable object-oriented JavaScript modules.",
+      "Connected profile, image, and engagement actions to a remote API.",
+    ],
+  },
 };
 
 export const projectsData = [

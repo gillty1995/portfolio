@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { useNav } from "./NavContext";
 import { usePathname } from "next/navigation";
 import LiquidHeroBackground from "./LiquidHeroBackground";
@@ -9,6 +9,7 @@ import LiquidHeroBackground from "./LiquidHeroBackground";
 export default function Hero() {
   const { toggleMenu } = useNav();
   const pathname = usePathname();
+  const shouldReduceMotion = useReducedMotion();
 
   const [immediateAnimate, setImmediateAnimate] = useState(true);
 
@@ -45,7 +46,6 @@ export default function Hero() {
     "Software",
     "Engineer",
   ];
-  const taglineWords2 = ["Design.", "Build.", "Ship."];
 
   const initialAnim = {
     opacity: 0,
@@ -66,10 +66,14 @@ export default function Hero() {
   };
   const transitionDuration = 2;
   const baseDelay = 0.1;
-  // const secondaryDelay = 1;
-  const taglineDelay = 3;
 
-  const dynamicProps = immediateAnimate
+  const reducedMotionProps = {
+    initial: false,
+    animate: animateAnim,
+  };
+  const dynamicProps = shouldReduceMotion
+    ? reducedMotionProps
+    : immediateAnimate
     ? { initial: initialAnim, animate: animateAnim }
     : {
         initial: initialAnim,
@@ -78,7 +82,9 @@ export default function Hero() {
         onViewportLeave: () => setAnimateKey((prev) => prev + 1),
       };
 
-  const headerDynamicProps = immediateAnimate
+  const headerDynamicProps = shouldReduceMotion
+    ? reducedMotionProps
+    : immediateAnimate
     ? { initial: initialAnim, animate: headerAnimateAnim }
     : {
         initial: initialAnim,
@@ -97,7 +103,7 @@ export default function Hero() {
       <LiquidHeroBackground />
 
       {/* Animated Text Container */}
-      <div className="absolute inset-0 flex flex-col justify-center items-center gap-6">
+      <div className="absolute inset-0 flex flex-col items-center justify-center px-6">
         {/* Header Section */}
         <div className="flex flex-wrap justify-center items-center">
           {headerWords.map((word, index) => (
@@ -107,11 +113,11 @@ export default function Hero() {
               className="lexend-extralight text-5xl md:text-8xl lg:text-6xl font-bold text-slate-800 mx-2 cursor-pointer smaller-text"
               {...headerDynamicProps}
               transition={{
-                duration: transitionDuration,
+                duration: shouldReduceMotion ? 0 : transitionDuration,
                 ease: "easeOut",
                 delay: index * baseDelay,
               }}
-              whileHover={{
+              whileHover={shouldReduceMotion ? undefined : {
                 scale: 1.02,
                 textShadow: "0 0 8px rgba(0,0,0,0.12)",
                 transition: {
@@ -126,7 +132,7 @@ export default function Hero() {
         </div>
 
         {/* Tagline Section */}
-        <div className="flex flex-wrap justify-center items-center max-w-4xl">
+        <div className="mt-4 flex max-w-4xl flex-wrap items-center justify-center">
           {taglineWords.map((word, index) => (
             <motion.button
               key={`${headerWords.length + index}-${animateKey}`}
@@ -134,11 +140,11 @@ export default function Hero() {
               className="lexend-extralight text-2xl md:text-4xl lg:text-3xl text-slate-700 mx-1 cursor-pointer"
               {...dynamicProps}
               transition={{
-                duration: transitionDuration,
+                duration: shouldReduceMotion ? 0 : transitionDuration,
                 ease: "easeOut",
                 delay: headerWords.length * baseDelay + index * baseDelay,
               }}
-              whileHover={{
+              whileHover={shouldReduceMotion ? undefined : {
                 scale: 1.1,
                 textShadow: "4px 4px 15px rgba(0, 0, 0, 0.5)",
               }}
@@ -147,61 +153,22 @@ export default function Hero() {
             </motion.button>
           ))}
         </div>
-        {/* Tagline2 Section */}
-        <motion.div
-          className="flex flex-wrap justify-center items-center max-w-4xl"
-          variants={{
-            hidden: {},
-            visible: {
-              transition: {
-                delayChildren: taglineDelay,
-                staggerChildren: 1.2,
-              },
-            },
-          }}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: false }}
-          onViewportLeave={() => setAnimateKey((prev) => prev + 1)}
-        >
-          {taglineWords2.map((word, index) => (
-            <motion.button
-              key={`${headerWords.length + index}-${animateKey}`}
-              onClick={toggleMenu}
-              className="lexend-extralight text-xl md:text-2xl lg:text-xl text-slate-700 mx-1 cursor-pointer max-sm:text-sm"
-              variants={{
-                hidden: { opacity: 0, x: -10 },
-                visible: { opacity: 1, x: 0 },
-              }}
-              transition={{
-                duration: transitionDuration,
-                ease: "easeOut",
-              }}
-              whileHover={{
-                scale: 1.1,
-                textShadow: "4px 4px 15px rgba(0, 0, 0, 0.5)",
-              }}
-            >
-              {word}
-            </motion.button>
-          ))}
-        </motion.div>
 
         {/* Call to Action Buttons */}
-        <div className="mt-8 flex flex-col sm:flex-row gap-4 sm:gap-6">
+        <div className="mt-9 flex w-full max-w-[360px] flex-col gap-3 sm:w-auto sm:max-w-none sm:flex-row sm:gap-4">
           {/* Work Button with Down Arrow */}
           <motion.button
             onClick={scrollToProjects}
             {...dynamicProps}
-            whileHover={buttonHoverEffect}
+            whileHover={shouldReduceMotion ? undefined : buttonHoverEffect}
             transition={{
-              duration: 1.2,
+              duration: shouldReduceMotion ? 0 : 1.2,
               ease: "easeOut",
               delay: 0.15,
             }}
-            className="cursor-pointer text-slate-800 px-5 sm:px-7 py-3 sm:py-4 md:px-10 md:py-4 border border-white/70 bg-white/65 shadow-[0_14px_45px_rgba(71,85,105,0.12)] backdrop-blur-md hover:bg-white transition-colors duration-300 rounded-full text-sm sm:text-base md:text-xl flex items-center justify-center min-w-[140px]"
+            className="flex min-h-[54px] min-w-[150px] cursor-pointer items-center justify-center rounded-full border border-white/70 bg-white/65 px-6 py-3.5 text-sm text-slate-800 shadow-[0_14px_45px_rgba(71,85,105,0.12)] backdrop-blur-md transition-colors duration-300 hover:bg-white sm:text-base md:px-8 md:py-4 md:text-lg"
           >
-            View Projects
+            My Work
             <svg
               className="w-6 h-6 ml-2"
               fill="none"
@@ -222,13 +189,13 @@ export default function Hero() {
           <motion.button
             onClick={scrollToContact}
             {...dynamicProps}
-            whileHover={buttonHoverEffect}
+            whileHover={shouldReduceMotion ? undefined : buttonHoverEffect}
             transition={{
-              duration: 1.2,
+              duration: shouldReduceMotion ? 0 : 1.2,
               ease: "easeOut",
               delay: 0.25,
             }}
-            className="cursor-pointer text-slate-800 px-5 sm:px-7 py-3 sm:py-4 md:px-10 md:py-4 border border-white/70 bg-white/45 shadow-[0_14px_45px_rgba(71,85,105,0.1)] backdrop-blur-md hover:bg-white/80 transition-colors duration-300 rounded-full text-sm sm:text-base md:text-xl min-w-[140px]"
+            className="min-h-[54px] min-w-[150px] cursor-pointer rounded-full border border-white/70 bg-white/45 px-6 py-3.5 text-sm text-slate-800 shadow-[0_14px_45px_rgba(71,85,105,0.1)] backdrop-blur-md transition-colors duration-300 hover:bg-white/80 sm:text-base md:px-8 md:py-4 md:text-lg"
           >
             Let&apos;s Talk
           </motion.button>
