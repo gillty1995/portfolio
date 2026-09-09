@@ -1,14 +1,17 @@
 "use client";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { useNav } from "./NavContext";
 import { usePathname, useRouter } from "next/navigation";
+import {
+  PORTFOLIO_NAVIGATION_EVENT,
+  type PortfolioNavigationDetail,
+} from "@/utils/navigationEvents";
 
 const defaultNavLinks = [
   { name: "Home", href: "#hero" },
-  { name: "Featured", href: "#featured-work" },
-  { name: "Projects", href: "#projects" },
+  { name: "My Work", href: "#featured-work" },
   { name: "Skills", href: "#skills" },
   { name: "Contact", href: "#contact" },
   { name: "Socials", href: "#footer" },
@@ -19,12 +22,16 @@ const defaultNavLinks = [
 export default function Navbar() {
   const { isOpen, toggleMenu } = useNav();
   const hamburgerRef = useRef<HTMLButtonElement>(null);
+  const menuRef = useRef<HTMLDivElement>(null);
+  const socialsObserverRef = useRef<IntersectionObserver | null>(null);
+  const socialsAnimationTimerRef = useRef<number | null>(null);
 
   const router = useRouter();
   const pathname = usePathname();
 
   const isMusicPage = pathname.startsWith("/musicskills");
   const [isDark, setIsDark] = useState(true);
+  const shouldReduceMotion = useReducedMotion();
 
   const navLinks = isMusicPage
     ? [
@@ -57,14 +64,12 @@ export default function Navbar() {
         const heroSection = document.getElementById("hero");
         const featuredProjectsSection =
           document.getElementById("featured-work");
-        const projectsSection = document.getElementById("projects");
         const skillsSection = document.getElementById("skills");
         const albumSection = document.getElementById("albums");
         const contactSection = document.getElementById("contact");
         sections = [
           heroSection,
           featuredProjectsSection,
-          projectsSection,
           skillsSection,
           albumSection,
           contactSection,
@@ -95,6 +100,89 @@ export default function Navbar() {
     };
   }, [isMusicPage]);
 
+  useEffect(
+    () => () => {
+      socialsObserverRef.current?.disconnect();
+      if (socialsAnimationTimerRef.current) {
+        window.clearTimeout(socialsAnimationTimerRef.current);
+      }
+    },
+    []
+  );
+
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const focusableElements = () =>
+      Array.from(
+        menuRef.current?.querySelectorAll<HTMLElement>(
+          'a[href], button:not([disabled])'
+        ) ?? []
+      );
+
+    const firstElement = focusableElements()[0];
+    firstElement?.focus();
+
+    const handleMenuKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        event.preventDefault();
+        toggleMenu();
+        hamburgerRef.current?.focus();
+        return;
+      }
+
+      if (event.key !== "Tab") return;
+
+      const elements = focusableElements();
+      if (!elements.length) return;
+      const first = elements[0];
+      const last = elements[elements.length - 1];
+
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    };
+
+    document.addEventListener("keydown", handleMenuKeyDown);
+    return () => document.removeEventListener("keydown", handleMenuKeyDown);
+  }, [isOpen, toggleMenu]);
+
+  const highlightSocialsOnArrival = () => {
+    const socialsEl = document.getElementById("social-icons");
+    if (!socialsEl) return;
+
+    socialsObserverRef.current?.disconnect();
+    if (socialsAnimationTimerRef.current) {
+      window.clearTimeout(socialsAnimationTimerRef.current);
+    }
+
+    const startHighlight = () => {
+      socialsObserverRef.current?.disconnect();
+      socialsEl.classList.remove("highlight-socials");
+      void socialsEl.offsetWidth;
+      socialsEl.classList.add("highlight-socials");
+      socialsAnimationTimerRef.current = window.setTimeout(() => {
+        socialsEl.classList.remove("highlight-socials");
+      }, 3400);
+    };
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && entry.intersectionRatio >= 0.75) {
+          startHighlight();
+        }
+      },
+      { threshold: [0.75] }
+    );
+
+    socialsObserverRef.current = observer;
+    observer.observe(socialsEl);
+  };
+
   const handleNavClick = (
     e: React.MouseEvent<HTMLAnchorElement>,
     href: string
@@ -105,6 +193,14 @@ export default function Navbar() {
       const targetId = href.replace("#", "");
       const targetEl = document.getElementById(targetId);
       if (targetEl) {
+        window.dispatchEvent(
+          new CustomEvent<PortfolioNavigationDetail>(
+            PORTFOLIO_NAVIGATION_EVENT,
+            {
+              detail: { targetY: targetEl.offsetTop },
+            }
+          )
+        );
         targetEl.scrollIntoView({ behavior: "smooth" });
       } else if (pathname !== "/") {
         // If not found and not on the homepage, navigate there.
@@ -112,16 +208,7 @@ export default function Navbar() {
       }
       // Special handling for footer highlighting (if needed)
       if (targetId === "footer") {
-        setTimeout(() => {
-          const socialsEl = document.getElementById("social-icons");
-          if (socialsEl) {
-            socialsEl.classList.add("highlight-socials");
-            setTimeout(
-              () => socialsEl.classList.remove("highlight-socials"),
-              2000
-            );
-          }
-        }, 500);
+        highlightSocialsOnArrival();
       }
     }
   };
@@ -131,8 +218,12 @@ export default function Navbar() {
       <div className="container mx-auto flex justify-between items-center">
         <button
           ref={hamburgerRef}
+          type="button"
           onClick={toggleMenu}
-          className={`absolute top-4 right-4 cursor-pointer text-2xl transition-colors duration-300 focus:outline-none ${
+          aria-label={isOpen ? "Close navigation menu" : "Open navigation menu"}
+          aria-expanded={isOpen}
+          aria-controls="portfolio-navigation-menu"
+          className={`absolute top-4 right-4 cursor-pointer text-2xl transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-current focus-visible:ring-offset-2 ${
             isDark ? "text-black" : "text-white"
           }`}
         >
@@ -140,18 +231,28 @@ export default function Navbar() {
         </button>
       </div>
       <motion.div
+        ref={menuRef}
+        id="portfolio-navigation-menu"
+        aria-hidden={!isOpen}
         className="fixed top-0 left-0 w-full h-full flex justify-center items-center"
-        style={{ backgroundColor: "rgba(17, 24, 39, 0.8)" }}
+        style={{
+          backgroundColor: "rgba(17, 24, 39, 0.8)",
+          pointerEvents: isOpen ? "auto" : "none",
+        }}
         initial="closed"
         animate={isOpen ? "open" : "closed"}
         variants={{
           open: {
             clipPath: "circle(120% at 99% 4%)",
-            transition: { type: "spring", stiffness: 100, damping: 20 },
+            transition: shouldReduceMotion
+              ? { duration: 0 }
+              : { type: "spring", stiffness: 100, damping: 20 },
           },
           closed: {
             clipPath: "circle(0% at 98.5% 4%)",
-            transition: { type: "spring", stiffness: 400, damping: 40 },
+            transition: shouldReduceMotion
+              ? { duration: 0 }
+              : { type: "spring", stiffness: 400, damping: 40 },
           },
         }}
       >
@@ -161,7 +262,8 @@ export default function Navbar() {
               <motion.div key={link.name} whileHover={{ scale: 1.1 }}>
                 <a
                   href={link.href}
-                  className="text-white text-2xl"
+                  tabIndex={isOpen ? 0 : -1}
+                  className="text-white text-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
                   onClick={(e) => handleNavClick(e, link.href)}
                   style={{ fontFamily: "LexendZetta", fontWeight: 100 }}
                 >
@@ -172,7 +274,8 @@ export default function Navbar() {
               <motion.div key={link.name} whileHover={{ scale: 1.1 }}>
                 <Link
                   href={link.href}
-                  className="text-white text-2xl"
+                  tabIndex={isOpen ? 0 : -1}
+                  className="text-white text-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
                   onClick={() => {
                     // If already on /musicskills, refresh to reload content if needed.
                     if (pathname === "/musicskills") {
@@ -190,8 +293,10 @@ export default function Navbar() {
           {/* Close Button */}
           <motion.div whileHover={{ scale: 1.1 }}>
             <button
+              type="button"
               onClick={toggleMenu}
-              className="text-white text-2xl cursor-pointer"
+              tabIndex={isOpen ? 0 : -1}
+              className="text-white text-2xl cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
               style={{ fontFamily: "LexendZetta", fontWeight: 100 }}
             >
               Close

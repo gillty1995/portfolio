@@ -2,7 +2,6 @@
 import React, { Suspense } from "react";
 import Hero from "@/components/Hero";
 import FeaturedProjects from "@/components/FeaturedProjects";
-import Projects from "@/components/Projects";
 import Skills from "@/components/Skills";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
@@ -15,7 +14,6 @@ export default function HomePage() {
     >
       <Hero />
       <FeaturedProjects />
-      <Projects />
       <Skills />
       <Contact />
       <Footer />

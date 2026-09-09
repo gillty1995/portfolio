@@ -1,395 +1,304 @@
 "use client";
 
-import { motion, AnimatePresence, useScroll } from "framer-motion";
-import { useRef, useState, useEffect } from "react";
-import { FaArrowRight } from "react-icons/fa";
+import {
+  AnimatePresence,
+  motion,
+  useInView,
+  useReducedMotion,
+} from "framer-motion";
+import { useEffect, useRef, useState } from "react";
 
-// Define the tech skills and core competencies
-const techSkills = [
-  "HTML/CSS",
-  "JavaScript",
+const PREFIX_TEXT = "I work with";
+const SCRAMBLE_CHARACTERS = "01<>/{}[]#*+=-";
+const SCRAMBLE_FRAMES = 20;
+const SCRAMBLE_INTERVAL_MS = 55;
+const HEADLINE_INTERVAL_MS = 2200;
+
+const headlineSkills = [
   "TypeScript",
   "React",
   "Next.js",
   "React Native",
-  "Expo",
-  "Vite",
-  "Tailwind CSS",
-  "TanStack Query",
-  "tRPC",
-  "shadcn/ui",
-  "Radix UI",
-  "Framer Motion",
-  "GSAP",
   "Node.js",
-  "Express.js",
-  "Java",
-  "Spring Boot",
   "Python",
-  "FastAPI",
-  "Rust",
-  "GraphQL",
-  "RESTful APIs",
-  "Zod",
   "PostgreSQL",
-  "MongoDB",
-  "Prisma",
-  "Supabase",
-  "Auth0",
-  "JWT",
-  "Stripe",
-  "RevenueCat",
-  "OpenAI API",
-  "GenAI",
   "AWS",
-  "Docker",
-  "Kubernetes",
-  "Cloudflare",
-  "CloudFront",
-  "Vercel",
-  "NGINX",
-  "CI/CD Pipelines",
-  "GitHub Actions",
-  "Jest",
-  "Playwright",
-  "Storybook",
-  "ESLint",
-  "Prettier",
-  "Git/GitHub",
-  "Linear",
-  "AI-Assisted Development",
-  "Figma",
-  "OOP",
-];
+] as const;
 
-const coreCompetencies = [
-  "Communication",
-  "Active Listening",
-  "Interpersonal Skills",
-  "Problem Solving",
-  "Time Management",
-  "Adaptation to New Tools",
-  "Team Support",
-  "Leadership",
-  "Attention to Detail",
-];
+const skillGroups = [
+  {
+    label: "Frontend",
+    skills: [
+      "TypeScript",
+      "JavaScript",
+      "React",
+      "Next.js",
+      "React Native / Expo",
+      "HTML / CSS",
+      "Tailwind CSS",
+      "TanStack Query",
+      "shadcn/ui / Radix UI",
+      "Framer Motion / GSAP",
+    ],
+  },
+  {
+    label: "Backend",
+    skills: [
+      "Node.js / Express",
+      "Java / Spring Boot",
+      "Python / FastAPI",
+      "Rust",
+      "Zod",
+    ],
+  },
+  {
+    label: "Data & APIs",
+    skills: [
+      "REST / GraphQL / tRPC",
+      "PostgreSQL / Prisma",
+      "MongoDB / Supabase",
+      "Auth0 / JWT",
+      "Stripe / RevenueCat",
+      "OpenAI API / GenAI",
+    ],
+  },
+  {
+    label: "Platform & Tools",
+    skills: [
+      "AWS",
+      "Docker / Kubernetes",
+      "Cloudflare / CloudFront",
+      "Firebase",
+      "Vercel / NGINX",
+      "CI/CD / GitHub Actions",
+      "Jest / Playwright",
+      "Storybook",
+      "Git / GitHub",
+      "Figma",
+    ],
+  },
+] as const;
 
-const techSkillsInfo: Record<string, string> = {
-  "HTML/CSS":
-    "I create responsive, accessible layouts using semantic HTML and modern CSS techniques.",
-  JavaScript:
-    "I write clean, efficient JavaScript to build dynamic, interactive interfaces.",
-  TypeScript:
-    "I use type-safe code to ensure bug-free, production-ready applications.",
-  React:
-    "I build interactive UIs with React and manage state effectively using the Context API.",
-  "Next.js":
-    "I develop server-rendered and static sites with Next.js for optimal performance and routing.",
-  "React Native":
-    "I build cross-platform mobile applications with React Native using React and TypeScript patterns.",
-  Expo:
-    "I use Expo to build, test, configure, and ship React Native applications for iOS.",
-  Vite: "I utilize Vite for fast, efficient builds and a smooth development experience.",
-  "Tailwind CSS":
-    "I style UIs quickly and consistently using utility-first classes with Tailwind.",
-  "TanStack Query":
-    "I handle caching, background sync, and server state with TanStack Query for performant data fetching.",
-  tRPC: "I build typesafe, end-to-end APIs with tRPC to eliminate client/server schema drift.",
-  "shadcn/ui":
-    "I use shadcn/ui for composable, well-designed components that speed up UI development.",
-  "Radix UI":
-    "I leverage Radix primitives to build accessible, unstyled UI foundations.",
-  "Framer Motion":
-    "I create engaging animations and transitions with Framer Motion.",
-  GSAP:
-    "I create polished motion and interaction details with GSAP for more expressive UI experiences.",
-  "Node.js": "I build scalable backend services using Node.js.",
-  "Express.js":
-    "I create RESTful APIs with Express.js for robust application backends.",
-  Java:
-    "I work with Java to support backend application development and service integrations.",
-  "Spring Boot":
-    "I build backend services with Spring Boot for structured, production-ready APIs.",
-  Python:
-    "I leverage Python for scripting, data processing, and building backend services.",
-  FastAPI:
-    "I build high-performance APIs with FastAPI, ensuring fast and efficient data exchange.",
-  Rust:
-    "I work within Rust backend services on production features, integrations, API flows, and maintenance.",
-  GraphQL: "I design flexible and efficient APIs using GraphQL.",
-  "RESTful APIs":
-    "I design robust RESTful APIs for efficient communication between services.",
-  Zod: "I validate and parse runtime data with Zod, pairing well with TypeScript for robust input validation.",
-  PostgreSQL:
-    "I design relational data models and manage production databases with PostgreSQL.",
-  MongoDB: "I use MongoDB for flexible, scalable NoSQL data storage.",
-  Prisma:
-    "I use Prisma as a type-safe ORM for schema-driven database access and clearer query code.",
-  Supabase:
-    "I use Supabase as an open-source Firebase alternative for hosted Postgres, auth, and realtime features.",
-  Auth0: "I integrate Auth0 for secure, streamlined user authentication.",
-  JWT: "I implement JWT authentication to secure API endpoints.",
-  Stripe:
-    "I integrate Stripe for payment processing, subscriptions, and secure transaction handling.",
-  RevenueCat:
-    "I integrate RevenueCat to manage mobile subscriptions, entitlements, and in-app purchase access.",
-  "OpenAI API":
-    "I integrate OpenAI's capabilities to add intelligent features to applications.",
-  GenAI:
-    "I build production features that integrate generative AI into real product workflows.",
-  AWS:
-    "I work with AWS services including EC2, S3, CloudFront, security configuration, and production infrastructure.",
-  Docker:
-    "I containerize apps with Docker for consistent builds and deployments.",
-  Kubernetes:
-    "I work with Kubernetes-based production environments for containerized application deployment and service configuration.",
-  Cloudflare:
-    "I secure and accelerate deployments using Cloudflare for DNS, HTTPS, and edge features.",
-  CloudFront:
-    "I use CloudFront to deliver assets via a global CDN, optimizing latency and cache behavior for faster page loads.",
-  Vercel:
-    "I deploy Next.js apps on Vercel to leverage edge hosting, instant previews, and a fast global CDN.",
-  NGINX:
-    "I configure NGINX as a high-performance web server, reverse proxy, and load balancer.",
-  "CI/CD Pipelines":
-    "I automate testing and deployment with efficient CI/CD pipelines.",
-  "GitHub Actions":
-    "I automate builds, checks, and deployments with GitHub Actions workflows.",
-  Jest: "I write comprehensive tests using Jest to ensure code quality.",
-  Playwright:
-    "I write end-to-end tests with Playwright to validate critical user flows and catch regressions.",
-  Storybook:
-    "I build and document reusable UI components in Storybook with isolated states and mock data.",
-  ESLint:
-    "I enforce code quality, consistency, and team rules using ESLint configurations and plugins.",
-  Prettier:
-    "I maintain consistent code formatting across the codebase using Prettier.",
-  "Git/GitHub":
-    "I manage code versioning and collaboration using Git and GitHub.",
-  Linear:
-    "I use Linear for issue tracking and project planning to keep tasks organized and workflows efficient.",
-  "AI-Assisted Development":
-    "I use Codex, Claude, Copilot, and similar tools to accelerate development while keeping code clean, DRY, and well-reviewed.",
-  Figma: "I design and prototype user interfaces in Figma.",
-  OOP: "I use object-oriented programming principles to write scalable, maintainable code.",
-};
+function scrambleText(text: string, progress: number, seed: number) {
+  if (progress >= 1) return text;
 
-const coreCompetenciesInfo: Record<string, string> = {
-  Communication:
-    "I clearly articulate ideas and listen actively to engage and inform others.",
-  "Active Listening":
-    "I focus intently on others' perspectives, ensuring effective communication.",
-  "Interpersonal Skills":
-    "I build strong relationships and collaborate effectively across teams.",
-  "Problem Solving":
-    "I analyze challenges and design creative solutions for complex problems.",
-  "Time Management":
-    "I prioritize tasks and manage my time efficiently to meet deadlines.",
-  "Adaptation to New Tools":
-    "I quickly learn and adapt to new technologies and methodologies.",
-  "Team Support":
-    "I contribute to a supportive team environment and offer assistance when needed.",
-  Leadership: "I guide and motivate teams to achieve shared objectives.",
-  "Attention to Detail":
-    "I focus meticulously on details to ensure high-quality work.",
-};
+  const frame = Math.floor(progress * SCRAMBLE_FRAMES);
+  const revealedCharacters = Math.floor(progress * text.length);
+
+  return Array.from(text, (character, index) => {
+    if (character === " " || index < revealedCharacters) {
+      return character;
+    }
+
+    return SCRAMBLE_CHARACTERS[
+      (character.charCodeAt(0) + index * 7 + frame * 11 + seed) %
+        SCRAMBLE_CHARACTERS.length
+    ];
+  }).join("");
+}
 
 export default function Skills() {
-  const scrollContainerRef = useRef<HTMLDivElement | null>(null);
-  const { scrollXProgress } = useScroll({ container: scrollContainerRef });
-  const [arrowDirection, setArrowDirection] = useState<"right" | "left">(
-    "right"
+  const sectionRef = useRef<HTMLElement | null>(null);
+  const hasEntered = useRef(false);
+  const shouldReduceMotion = useReducedMotion();
+  const isSectionVisible = useInView(sectionRef, { amount: 0.2 });
+  const [phase, setPhase] = useState<"waiting" | "scrambling" | "ready">(
+    "waiting"
   );
-  const [clickedCard, setClickedCard] = useState<string | null>(null);
+  const [scrambleProgress, setScrambleProgress] = useState(0);
+  const [headlineIndex, setHeadlineIndex] = useState(0);
 
   useEffect(() => {
-    const unsubscribe = scrollXProgress.on("change", (latest) => {
-      if (latest >= 0.99) {
-        setArrowDirection("left");
-      } else if (latest <= 0.01) {
-        setArrowDirection("right");
-      }
-    });
-    return () => unsubscribe();
-  }, [scrollXProgress]);
+    const section = sectionRef.current;
+    if (!section) return;
 
-  // Auto-close the open card after 7 seconds.
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting || hasEntered.current) return;
+
+        hasEntered.current = true;
+        setPhase("scrambling");
+      },
+      { threshold: 0.3 }
+    );
+
+    observer.observe(section);
+    return () => observer.disconnect();
+  }, []);
+
   useEffect(() => {
-    let timeoutId: NodeJS.Timeout;
-    if (clickedCard !== null) {
-      timeoutId = setTimeout(() => {
-        setClickedCard(null);
-      }, 7000);
+    if (phase !== "scrambling") return;
+
+    if (shouldReduceMotion) {
+      setScrambleProgress(1);
+      setPhase("ready");
+      return;
     }
-    return () => {
-      clearTimeout(timeoutId);
-    };
-  }, [clickedCard]);
 
-  const handleCardClick = (card: string) => {
-    setClickedCard(card === clickedCard ? null : card);
-  };
+    let frame = 0;
+    const interval = window.setInterval(() => {
+      frame += 1;
+      const progress = Math.min(1, frame / SCRAMBLE_FRAMES);
+      setScrambleProgress(progress);
 
-  // Variants for the progress circle fade in:
-  const progressCircleVariants = {
-    initial: { opacity: 0 },
-    animate: { opacity: 1 },
-    exit: { opacity: 0 },
-  };
+      if (progress === 1) {
+        window.clearInterval(interval);
+        setPhase("ready");
+      }
+    }, SCRAMBLE_INTERVAL_MS);
 
-  // Reusable card renderer wrapped in a fixed-size container.
-  const renderCard = (card: string, info?: string, delay = 0) => (
-    <div key={card} className="flex-none w-[300px] h-[150px]">
-      <motion.div
-        onClick={() => handleCardClick(card)}
-        className="w-full h-full p-6 bg-white rounded-lg shadow-2xl flex flex-col items-center justify-center text-center cursor-pointer relative overflow-visible"
-        initial={{ opacity: 0, x: 50 }}
-        whileInView={{ opacity: 1, x: 0 }}
-        animate={{
-          scale: clickedCard === card ? 1.25 : 1,
-          zIndex: clickedCard === card ? 10 : 0,
-        }}
-        transition={{
-          x: { duration: 0.2, delay, type: "spring", stiffness: 100 },
-          scale: { duration: 0.6, ease: "easeOut" },
-        }}
-        style={{ transformOrigin: "center" }}
-      >
-        {clickedCard === card ? (
-          <AnimatePresence>
-            {info && (
-              <motion.p
-                key="info"
-                className="text-sm text-gray-600"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.6, ease: "easeOut" }}
-              >
-                {info}
-              </motion.p>
-            )}
-          </AnimatePresence>
-        ) : (
-          <h4 className="text-lg font-semibold text-gray-800 overflow-hidden text-ellipsis">
-            {card}
-          </h4>
-        )}
-      </motion.div>
-    </div>
-  );
+    return () => window.clearInterval(interval);
+  }, [phase, shouldReduceMotion]);
+
+  useEffect(() => {
+    if (phase !== "ready" || shouldReduceMotion) return;
+
+    const interval = window.setInterval(() => {
+      setHeadlineIndex((current) => (current + 1) % headlineSkills.length);
+    }, HEADLINE_INTERVAL_MS);
+
+    return () => window.clearInterval(interval);
+  }, [phase, shouldReduceMotion]);
+
+  const activeHeadline = headlineSkills[headlineIndex];
+  const displayedPrefix =
+    phase === "ready"
+      ? PREFIX_TEXT
+      : scrambleText(PREFIX_TEXT, scrambleProgress, 1);
+  const displayedSkill =
+    phase === "ready"
+      ? headlineSkills[0]
+      : scrambleText(headlineSkills[0], scrambleProgress, 3);
 
   return (
-    <motion.section
+    <section
       id="skills"
-      className="relative py-20 h-[500px] bg-gradient-to-b from-gray-200 to-gray-100"
+      ref={sectionRef}
+      className="word-scroll-section relative isolate text-gray-950"
     >
-      {/* Title and progress circle */}
-      <div className="flex items-center justify-center mb-10">
-        <motion.h2
-          className="text-4xl font-bold text-gray-800"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 3.5 }}
-        >
-          {["S", "k", "i", "l", "l", "s"].map((letter, index) => (
-            <motion.span
-              key={index}
-              className="inline-block"
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              transition={{ delay: index * 0.2 }}
-            >
-              {letter}
-            </motion.span>
-          ))}
-        </motion.h2>
-        {/* Progress Circle with fade-in */}
-        <div className="ml-4 flex-shrink-0">
-          <AnimatePresence mode="wait">
-            <motion.svg
-              key="progress-circle"
-              width="40"
-              height="40"
-              viewBox="0 0 100 100"
-              xmlns="http://www.w3.org/2000/svg"
-              className="rotate-90"
-              variants={progressCircleVariants}
-              initial="initial"
-              whileInView={"animate"}
-              exit="exit"
-              transition={{ duration: 2, delay: 1 }}
-            >
-              <circle
-                cx="50"
-                cy="50"
-                r="45"
-                stroke="#D1D5DB"
-                strokeWidth="10"
-                fill="none"
-              />
-              <motion.circle
-                cx="50"
-                cy="50"
-                r="45"
-                stroke="#2d3748"
-                strokeWidth="10"
-                fill="none"
-                strokeDasharray="283"
-                style={{ pathLength: scrollXProgress }}
-              />
-            </motion.svg>
-          </AnimatePresence>
-        </div>
+      <h2 className="sr-only">Skills</h2>
 
-        {/* Bouncing Arrow with fade and direction change */}
+      <div className="word-scroll-stage-shell relative flex min-h-[100dvh] items-center overflow-hidden px-5 py-24 sm:px-8 sm:py-28 lg:px-12">
         <motion.div
-          // Arrow fades in on mount
-          initial={{ opacity: 0 }}
-          whileInView={{
-            opacity: 1,
-            x: arrowDirection === "right" ? [0, -10, 0] : [0, 10, 0],
-          }}
-          transition={{
-            opacity: { duration: 1, delay: 1.3 }, // Fade in over 1 second
-            x: { duration: 2, repeat: Infinity, ease: "easeInOut" },
-          }}
-          className="ml-6 pointer-events-none"
-        >
-          <FaArrowRight
-            style={{
-              transform: arrowDirection === "left" ? "scaleX(-1)" : "none",
-            }}
-            className="text-gray-800 text-2xl"
-          />
-        </motion.div>
-      </div>
-
-      {/* Cards container with hidden scrollbar */}
-      <div className="relative">
-        <div
-          ref={scrollContainerRef}
-          className="flex overflow-x-auto space-x-8 px-10 py-5 pb-100 hide-scrollbar"
-        >
-          {techSkills.map((skill) =>
-            renderCard(skill, techSkillsInfo[skill], 0.1)
-          )}
-          {coreCompetencies.map((competency, index) =>
-            renderCard(
-              competency,
-              coreCompetenciesInfo[competency],
-              0.1 * index
-            )
-          )}
-        </div>
-        {/* Gradient overlay: fades from transparent to the background color */}
-        <div
-          className="absolute right-0 top-0 h-full w-12 pointer-events-none"
-          style={{
-            background: "linear-gradient(to left, #E5E7EB, transparent)",
-          }}
+          aria-hidden="true"
+          className="word-scroll-orbit word-scroll-orbit-one"
+          animate={
+            shouldReduceMotion || !isSectionVisible
+              ? undefined
+              : {
+                  rotate: [0, 7, -5, 0],
+                  x: [0, 26, -18, 0],
+                  borderColor: [
+                    "rgba(75, 85, 99, 0.22)",
+                    "rgba(255, 255, 255, 0.76)",
+                    "rgba(75, 85, 99, 0.22)",
+                  ],
+                  backgroundColor: [
+                    "rgba(255, 255, 255, 0.045)",
+                    "rgba(255, 255, 255, 0.09)",
+                    "rgba(255, 255, 255, 0.045)",
+                  ],
+                }
+          }
+          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
         />
+        <motion.div
+          aria-hidden="true"
+          className="word-scroll-orbit word-scroll-orbit-two"
+          animate={
+            shouldReduceMotion || !isSectionVisible
+              ? undefined
+              : {
+                  rotate: [0, -8, 6, 0],
+                  y: [0, -22, 16, 0],
+                  borderColor: [
+                    "rgba(75, 85, 99, 0.14)",
+                    "rgba(255, 255, 255, 0.64)",
+                    "rgba(75, 85, 99, 0.14)",
+                  ],
+                  backgroundColor: [
+                    "rgba(255, 255, 255, 0.025)",
+                    "rgba(255, 255, 255, 0.07)",
+                    "rgba(255, 255, 255, 0.025)",
+                  ],
+                }
+          }
+          transition={{ duration: 13, repeat: Infinity, ease: "easeInOut" }}
+        />
+        <motion.div
+          aria-hidden="true"
+          className="word-scroll-glow"
+          animate={
+            shouldReduceMotion || !isSectionVisible
+              ? undefined
+              : { x: ["-7%", "8%", "-7%"], scale: [1, 1.08, 1] }
+          }
+          transition={{ duration: 11, repeat: Infinity, ease: "easeInOut" }}
+        />
+
+        <div className="relative z-10 mx-auto flex w-full max-w-6xl flex-col gap-14 sm:gap-16">
+          <div className="flex min-h-16 items-center justify-center overflow-hidden">
+            <p
+              className="lexend-extralight flex max-w-full items-baseline justify-center gap-[0.35em] whitespace-nowrap text-[clamp(1rem,3.2vw,2.35rem)] tracking-[-0.055em] text-slate-800"
+              aria-label={`${PREFIX_TEXT} ${activeHeadline}`}
+            >
+              <span aria-hidden="true">{displayedPrefix}</span>
+              <span
+                aria-hidden="true"
+                className="relative inline-grid min-w-[12ch] text-left sm:min-w-[15ch]"
+              >
+                {phase === "ready" ? (
+                  <AnimatePresence mode="wait" initial={false}>
+                    <motion.span
+                      key={activeHeadline}
+                      className="col-start-1 row-start-1"
+                      initial={{ opacity: 0, y: 12, filter: "blur(5px)" }}
+                      animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                      exit={{ opacity: 0, y: -12, filter: "blur(5px)" }}
+                      transition={{ duration: 0.42, ease: [0.22, 1, 0.36, 1] }}
+                    >
+                      {activeHeadline}
+                    </motion.span>
+                  </AnimatePresence>
+                ) : (
+                  <span className="col-start-1 row-start-1">{displayedSkill}</span>
+                )}
+              </span>
+            </p>
+          </div>
+
+          <div className="grid grid-cols-2 gap-x-7 gap-y-10 md:grid-cols-4 md:gap-x-10">
+            {skillGroups.map((group, groupIndex) => (
+              <motion.div
+                key={group.label}
+                className="border-t border-slate-400/55 pt-4"
+                initial={shouldReduceMotion ? false : { opacity: 0, y: 14 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.35 }}
+                transition={{
+                  duration: shouldReduceMotion ? 0 : 0.5,
+                  delay: shouldReduceMotion ? 0 : groupIndex * 0.07,
+                  ease: [0.22, 1, 0.36, 1],
+                }}
+              >
+                <h3 className="mb-4 text-[0.58rem] font-light uppercase tracking-[0.18em] text-slate-500 sm:text-[0.65rem]">
+                  {group.label}
+                </h3>
+                <ul className="space-y-2.5">
+                  {group.skills.map((skill) => (
+                    <li
+                      key={skill}
+                      className="text-[0.68rem] font-light leading-relaxed tracking-[-0.025em] text-slate-800 sm:text-xs lg:text-[0.8rem]"
+                    >
+                      {skill}
+                    </li>
+                  ))}
+                </ul>
+              </motion.div>
+            ))}
+          </div>
+        </div>
       </div>
-    </motion.section>
+    </section>
   );
 }
