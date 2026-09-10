@@ -45,6 +45,8 @@ export default function FeaturedProjects() {
   const shouldReduceMotion = useReducedMotion();
   const wheelLockRef = useRef(false);
   const wheelTimerRef = useRef<number | undefined>(undefined);
+  const pointerStartRef = useRef<{ id: number; x: number; y: number } | null>(null);
+  const suppressClickRef = useRef(false);
   const [{ index: activeIndex, direction }, setNavigation] = useState({
     index: 0,
     direction: 1,
@@ -115,12 +117,25 @@ export default function FeaturedProjects() {
     }, shouldReduceMotion ? 0 : 520);
   };
 
-  const handleDragEnd = (
-    _event: MouseEvent | TouchEvent | PointerEvent,
-    info: { offset: { x: number } }
-  ) => {
-    if (Math.abs(info.offset.x) < 56) return;
-    navigateTo(activeIndex + (info.offset.x < 0 ? 1 : -1));
+  const handlePointerDown = (event: React.PointerEvent<HTMLElement>) => {
+    pointerStartRef.current = {
+      id: event.pointerId,
+      x: event.clientX,
+      y: event.clientY,
+    };
+  };
+
+  const handlePointerUp = (event: React.PointerEvent<HTMLElement>) => {
+    const start = pointerStartRef.current;
+    pointerStartRef.current = null;
+    if (!start) return;
+
+    const deltaX = event.clientX - start.x;
+    const deltaY = event.clientY - start.y;
+    if (Math.abs(deltaX) < 56 || Math.abs(deltaX) <= Math.abs(deltaY)) return;
+
+    suppressClickRef.current = true;
+    navigateTo(activeIndex + (deltaX < 0 ? 1 : -1));
   };
 
   return (
@@ -143,6 +158,11 @@ export default function FeaturedProjects() {
         <div
           aria-label="Swipe or horizontally scroll to browse work"
           onWheel={handleWheel}
+          onPointerDown={handlePointerDown}
+          onPointerUp={handlePointerUp}
+          onPointerCancel={() => {
+            pointerStartRef.current = null;
+          }}
           className="relative h-[clamp(340px,64vh,620px)] w-full max-w-[680px] touch-pan-y"
         >
           <AnimatePresence initial={false} custom={direction} mode="popLayout">
@@ -200,7 +220,7 @@ export default function FeaturedProjects() {
                   style={{
                     willChange: "opacity, filter, transform",
                     zIndex: isActiveCard ? 20 : CARD_LAYOUTS.length - slot,
-                    pointerEvents: "auto",
+                    pointerEvents: isActiveCard ? "auto" : "none",
                   }}
                 >
                   <Image
@@ -221,23 +241,27 @@ export default function FeaturedProjects() {
                         ? `Open details for ${project.title}`
                         : `Move ${project.title} to the center`
                     }
-                    onClick={() =>
-                      isActiveCard
-                        ? openProject(project)
-                        : navigateTo(
-                            featuredProjects.findIndex(
-                              (featuredProject) =>
-                                featuredProject.id === project.id
-                            )
-                          )
-                    }
-                    onDragEnd={isActiveCard ? handleDragEnd : undefined}
-                    drag={isActiveCard ? "x" : false}
-                    dragElastic={0.14}
-                    dragMomentum={false}
+                    style={{ pointerEvents: "auto" }}
+                    onClick={() => {
+                      if (suppressClickRef.current) {
+                        suppressClickRef.current = false;
+                        return;
+                      }
+
+                      if (isActiveCard) {
+                        openProject(project);
+                        return;
+                      }
+
+                      navigateTo(
+                        featuredProjects.findIndex(
+                          (featuredProject) => featuredProject.id === project.id
+                        )
+                      );
+                    }}
                     className={
                       isActiveCard
-                        ? "absolute inset-0 cursor-grab bg-transparent outline-none focus-visible:ring-2 focus-visible:ring-gray-800 focus-visible:ring-offset-4 focus-visible:ring-offset-gray-200 active:cursor-grabbing"
+                        ? "absolute left-[8%] top-[8%] h-[84%] w-[84%] cursor-grab bg-transparent outline-none focus-visible:ring-2 focus-visible:ring-gray-800 focus-visible:ring-offset-4 focus-visible:ring-offset-gray-200 active:cursor-grabbing"
                         : `absolute top-1/4 h-1/2 w-1/2 bg-transparent outline-none focus-visible:ring-2 focus-visible:ring-gray-800 focus-visible:ring-offset-4 focus-visible:ring-offset-gray-200 ${
                             slot === 0 ? "left-0" : "right-0"
                           }`
