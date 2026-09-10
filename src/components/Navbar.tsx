@@ -4,10 +4,6 @@ import { useEffect, useRef, useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { useNav } from "./NavContext";
 import { usePathname, useRouter } from "next/navigation";
-import {
-  PORTFOLIO_NAVIGATION_EVENT,
-  type PortfolioNavigationDetail,
-} from "@/utils/navigationEvents";
 
 const defaultNavLinks = [
   { name: "Home", href: "#hero" },
@@ -193,14 +189,6 @@ export default function Navbar() {
       const targetId = href.replace("#", "");
       const targetEl = document.getElementById(targetId);
       if (targetEl) {
-        window.dispatchEvent(
-          new CustomEvent<PortfolioNavigationDetail>(
-            PORTFOLIO_NAVIGATION_EVENT,
-            {
-              detail: { targetY: targetEl.offsetTop },
-            }
-          )
-        );
         targetEl.scrollIntoView({ behavior: "smooth" });
       } else if (pathname !== "/") {
         // If not found and not on the homepage, navigate there.
