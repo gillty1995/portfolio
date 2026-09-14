@@ -92,44 +92,18 @@ export default function Projects() {
       ref={sectionRef}
       className="relative w-full min-h-[80vh] lg:min-h-[60vh] xl:pb-50 bg-gradient-to-b from-neutral-200 to-gray-200 overflow-y-auto overflow-x-hidden mobile-extra-pb px-4 py-8 md:px-8 lg:px-12"
     >
-      {/* Header placed close to the project cards */}
-      <div className="flex items-center justify-center mt-25 mb-25 mobile-less-p">
-        <motion.h2
-          className="text-4xl font-bold text-gray-800 text-center max-md:max-w-100"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 3.5 }}
-        >
-          {[
-            "D",
-            "i",
-            "v",
-            "e",
-            " ",
-            "i",
-            "n",
-            "t",
-            "o",
-            " ",
-            "m",
-            "y",
-            " ",
-            "W",
-            "o",
-            "r",
-            "k",
-          ].map((letter, index) => (
-            <motion.span
-              key={index}
-              className={letter === " " ? "inline-block mx-2" : "inline-block"}
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              transition={{ delay: index * 0.2 }}
-            >
-              {letter}
-            </motion.span>
-          ))}
-        </motion.h2>
+      <div className="mx-auto flex max-w-6xl items-end justify-between gap-6 px-2 pb-8 pt-4">
+        <div>
+          <p className="text-[0.62rem] uppercase tracking-[0.24em] text-slate-500">
+            Browse the archive
+          </p>
+          <h2 className="mt-2 text-3xl font-light tracking-[-0.05em] text-slate-800 sm:text-4xl">
+            Project carousel
+          </h2>
+        </div>
+        <p className="hidden max-w-xs text-right text-xs leading-5 text-slate-500 sm:block">
+          Drag horizontally or use the arrows. Select any project to open its full case study.
+        </p>
       </div>
 
       {/* Desktop Parallax Layout (visible on xl and up) */}

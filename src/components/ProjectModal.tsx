@@ -153,7 +153,7 @@ export default function ProjectModal({
       aria-modal="true"
       aria-labelledby={titleId}
       aria-describedby={descriptionId}
-      className="fixed inset-0 z-[9999] overflow-y-auto bg-[#f0f1f1] text-slate-800"
+      className="fixed inset-0 z-[9999] overflow-x-hidden overflow-y-auto bg-[#f0f1f1] text-slate-800"
       initial={shouldReduceMotion ? false : { opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
@@ -190,7 +190,7 @@ export default function ProjectModal({
         </button>
       </header>
 
-      <main className="relative z-10 mx-auto grid min-h-[calc(100dvh-73px)] w-full max-w-[1480px] items-start gap-8 px-5 py-8 sm:px-8 sm:py-10 lg:grid-cols-[minmax(0,1.12fr)_minmax(360px,0.88fr)] lg:gap-10 lg:px-12 xl:gap-16 xl:px-16">
+      <main className="relative z-10 mx-auto grid min-h-[calc(100dvh-73px)] w-full max-w-[1480px] min-w-0 items-start gap-8 px-4 py-8 sm:px-6 sm:py-10 lg:grid-cols-[minmax(0,1.12fr)_minmax(340px,0.88fr)] lg:gap-10 lg:px-10 xl:gap-16 xl:px-14">
         <section
           aria-label={`${project.title} media`}
           className="min-w-0 lg:sticky lg:top-[90px]"
@@ -274,7 +274,7 @@ export default function ProjectModal({
 
         <motion.section
           key={project.id}
-          className="mx-auto w-full max-w-xl pb-4 lg:flex lg:h-[calc(100dvh-105px)] lg:max-h-[calc(100dvh-105px)] lg:flex-col lg:overflow-hidden"
+          className="mx-auto min-w-0 w-full max-w-xl overflow-x-hidden pb-4 lg:flex lg:h-[calc(100dvh-105px)] lg:max-h-[calc(100dvh-105px)] lg:flex-col lg:overflow-hidden"
           initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{
@@ -283,7 +283,7 @@ export default function ProjectModal({
             ease: [0.22, 1, 0.36, 1],
           }}
         >
-          <div className="pr-1 lg:min-h-0 lg:flex-1 lg:overflow-y-auto lg:overscroll-contain lg:[scrollbar-color:rgba(100,116,139,0.35)_transparent] lg:[scrollbar-width:thin]">
+          <div className="min-w-0 overflow-x-hidden pr-0 [overflow-wrap:anywhere] lg:min-h-0 lg:flex-1 lg:overflow-y-auto lg:overscroll-contain lg:pr-1 lg:[scrollbar-color:rgba(100,116,139,0.35)_transparent] lg:[scrollbar-width:thin]">
             <h2
               id={titleId}
               className="text-4xl font-light tracking-[-0.055em] text-slate-800 sm:text-5xl xl:text-6xl"

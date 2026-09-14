@@ -8,21 +8,17 @@ import {
 } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 
-const PREFIX_TEXT = "I work with";
+const PREFIX_TEXT = "I";
 const SCRAMBLE_CHARACTERS = "01<>/{}[]#*+=-";
-const SCRAMBLE_FRAMES = 20;
-const SCRAMBLE_INTERVAL_MS = 55;
+const SCRAMBLE_FRAMES = 12;
+const SCRAMBLE_INTERVAL_MS = 32;
 const HEADLINE_INTERVAL_MS = 2200;
 
 const headlineSkills = [
-  "TypeScript",
-  "React",
-  "Next.js",
-  "React Native",
-  "Node.js",
-  "Python",
-  "PostgreSQL",
-  "AWS",
+  "design and ship AI-powered web and mobile products",
+  "work across product design, frontend, backend, and production",
+  "take products from first sketch to deployed software",
+  "care about making complex systems feel simple",
 ] as const;
 
 const skillGroups = [
@@ -155,6 +151,8 @@ export default function Skills() {
 
     const interval = window.setInterval(() => {
       setHeadlineIndex((current) => (current + 1) % headlineSkills.length);
+      setScrambleProgress(0);
+      setPhase("scrambling");
     }, HEADLINE_INTERVAL_MS);
 
     return () => window.clearInterval(interval);
@@ -167,8 +165,8 @@ export default function Skills() {
       : scrambleText(PREFIX_TEXT, scrambleProgress, 1);
   const displayedSkill =
     phase === "ready"
-      ? headlineSkills[0]
-      : scrambleText(headlineSkills[0], scrambleProgress, 3);
+      ? activeHeadline
+      : scrambleText(activeHeadline, scrambleProgress, 3);
 
   return (
     <section
@@ -239,19 +237,19 @@ export default function Skills() {
         <div className="relative z-10 mx-auto flex w-full max-w-6xl flex-col gap-14 sm:gap-16">
           <div className="flex min-h-16 items-center justify-center overflow-hidden">
             <p
-              className="lexend-extralight flex max-w-full items-baseline justify-center gap-[0.35em] whitespace-nowrap text-[clamp(1rem,3.2vw,2.35rem)] tracking-[-0.055em] text-slate-800"
+              className="lexend-extralight max-w-full px-3 text-center text-[clamp(0.64rem,2.55vw,1.45rem)] leading-[1.3] tracking-[-0.055em] text-slate-800 sm:px-0 sm:text-[clamp(0.64rem,1.55vw,1.45rem)] sm:leading-[1.2]"
               aria-label={`${PREFIX_TEXT} ${activeHeadline}`}
             >
-              <span aria-hidden="true">{displayedPrefix}</span>
+              <span aria-hidden="true">{displayedPrefix} </span>
               <span
                 aria-hidden="true"
-                className="relative inline-grid min-w-[12ch] text-left sm:min-w-[15ch]"
+                className="relative inline max-w-full whitespace-normal text-center sm:whitespace-nowrap"
               >
                 {phase === "ready" ? (
                   <AnimatePresence mode="wait" initial={false}>
                     <motion.span
                       key={activeHeadline}
-                      className="col-start-1 row-start-1"
+                      className="inline"
                       initial={{ opacity: 0, y: 12, filter: "blur(5px)" }}
                       animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
                       exit={{ opacity: 0, y: -12, filter: "blur(5px)" }}
@@ -261,7 +259,7 @@ export default function Skills() {
                     </motion.span>
                   </AnimatePresence>
                 ) : (
-                  <span className="col-start-1 row-start-1">{displayedSkill}</span>
+                  <span className="inline">{displayedSkill}</span>
                 )}
               </span>
             </p>

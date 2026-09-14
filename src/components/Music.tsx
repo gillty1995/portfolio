@@ -2,7 +2,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import AlbumCard, { Album } from "./AlbumCard";
-import MusicModal from "./MusicModal";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 
 const albumsData: Album[] = [
@@ -67,7 +66,6 @@ const albumsData: Album[] = [
 ];
 
 export default function Music() {
-  const [selectedAlbum, setSelectedAlbum] = useState<Album | null>(null);
   const [showAll, setShowAll] = useState(false);
   const [mobileIndex, setMobileIndex] = useState(0);
 
@@ -96,63 +94,49 @@ export default function Music() {
   return (
     <section
       id="albums"
-      className="relative py-20 bg-gradient-to-b from-gray-100 to-gray-50"
+      className="relative bg-gradient-to-b from-[#f3f4f6] via-[#f5f6f7] to-[#f3f4f6] py-20 sm:py-24"
     >
-      <div className="container mx-auto px-4">
-        {/* Header */}
+      <div className="container mx-auto max-w-7xl px-5 sm:px-8">
         <motion.h2
-          className="text-4xl font-bold text-center text-gray-800 mb-20"
+          className="mb-10 text-center text-3xl font-light tracking-[-0.05em] text-slate-900 sm:text-4xl xl:text-left"
           initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 3.5 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7 }}
         >
-          {["A", "l", "b", "u", "m", "s"].map((letter, index) => (
-            <motion.span
-              key={index}
-              className="inline-block"
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              transition={{ delay: index * 0.2 }}
-            >
-              {letter}
-            </motion.span>
-          ))}
+          Albums
         </motion.h2>
 
         {/* Desktop Layout: Grid for album cards (visible on xl and up) */}
         <div className="hidden xl:block">
-          {/* Grid for the first 4 album cards, centered */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 justify-items-center">
+          <div className="grid grid-cols-1 justify-items-center gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {firstAlbums.map((album, index) => (
               <motion.div key={album.id} {...getCardAnimation(index)}>
-                <AlbumCard
-                  album={album}
-                  onClick={() => setSelectedAlbum(album)}
-                />
+                <AlbumCard album={album} />
               </motion.div>
             ))}
           </div>
 
           {/* Extra albums drop down (with alternating animations) */}
-          <AnimatePresence>
+          <AnimatePresence initial={false}>
             {showAll && extraAlbums.length > 0 && (
               <motion.div
                 key="extra-albums"
                 initial={{ opacity: 0, height: 0 }}
                 animate={{ opacity: 1, height: "auto" }}
                 exit={{ opacity: 0, height: 0 }}
-                transition={{ duration: 0.8, ease: "easeOut" }}
-                className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 justify-items-center"
+                transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
+                className="mt-5 grid grid-cols-1 justify-items-center gap-5 overflow-hidden sm:grid-cols-2 lg:grid-cols-4"
               >
                 {extraAlbums.map((album, index) => (
                   <motion.div
                     key={album.id}
-                    {...getCardAnimation(index + 4)} // Continue delay count from the first grid
+                    initial={{ opacity: 0, y: 12 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: 12 }}
+                    transition={{ duration: 0.45, delay: index * 0.08, ease: [0.22, 1, 0.36, 1] }}
                   >
-                    <AlbumCard
-                      album={album}
-                      onClick={() => setSelectedAlbum(album)}
-                    />
+                    <AlbumCard album={album} />
                   </motion.div>
                 ))}
               </motion.div>
@@ -161,12 +145,12 @@ export default function Music() {
 
           {/* Toggle Button for extra albums */}
           {extraAlbums.length > 0 && (
-            <div className="mt-15 flex justify-center">
+            <div className="mt-8 flex justify-center">
               <motion.button
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => setShowAll((prev) => !prev)}
-                className="w-full max-w-xs px-6 py-3 bg-gray-300 text-gray-800 shadow-lg rounded-full hover:bg-gray-200 duration-500 ease-in-out transition-colors cursor-pointer"
+                className="w-full max-w-xs cursor-pointer rounded-full border border-slate-300/80 bg-white/70 px-6 py-3 text-sm font-light tracking-[-0.02em] text-slate-700 shadow-sm transition-colors duration-300 hover:bg-white"
               >
                 {showAll ? "Show Less" : "Show More"}
               </motion.button>
@@ -183,31 +167,20 @@ export default function Music() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
             whileHover={{ scale: 1.05 }}
-            onClick={() => setSelectedAlbum(albumsData[mobileIndex])}
           >
-            <AlbumCard
-              album={albumsData[mobileIndex]}
-              onClick={() => setSelectedAlbum(albumsData[mobileIndex])}
-            />
+            <AlbumCard album={albumsData[mobileIndex]} />
           </motion.div>
           <div className="flex items-center justify-center space-x-4 mt-4 z-10">
-            <button onClick={handlePrev} className="text-3xl text-gray-800 p-2">
+            <button aria-label="Previous album" onClick={handlePrev} className="cursor-pointer p-2 text-2xl text-gray-700">
               <FaArrowLeft />
             </button>
-            <button onClick={handleNext} className="text-3xl text-gray-800 p-2">
+            <button aria-label="Next album" onClick={handleNext} className="cursor-pointer p-2 text-2xl text-gray-700">
               <FaArrowRight />
             </button>
           </div>
         </div>
       </div>
 
-      {/* Modal for Album Details */}
-      {selectedAlbum && (
-        <MusicModal
-          album={selectedAlbum}
-          onClose={() => setSelectedAlbum(null)}
-        />
-      )}
     </section>
   );
 }

@@ -2,7 +2,7 @@ export const featuredProjectIds = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10] as const;
 
 export const featuredProjectImages: Record<number, string> = {
   0: "/images/picio-featured.png",
-  1: "/images/leaplogger-featured.png",
+  1: "/images/leaplogger-detail-v3.png",
   2: "/images/device-mockups/retry/clickk-macbook-v2.png",
   3: "/images/freekik-featured.png",
   4: "/images/textilepoms-featured.png",
