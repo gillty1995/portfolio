@@ -7,7 +7,7 @@ import { usePathname, useRouter } from "next/navigation";
 
 const defaultNavLinks = [
   { name: "Home", href: "#hero" },
-  { name: "My Work", href: "#featured-work" },
+  { name: "My Work", href: "/projects" },
   { name: "Skills", href: "#skills" },
   { name: "Contact", href: "#contact" },
   { name: "Socials", href: "#footer" },
@@ -211,11 +211,15 @@ export default function Navbar() {
           aria-label={isOpen ? "Close navigation menu" : "Open navigation menu"}
           aria-expanded={isOpen}
           aria-controls="portfolio-navigation-menu"
-          className={`absolute top-4 right-4 cursor-pointer text-2xl transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-current focus-visible:ring-offset-2 ${
+          className={`absolute top-3 right-3 flex h-11 w-11 cursor-pointer items-center justify-center transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-current focus-visible:ring-offset-2 sm:top-4 sm:right-4 ${
             isDark ? "text-black" : "text-white"
           }`}
         >
-          ☰
+          <span className="flex w-6 flex-col gap-[4px]" aria-hidden="true">
+            <span className="h-[3px] w-full rounded-full bg-current" />
+            <span className="h-[3px] w-full rounded-full bg-current" />
+            <span className="h-[3px] w-full rounded-full bg-current" />
+          </span>
         </button>
       </div>
       <motion.div

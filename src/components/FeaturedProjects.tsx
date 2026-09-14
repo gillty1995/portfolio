@@ -6,6 +6,7 @@ import Image from "next/image";
 import {
   featuredProjectIds,
   featuredProjectImages,
+  projectCaseStudySummaries,
   projectsData,
 } from "@/utils/ProjectData";
 import ProjectModal from "./ProjectModal";
@@ -37,8 +38,8 @@ const CARD_LAYOUTS = [
 
 type Project = (typeof projectsData)[number];
 
-function clamp(value: number, min: number, max: number) {
-  return Math.min(Math.max(value, min), max);
+function wrapIndex(value: number, length: number) {
+  return ((value % length) + length) % length;
 }
 
 export default function FeaturedProjects() {
@@ -60,7 +61,7 @@ export default function FeaturedProjects() {
   const navigateTo = useCallback(
     (nextIndex: number) => {
       setNavigation((current) => {
-        const index = clamp(nextIndex, 0, featuredProjects.length - 1);
+        const index = wrapIndex(nextIndex, featuredProjects.length);
         if (index === current.index) return current;
 
         return {
@@ -87,17 +88,15 @@ export default function FeaturedProjects() {
 
   if (!featuredProjects.length) return null;
 
-  const carouselEntries = (
-    activeIndex === 0
-      ? featuredProjects.slice(0, CARD_LAYOUTS.length)
-      : featuredProjects.slice(
-          activeIndex - 1,
-          activeIndex + CARD_LAYOUTS.length - 1
-        )
-  ).map((project, slot) => ({ project, slot }));
+  const carouselEntries = [-1, 0, 1, 2].map((offset, slot) => ({
+    project: featuredProjects[wrapIndex(activeIndex + offset, featuredProjects.length)],
+    slot,
+  }));
   const selectedProjectIndex = selectedProject
     ? featuredProjects.findIndex((project) => project.id === selectedProject.id)
     : -1;
+  const activeProject = featuredProjects[activeIndex];
+  const activeSummary = projectCaseStudySummaries[activeProject.id];
 
   const handleWheel = (event: React.WheelEvent<HTMLElement>) => {
     const horizontalDelta =
@@ -148,30 +147,33 @@ export default function FeaturedProjects() {
             "radial-gradient(ellipse at 50% 52%, rgba(255, 255, 255, 0.92) 0%, rgba(229, 231, 235, 0.3) 42%, rgba(229, 229, 229, 0) 74%), linear-gradient(to bottom, #e5e5e5 0%, #e5e7eb 50%, #e5e5e5 100%)",
         } as CSSProperties
       }
-      className="relative overflow-hidden py-20 text-gray-800 sm:py-24"
+      className="relative overflow-hidden py-0 text-gray-800"
     >
       <div className="pointer-events-none absolute bottom-[10%] left-1/2 h-28 w-[min(72vw,900px)] -translate-x-1/2 rounded-[50%] bg-gray-500/10 blur-3xl" />
 
-      <div className="relative mx-auto flex min-h-[min(78dvh,760px)] w-full max-w-[1100px] flex-col items-center justify-center px-5 sm:px-8">
+      <div className="relative mx-auto flex min-h-[100dvh] w-full max-w-[1180px] items-center justify-center px-5 sm:px-8">
         <h2 className="sr-only">My work</h2>
 
-        <div
-          aria-label="Swipe or horizontally scroll to browse work"
-          onWheel={handleWheel}
-          onPointerDown={handlePointerDown}
-          onPointerUp={handlePointerUp}
-          onPointerCancel={() => {
-            pointerStartRef.current = null;
-          }}
-          className="relative h-[clamp(340px,64vh,620px)] w-full max-w-[680px] touch-pan-y"
-        >
+        <div className="flex w-full flex-col items-center">
+          <div
+            aria-label="Swipe or horizontally scroll to browse work"
+            onWheel={handleWheel}
+            onPointerDown={handlePointerDown}
+            onPointerUp={handlePointerUp}
+            onPointerCancel={() => {
+              pointerStartRef.current = null;
+            }}
+            className="relative h-[clamp(300px,52vh,520px)] w-full max-w-[620px] touch-pan-y"
+          >
           <AnimatePresence initial={false} custom={direction} mode="popLayout">
             {carouselEntries.map(({ project, slot }) => {
               const isActiveCard = project.id === featuredProjects[activeIndex].id;
-              const layout =
-                activeIndex === 0
-                  ? CARD_LAYOUTS[slot]
-                  : [CARD_LAYOUTS[2], CARD_LAYOUTS[0], CARD_LAYOUTS[1], CARD_LAYOUTS[3]][slot];
+              const layout = [
+                CARD_LAYOUTS[2],
+                CARD_LAYOUTS[0],
+                CARD_LAYOUTS[1],
+                CARD_LAYOUTS[3],
+              ][slot];
               const activeScale = isActiveCard && project.id === 3 ? 1.2 : layout.scale;
               const image =
                 featuredProjectImages[project.id] ?? project.backgroundImage;
@@ -206,17 +208,17 @@ export default function FeaturedProjects() {
                           filter: { duration: 0.45, ease: "easeInOut" },
                         }
                   }
-                  className={`absolute inset-0 m-auto h-[56vh] max-h-[620px] min-h-[300px] ${
+                  className={`absolute inset-0 m-auto h-[48vh] max-h-[520px] min-h-[260px] ${
                     isActiveCard
-                      ? "w-[min(92vw,680px)]"
-                      : "w-[min(64vw,500px)]"
-                  } cursor-grab bg-transparent text-left outline-none focus-visible:ring-2 focus-visible:ring-gray-800 focus-visible:ring-offset-4 focus-visible:ring-offset-gray-200 active:cursor-grabbing sm:h-[64vh] ${
+                      ? "w-[min(86vw,620px)]"
+                      : "w-[min(58vw,430px)]"
+                  } cursor-grab bg-transparent text-left outline-none focus-visible:ring-2 focus-visible:ring-gray-800 focus-visible:ring-offset-4 focus-visible:ring-offset-gray-200 ${
                     !isActiveCard ? "max-md:hidden" : "z-10"
                   } ${
                     isCustomImage
                       ? "overflow-visible shadow-none"
                       : "overflow-hidden rounded-xl shadow-[0_1px_3px_rgba(0,0,0,0.08),0_0_0_1px_rgba(0,0,0,0.05)]"
-                  }`}
+                  } sm:h-[52vh]`}
                   style={{
                     willChange: "opacity, filter, transform",
                     zIndex: isActiveCard ? 20 : CARD_LAYOUTS.length - slot,
@@ -261,8 +263,8 @@ export default function FeaturedProjects() {
                     }}
                     className={
                       isActiveCard
-                        ? "absolute left-[8%] top-[8%] h-[84%] w-[84%] cursor-grab bg-transparent outline-none focus-visible:ring-2 focus-visible:ring-gray-800 focus-visible:ring-offset-4 focus-visible:ring-offset-gray-200 active:cursor-grabbing"
-                        : `absolute top-1/4 h-1/2 w-1/2 bg-transparent outline-none focus-visible:ring-2 focus-visible:ring-gray-800 focus-visible:ring-offset-4 focus-visible:ring-offset-gray-200 ${
+                        ? "absolute left-[8%] top-[8%] h-[84%] w-[84%] cursor-pointer bg-transparent outline-none focus-visible:ring-2 focus-visible:ring-gray-800 focus-visible:ring-offset-4 focus-visible:ring-offset-gray-200"
+                        : `absolute top-1/4 h-1/2 w-1/2 cursor-pointer bg-transparent outline-none focus-visible:ring-2 focus-visible:ring-gray-800 focus-visible:ring-offset-4 focus-visible:ring-offset-gray-200 ${
                             slot === 0 ? "left-0" : "right-0"
                           }`
                     }
@@ -271,6 +273,29 @@ export default function FeaturedProjects() {
               );
             })}
           </AnimatePresence>
+          </div>
+
+          <div className="mt-10 min-h-[112px] w-full max-w-[620px] text-center sm:mt-14">
+            <AnimatePresence initial={false} mode="wait">
+              <motion.div
+                key={activeProject.id}
+                initial={shouldReduceMotion ? { opacity: 1 } : { opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, y: -6 }}
+                transition={shouldReduceMotion ? { duration: 0 } : { duration: 0.28, ease: "easeOut" }}
+              >
+                <p className="text-[0.58rem] uppercase tracking-[0.28em] text-slate-400">
+                  {String(activeIndex + 1).padStart(2, "0")} / {String(featuredProjects.length).padStart(2, "0")} · {activeSummary?.category ?? "Project"}
+                </p>
+                <h3 className="mt-2 text-xl font-medium tracking-[-0.03em] text-slate-800 sm:text-2xl">
+                  {activeProject.title}
+                </h3>
+                <p className="mx-auto mt-1 max-w-lg text-sm leading-6 text-slate-500">
+                  {activeSummary?.tagline ?? activeProject.description}
+                </p>
+              </motion.div>
+            </AnimatePresence>
+          </div>
         </div>
 
         <p className="sr-only" aria-live="polite">
@@ -286,15 +311,19 @@ export default function FeaturedProjects() {
             position={selectedProjectIndex + 1}
             total={featuredProjects.length}
             onClose={() => setSelectedProject(null)}
-            onPrevious={
-              selectedProjectIndex > 0
-                ? () => openProject(featuredProjects[selectedProjectIndex - 1])
-                : undefined
+            onPrevious={() =>
+              openProject(
+                featuredProjects[
+                  wrapIndex(selectedProjectIndex - 1, featuredProjects.length)
+                ]
+              )
             }
-            onNext={
-              selectedProjectIndex < featuredProjects.length - 1
-                ? () => openProject(featuredProjects[selectedProjectIndex + 1])
-                : undefined
+            onNext={() =>
+              openProject(
+                featuredProjects[
+                  wrapIndex(selectedProjectIndex + 1, featuredProjects.length)
+                ]
+              )
             }
           />
         )}

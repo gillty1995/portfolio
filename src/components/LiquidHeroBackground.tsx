@@ -80,14 +80,14 @@ const fragmentShaderSource = `
     float secondaryFlow = 1.0 - smoothstep(0.025, 0.135, abs(detail - 0.535));
     float liquidEdge = clamp(mainEdge * 0.72 + secondaryFlow * 0.12, 0.0, 1.0);
 
-    vec3 coolWhite = vec3(0.905, 0.918, 0.932);
-    vec3 pearl = vec3(0.995, 0.992, 0.976);
-    vec3 silver = vec3(0.455, 0.525, 0.605);
-    vec3 frost = vec3(0.755, 0.800, 0.840);
+    vec3 coolWhite = vec3(0.968, 0.970, 0.972);
+    vec3 pearl = vec3(0.998, 0.998, 0.996);
+    vec3 silver = vec3(0.800, 0.812, 0.824);
+    vec3 frost = vec3(0.920, 0.925, 0.930);
 
     vec3 color = mix(coolWhite, pearl, liquidBody * 0.90);
-    color = mix(color, frost, secondaryFlow * 0.07);
-    color = mix(color, silver, liquidEdge * 0.54);
+    color = mix(color, frost, secondaryFlow * 0.045);
+    color = mix(color, silver, liquidEdge * 0.16);
 
     float centerLight = 1.0 - smoothstep(0.18, 0.92, length(point * vec2(0.78, 1.08)));
     color = mix(color, pearl, centerLight * 0.16);

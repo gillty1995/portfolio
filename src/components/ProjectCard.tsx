@@ -18,6 +18,7 @@ interface ProjectCardProps {
 
 const ProjectCard: React.FC<ProjectCardProps> = ({
   title,
+  description,
   backgroundImage,
   onClick,
 }) => {
@@ -36,17 +37,19 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
         backgroundRepeat: "no-repeat",
       }}
     >
-      {!hasBackgroundImage && (
-        <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4 bg-black/20">
-          <span className="text-xs uppercase tracking-[0.3em] text-gray-300 mb-3">
-            Current Work
-          </span>
-          <h3 className="text-2xl font-semibold leading-tight">{title}</h3>
-          <p className="mt-2 text-sm text-gray-200 max-w-[12rem]">
-            Full-stack product work across AI, UX, and platform improvements.
-          </p>
-        </div>
-      )}
+      <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/20 to-transparent" />
+      <div className="absolute inset-x-0 bottom-0 p-5 text-left">
+        <span className="text-[0.58rem] uppercase tracking-[0.22em] text-white/70">
+          Project
+        </span>
+        <h3 className="mt-2 text-2xl font-medium leading-tight text-white">{title}</h3>
+        <p className="mt-2 line-clamp-3 text-xs leading-5 text-white/80">
+          {description}
+        </p>
+        <span className="mt-4 inline-flex text-[0.62rem] uppercase tracking-[0.16em] text-white">
+          View case study <span aria-hidden="true" className="ml-2">→</span>
+        </span>
+      </div>
     </div>
   );
 };

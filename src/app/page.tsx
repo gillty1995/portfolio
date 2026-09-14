@@ -1,7 +1,6 @@
 // app/page.tsx
 import React, { Suspense } from "react";
 import Hero from "@/components/Hero";
-import FeaturedProjects from "@/components/FeaturedProjects";
 import Skills from "@/components/Skills";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
@@ -13,7 +12,6 @@ export default function HomePage() {
       fallback={<LoadingScreen />}
     >
       <Hero />
-      <FeaturedProjects />
       <Skills />
       <Contact />
       <Footer />
