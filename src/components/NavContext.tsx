@@ -1,5 +1,5 @@
 "use client";
-import { createContext, useContext, useState } from "react";
+import { createContext, useCallback, useContext, useMemo, useState } from "react";
 
 interface NavContextType {
   isOpen: boolean;
@@ -16,12 +16,14 @@ export const useNav = () => useContext(NavContext);
 export const NavProvider = ({ children }: { children: React.ReactNode }) => {
   const [isOpen, setIsOpen] = useState(false);
 
-  const toggleMenu = () => {
+  const toggleMenu = useCallback(() => {
     setIsOpen((prev) => !prev);
-  };
+  }, []);
+
+  const value = useMemo(() => ({ isOpen, toggleMenu }), [isOpen, toggleMenu]);
 
   return (
-    <NavContext.Provider value={{ isOpen, toggleMenu }}>
+    <NavContext.Provider value={value}>
       {children}
     </NavContext.Provider>
   );

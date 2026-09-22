@@ -1,6 +1,13 @@
 "use client";
 
-import { useCallback, useRef, useState, type CSSProperties } from "react";
+import {
+  memo,
+  useCallback,
+  useMemo,
+  useRef,
+  useState,
+  type CSSProperties,
+} from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import Image from "next/image";
 import {
@@ -10,29 +17,23 @@ import {
   projectsData,
 } from "@/utils/ProjectData";
 import ProjectModal from "./ProjectModal";
+import { keepMotionOnRenderLoop } from "@/utils/keepMotionOnRenderLoop";
 
 const CARD_LAYOUTS = [
-  { x: "0vw", y: 22, scale: 1.08, rotate: 0, opacity: 1 },
+  {
+    x: "calc(-1 * clamp(7rem, 27vw, 32rem))",
+    y: 46,
+    scale: 0.72,
+    rotate: -1.5,
+    opacity: 0.72,
+  },
+  { x: "0vw", y: 22, scale: 1.2, rotate: 0, opacity: 1 },
   {
     x: "clamp(7rem, 27vw, 32rem)",
     y: 46,
-    scale: 0.78,
+    scale: 0.72,
     rotate: 1.5,
-    opacity: 0.88,
-  },
-  {
-    x: "calc(-1 * clamp(7rem, 27vw, 32rem))",
-    y: 58,
-    scale: 0.66,
-    rotate: -1.5,
-    opacity: 0.7,
-  },
-  {
-    x: "clamp(5rem, 18vw, 20rem)",
-    y: 8,
-    scale: 0.54,
-    rotate: 2.5,
-    opacity: 0.52,
+    opacity: 0.72,
   },
 ] as const;
 
@@ -42,21 +43,26 @@ function wrapIndex(value: number, length: number) {
   return ((value % length) + length) % length;
 }
 
-export default function FeaturedProjects() {
+function FeaturedProjects() {
   const shouldReduceMotion = useReducedMotion();
   const wheelLockRef = useRef(false);
   const wheelTimerRef = useRef<number | undefined>(undefined);
   const pointerStartRef = useRef<{ id: number; x: number; y: number } | null>(null);
   const suppressClickRef = useRef(false);
+  const suppressClickTimerRef = useRef<number | undefined>(undefined);
   const [{ index: activeIndex, direction }, setNavigation] = useState({
     index: 0,
     direction: 1,
   });
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
-  const featuredProjects = featuredProjectIds
-    .map((id) => projectsData.find((project) => project.id === id))
-    .filter((project): project is Project => Boolean(project));
+  const featuredProjects = useMemo(
+    () =>
+      featuredProjectIds
+        .map((id) => projectsData.find((project) => project.id === id))
+        .filter((project): project is Project => Boolean(project)),
+    [],
+  );
 
   const navigateTo = useCallback(
     (nextIndex: number) => {
@@ -88,7 +94,7 @@ export default function FeaturedProjects() {
 
   if (!featuredProjects.length) return null;
 
-  const carouselEntries = [-1, 0, 1, 2].map((offset, slot) => ({
+  const carouselEntries = [-1, 0, 1].map((offset, slot) => ({
     project: featuredProjects[wrapIndex(activeIndex + offset, featuredProjects.length)],
     slot,
   }));
@@ -126,14 +132,22 @@ export default function FeaturedProjects() {
 
   const handlePointerUp = (event: React.PointerEvent<HTMLElement>) => {
     const start = pointerStartRef.current;
+    if (!start || start.id !== event.pointerId) return;
+
     pointerStartRef.current = null;
-    if (!start) return;
 
     const deltaX = event.clientX - start.x;
     const deltaY = event.clientY - start.y;
     if (Math.abs(deltaX) < 56 || Math.abs(deltaX) <= Math.abs(deltaY)) return;
 
     suppressClickRef.current = true;
+    if (suppressClickTimerRef.current !== undefined) {
+      window.clearTimeout(suppressClickTimerRef.current);
+    }
+    suppressClickTimerRef.current = window.setTimeout(() => {
+      suppressClickRef.current = false;
+      suppressClickTimerRef.current = undefined;
+    }, 0);
     navigateTo(activeIndex + (deltaX < 0 ? 1 : -1));
   };
 
@@ -162,19 +176,18 @@ export default function FeaturedProjects() {
             onPointerUp={handlePointerUp}
             onPointerCancel={() => {
               pointerStartRef.current = null;
+              suppressClickRef.current = false;
+              if (suppressClickTimerRef.current !== undefined) {
+                window.clearTimeout(suppressClickTimerRef.current);
+                suppressClickTimerRef.current = undefined;
+              }
             }}
             className="relative h-[clamp(300px,52vh,520px)] w-full max-w-[620px] touch-pan-y"
           >
           <AnimatePresence initial={false} custom={direction} mode="popLayout">
             {carouselEntries.map(({ project, slot }) => {
               const isActiveCard = project.id === featuredProjects[activeIndex].id;
-              const layout = [
-                CARD_LAYOUTS[2],
-                CARD_LAYOUTS[0],
-                CARD_LAYOUTS[1],
-                CARD_LAYOUTS[3],
-              ][slot];
-              const activeScale = isActiveCard && project.id === 3 ? 1.2 : layout.scale;
+              const layout = CARD_LAYOUTS[slot];
               const image =
                 featuredProjectImages[project.id] ?? project.backgroundImage;
               const isCustomImage = Boolean(featuredProjectImages[project.id]);
@@ -182,15 +195,27 @@ export default function FeaturedProjects() {
               return (
                 <motion.div
                   key={project.id}
-                  initial={shouldReduceMotion ? false : { opacity: 0, scale: 0.82, filter: "blur(5px)" }}
+                  onUpdate={keepMotionOnRenderLoop}
+                  initial={false}
                   animate={{
                     x: layout.x,
                     y: layout.y,
-                    scale: activeScale,
+                    scale: layout.scale,
                     rotate: layout.rotate,
                     opacity: layout.opacity,
-                    filter: "blur(0px)",
+                    filter: isActiveCard ? "blur(0px)" : "blur(2px)",
                   }}
+                  whileHover={
+                    shouldReduceMotion
+                      ? undefined
+                      : {
+                          scale: layout.scale + 0.05,
+                          filter: "blur(0px)",
+                          opacity: 1,
+                          transition: { duration: 0.2, ease: "easeOut" },
+                        }
+                  }
+                  whileTap={shouldReduceMotion ? undefined : { scale: layout.scale + 0.02 }}
                   exit={
                     shouldReduceMotion
                       ? { opacity: 0 }
@@ -222,7 +247,7 @@ export default function FeaturedProjects() {
                   style={{
                     willChange: "opacity, filter, transform",
                     zIndex: isActiveCard ? 20 : CARD_LAYOUTS.length - slot,
-                    pointerEvents: isActiveCard ? "auto" : "none",
+                    pointerEvents: "auto",
                   }}
                 >
                   <Image
@@ -247,6 +272,10 @@ export default function FeaturedProjects() {
                     onClick={() => {
                       if (suppressClickRef.current) {
                         suppressClickRef.current = false;
+                        if (suppressClickTimerRef.current !== undefined) {
+                          window.clearTimeout(suppressClickTimerRef.current);
+                          suppressClickTimerRef.current = undefined;
+                        }
                         return;
                       }
 
@@ -264,9 +293,7 @@ export default function FeaturedProjects() {
                     className={
                       isActiveCard
                         ? "absolute left-[8%] top-[8%] h-[84%] w-[84%] cursor-pointer bg-transparent outline-none focus-visible:ring-2 focus-visible:ring-gray-800 focus-visible:ring-offset-4 focus-visible:ring-offset-gray-200"
-                        : `absolute top-1/4 h-1/2 w-1/2 cursor-pointer bg-transparent outline-none focus-visible:ring-2 focus-visible:ring-gray-800 focus-visible:ring-offset-4 focus-visible:ring-offset-gray-200 ${
-                            slot === 0 ? "left-0" : "right-0"
-                          }`
+                        : "absolute inset-0 cursor-pointer bg-transparent outline-none focus-visible:ring-2 focus-visible:ring-gray-800 focus-visible:ring-offset-4 focus-visible:ring-offset-gray-200"
                     }
                   />
                 </motion.div>
@@ -279,6 +306,7 @@ export default function FeaturedProjects() {
             <AnimatePresence initial={false} mode="wait">
               <motion.div
                 key={activeProject.id}
+                onUpdate={keepMotionOnRenderLoop}
                 initial={shouldReduceMotion ? { opacity: 1 } : { opacity: 0, y: 8 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, y: -6 }}
@@ -331,3 +359,5 @@ export default function FeaturedProjects() {
     </section>
   );
 }
+
+export default memo(FeaturedProjects);
