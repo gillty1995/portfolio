@@ -14,6 +14,7 @@ import {
   featuredProjectImages,
   projectCaseStudySummaries,
 } from "@/utils/ProjectData";
+import { keepMotionOnRenderLoop } from "@/utils/keepMotionOnRenderLoop";
 
 interface ProjectModalProps {
   project: {
@@ -149,6 +150,7 @@ export default function ProjectModal({
   return (
     <motion.div
       ref={dialogRef}
+      onUpdate={keepMotionOnRenderLoop}
       role="dialog"
       aria-modal="true"
       aria-labelledby={titleId}
