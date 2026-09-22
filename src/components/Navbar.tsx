@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { useNav } from "./NavContext";
 import { usePathname, useRouter } from "next/navigation";
+import { keepMotionOnRenderLoop } from "@/utils/keepMotionOnRenderLoop";
 
 const defaultNavLinks = [
   { name: "Home", href: "#hero" },
@@ -233,12 +234,17 @@ export default function Navbar() {
         }}
         initial="closed"
         animate={isOpen ? "open" : "closed"}
+        onUpdate={keepMotionOnRenderLoop}
         variants={{
           open: {
             clipPath: "circle(120% at 99% 4%)",
             transition: shouldReduceMotion
               ? { duration: 0 }
-              : { type: "spring", stiffness: 100, damping: 20 },
+              : {
+                  type: "spring", stiffness: 100, damping: 20,
+                  // Avoid snapping the last fraction of this viewport-sized circle.
+                  restDelta: 0.001, restSpeed: 0.01,
+                },
           },
           closed: {
             clipPath: "circle(0% at 98.5% 4%)",
