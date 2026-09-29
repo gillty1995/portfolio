@@ -22,6 +22,16 @@ body {
 
 html {
   scroll-behavior: smooth;
+  scrollbar-width: none;
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  display: none;
+}
+
+html::-webkit-scrollbar-track {
+  background: transparent;
 }
 
 @font-face {

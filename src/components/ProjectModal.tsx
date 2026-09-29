@@ -235,7 +235,7 @@ export default function ProjectModal({
                   setDemoReady(false);
                   setDemoError(true);
                 }}
-                className={`max-h-[68vh] w-full rounded-2xl bg-slate-950 object-contain shadow-[0_24px_80px_rgba(15,23,42,0.14)] transition-opacity duration-500 ${
+                className={`aspect-video max-h-[68vh] w-full max-w-full rounded-2xl bg-slate-950 object-contain shadow-[0_24px_80px_rgba(15,23,42,0.14)] transition-opacity duration-500 ${
                   demoReady ? "opacity-100" : "opacity-0"
                 }`}
               >

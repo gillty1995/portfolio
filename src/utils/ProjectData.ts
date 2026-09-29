@@ -1,6 +1,7 @@
-export const featuredProjectIds = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10] as const;
+export const featuredProjectIds = [11, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10] as const;
 
 export const featuredProjectImages: Record<number, string> = {
+  11: "/images/outgrown-featured.png",
   0: "/images/picio-featured.png",
   1: "/images/leaplogger-detail-v3.png",
   2: "/images/device-mockups/retry/clickk-macbook-v2.png",
@@ -26,6 +27,17 @@ export const projectCaseStudySummaries: Record<
   number,
   ProjectCaseStudySummary
 > = {
+  11: {
+    category: "iOS music player",
+    tagline: "Shape what plays next by sorting the songs in your music library.",
+    role: "Product designer & iOS engineer",
+    stack: ["React Native", "Expo", "TypeScript", "Swift", "MusicKit"],
+    highlights: [
+      "Designed and built a focused listening flow for keeping, removing, or favoriting songs.",
+      "Added durable local rotation decisions, accessible controls, and undo support.",
+      "Connected playback and managed playlist updates through an iOS MusicKit bridge.",
+    ],
+  },
   0: {
     category: "Mobile product",
     tagline: "AI-assisted nutrition and activity tracking built for everyday use.",
@@ -150,6 +162,61 @@ export const projectCaseStudySummaries: Record<
 };
 
 export const projectsData = [
+  {
+    id: 11,
+    title: "Outgrown",
+    description:
+      "Outgrown is an iOS music player for reshaping a personal listening rotation over time. While listening, keep a song and move on, remove it from Outgrown’s future rotation, or favorite it for another time. Removed songs stay in the listener’s source library. I designed and built the app’s sorting and player experience, combining React Native with a native iOS MusicKit bridge.",
+    backgroundImage: "/images/outgrown-featured.png",
+    links: {
+      Website: "https://outgrownmusic.com/",
+      "App Store": "https://apps.apple.com/app/outgrown-curate-your-music/id6813162138",
+    },
+    frontendFramework: `
+      <p><strong>Outgrown’s iOS app</strong> uses <strong>React Native, Expo, TypeScript, and Expo Router</strong>. The listening flow presents library tracks as album-art cards with Keep, Remove, Favorite, and Undo controls, alongside playback and rotation progress. Actions support both gestures and accessible buttons.</p>
+
+      <h4 class="font-semibold">Technologies Used:</h4>
+      <ul>
+        <li><strong>React Native & Expo</strong> – The native iOS product foundation.</li>
+        <li><strong>TypeScript</strong> – Typed app, domain, and service boundaries.</li>
+        <li><strong>Expo Router</strong> – File-based navigation across the app’s listening and library screens.</li>
+        <li><strong>TanStack Query</strong> – Provider request lifecycle and cached server state.</li>
+        <li><strong>AsyncStorage</strong> – Durable on-device storage for rotation decisions.</li>
+      </ul>
+    `,
+    backendFramework: `
+      <p>Outgrown uses native and provider integrations in place of a custom application server. TypeScript services keep rotation decisions and playback logic behind normalized music-provider contracts. A Swift MusicKit bridge handles iOS music capabilities, while the local repository persists user choices. Supported playlist changes synchronize separately from the local decision so the app can report pending, unsupported, or failed sync states.</p>
+
+      <h4 class="font-semibold">Technologies Used:</h4>
+      <ul>
+        <li><strong>Swift & MusicKit</strong> – Native Apple Music access and iOS playback integration.</li>
+        <li><strong>Provider adapters</strong> – Keep provider SDK types behind the integration boundary.</li>
+        <li><strong>RotationService</strong> – Applies local Keep, Remove, Favorite, and undo decisions before playlist synchronization.</li>
+        <li><strong>LocalRotationRepository</strong> – Validates and stores rotation state on device.</li>
+      </ul>
+    `,
+    challengesFaced:
+      "The central engineering challenge was keeping the listening experience responsive while coordinating playback, durable user decisions, and provider playlist updates. Outgrown saves rotation choices locally first, then handles provider synchronization with explicit pending, unsupported, and failed states. The app also needs to keep queue behavior consistent as songs are kept or removed, while preserving a safe undo path.",
+    futureImprovements: `
+      <p>The current product focuses on music playback and sorting a personal library. Recommendations, discovery, social features, custom streaming, and providers beyond Apple Music and Spotify are outside its defined product scope.</p>
+    `,
+    finalThoughts:
+      "Outgrown brings product design, React Native development, native iOS integration, music playback, and durable state management into one focused listening experience. Its central idea is simple: let listeners decide what belongs in their rotation while the music keeps playing.",
+    videoUrl: "/videos/outgrown-video.mov",
+    details: `
+      <p><strong>Key Features:</strong></p>
+      <ul>
+        <li><strong>Sort while listening</strong> – Keep a track and advance, remove it from Outgrown’s rotation, or favorite it without leaving the current song.</li>
+        <li><strong>Accessible actions</strong> – Sorting decisions are available through labeled controls as well as gestures.</li>
+        <li><strong>Undo</strong> – Restore a recent rotation decision through the app’s undo flow.</li>
+        <li><strong>Rotation progress</strong> – See reviewed and remaining library counts as sorting progresses.</li>
+        <li><strong>Managed playlists</strong> – Where supported, Outgrown mirrors removed songs and favorites into its Apple Music playlists.</li>
+        <li><strong>Explicit sync state</strong> – The interface distinguishes pending, successful, unsupported, and failed provider operations.</li>
+        <li><strong>On-device state</strong> – Rotation choices are persisted locally before network synchronization.</li>
+      </ul>
+      <p>Removing a song changes its eligibility in Outgrown’s rotation. It does not delete the song from the listener’s music library.</p>
+    `,
+  },
   {
     id: 0,
     title: "Picio",
