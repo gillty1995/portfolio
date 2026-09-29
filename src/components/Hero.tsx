@@ -42,8 +42,8 @@ export default function Hero() {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
   };
 
-  const featuredProjects = selectedProjects
-    .map((project) => projectsData.find((projectData) => projectData.id === project.projectId))
+  const featuredProjects = [11, ...selectedProjects.map((project) => project.projectId)]
+    .map((projectId) => projectsData.find((projectData) => projectData.id === projectId))
     .filter((project): project is (typeof projectsData)[number] => Boolean(project));
   const selectedProjectIndex = selectedProjectId === null
     ? -1
@@ -61,7 +61,7 @@ export default function Hero() {
         <LiquidHeroBackground />
       </div>
       <Image
-        src="/images/portfolio-hero/picio-hero-background-v1.png"
+        src="/images/portfolio-hero/outgrown-hero-background.png"
         alt=""
         fill
         priority
@@ -134,6 +134,13 @@ export default function Hero() {
           ))}
         </div>
       </div>
+
+      <button
+        type="button"
+        aria-label="Open Outgrown project details"
+        onClick={() => setSelectedProjectId(11)}
+        className="absolute right-[6%] top-[24%] z-[3] hidden h-[51%] w-[14%] -rotate-[6deg] cursor-pointer rounded-[16%] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#20272d] focus-visible:ring-offset-4 lg:block"
+      />
 
       {selectedProject && selectedProjectIndex >= 0 && (
         <ProjectModal
