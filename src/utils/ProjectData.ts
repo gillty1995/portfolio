@@ -165,6 +165,7 @@ export const projectsData = [
   {
     id: 11,
     title: "Outgrown",
+    demoDevice: "iphone" as const,
     description:
       "Outgrown is an iOS music player for reshaping a personal listening rotation over time. While listening, keep a song and move on, remove it from Outgrown’s future rotation, or favorite it for another time. Removed songs stay in the listener’s source library. I designed and built the app’s sorting and player experience, combining React Native with a native iOS MusicKit bridge.",
     backgroundImage: "/images/outgrown-featured.png",
@@ -220,6 +221,7 @@ export const projectsData = [
   {
     id: 0,
     title: "Picio",
+    demoDevice: "iphone" as const,
     description:
       "Picio is an iOS meal and activity tracker I designed and built to make nutrition logging faster, clearer, and easier to repeat. Users can photograph a meal, review and correct an AI-generated nutrition estimate, save it to their daily log, track workouts, receive customizable meal reminders, review historical entries, and see weekly progress. I also implemented Apple’s Liquid Glass UI for the app’s navigation bar, giving the primary navigation a native, modern iOS feel while preserving accessible fallbacks. A differentiating workflow suggests encouraging cardio options when a user goes over their maintenance calories, helping them understand practical ways to balance the day without guilt-driven messaging.",
     backgroundImage: "/images/picio-image.png",
@@ -270,7 +272,7 @@ export const projectsData = [
     `,
     finalThoughts:
       "Picio is a complete independent mobile product that brought together product design, React Native development, backend architecture, AI integration, authentication, subscriptions, data security, and App Store distribution. The project pushed me to think carefully about how to make a technically complex workflow feel calm, understandable, and genuinely useful in everyday life.",
-    videoUrl: "/videos/picio-video.mp4",
+    videoUrl: "/videos/picio-demo-portrait.mp4",
     details: `
       <p><strong>Key Features:</strong></p>
       <ul>
@@ -290,6 +292,7 @@ export const projectsData = [
   {
     id: 1,
     title: "LeapLogger",
+    demoDevice: "laptop" as const,
     description:
       "LeapLogger is a full-stack SaaS writing and note-taking platform I designed, built, and soft-launched independently. It combines a focused writing experience with rich-text editing, grammar assistance, organization tools, account management, and subscription-based access. I owned the product end-to-end, from architecture and UI/UX through authentication, billing, third-party integrations, deployment, and production polish.",
     backgroundImage: "/images/leaplogger-image.png",
@@ -336,7 +339,7 @@ export const projectsData = [
     `,
     finalThoughts:
       "LeapLogger has been my most complete independent SaaS project to date. Building and soft-launching it required me to work across product design, frontend and backend architecture, authentication, payments, integrations, infrastructure, and production deployment. More than anything, it gave me experience making the kinds of tradeoffs that come with owning a real product rather than simply completing individual features.",
-    videoUrl: "/videos/leaplogger-video.mov",
+    videoUrl: "/videos/leaplogger-demo-h264.mp4",
     details: `
       <p><strong>Key Features:</strong></p>
       <ul>
@@ -354,6 +357,7 @@ export const projectsData = [
   {
     id: 2,
     title: "Clickk",
+    demoDevice: "laptop" as const,
     description:
       "Clickk is a lead generation system that uses interactive offers, AI-powered insights, and optimized user flows to capture and qualify leads through content-driven engagement. I handle a broad mix of product work including features, bug fixes, chores, maintenance, and larger end-to-end flows across the frontend and backend. The examples below highlight some of the work I’ve owned, such as AI-driven lead insights, offer suggestions, lead pages, metrics auditing, quiz offers, mobile UX, and architectural refactors that improved consistency and reduced technical debt.",
     backgroundImage: "/images/clickk-image.png",
@@ -398,7 +402,7 @@ export const projectsData = [
     `,
     finalThoughts:
       "Clickk has been a strong opportunity to work as a full-stack engineer on a wide range of product work, from features and bug fixes to maintenance and deeper architecture improvements. It’s also pushed me to improve architectural discipline, keep code quality high, and reduce technical debt while moving fast.",
-    videoUrl: "/videos/clickk-video.mov",
+    videoUrl: "/videos/clickk-demo-h264.mp4",
     details: `
       <p><strong>Key Contributions:</strong></p>
       <ul>
@@ -416,6 +420,7 @@ export const projectsData = [
   {
       id: 3,
       title: "Freekik",
+      demoDevice: "iphone" as const,
       description: "Freekik is a modern football match info app built to practice a modernized full-stack workflow — focused on fast, accessible live match data, search with recent history, and PWA support so you can follow games on the go.",
       backgroundImage: "/images/freekik-image.png",
       links: {
@@ -453,7 +458,7 @@ export const projectsData = [
       </ul>
     `,
       finalThoughts: "Freekik was a great practice project to sharpen modern full-stack tools — especially tRPC, TanStack Query, shadcn/radix component work, Docker deployment, and Cloudflare. I built it as a PWA because I use my phone a lot to follow games while I'm on the run, so installability and fast access were priorities.",
-      videoUrl: "/videos/freekik-video.mp4",
+      videoUrl: "/videos/freekik-demo-portrait.mp4",
       details: `
       <p><strong>Key Features:</strong></p>
       <ul>
@@ -468,6 +473,7 @@ export const projectsData = [
   {
     id: 4,
     title: "Textile Poms",
+    demoDevice: "laptop" as const,
     description: 
       "Textile Poms is a responsive Pomeranian adoption website showcasing healthy, AKC-registered puppies born and raised in St. Louis. Visitors can view detailed puppy profiles, read the blog, and get in touch via a contact form, while admins manage content through a custom CMS with secure tools behind the scenes.",
     backgroundImage: "/images/textilepoms-image.png",
@@ -529,6 +535,7 @@ export const projectsData = [
     {
     id: 5,
       title: "RSVPMe",
+      demoDevice: "laptop" as const,
       description:
         "Ever struggled to keep track of who’s coming to your events? RSVPMe makes event planning effortless by allowing users to create, manage, and track RSVPs — all in one place. Whether it’s a small gathering or a large party, RSVPMe ensures smooth coordination with built-in location services and real-time updates.",
       backgroundImage: "/images/rsvpme-image.png",
@@ -586,6 +593,7 @@ export const projectsData = [
     {
     id: 6,
       title: "FutbolScores",
+      demoDevice: "laptop" as const,
       description: "A football-themed web application that allows users to search for teams, view live games, and save their favorite matches. It integrates RapidAPI’s Football API to display real-time data. Users can create accounts, log in, and manage saved games.",
       backgroundImage: "/images/futbolscores-image.png", 
       links: {
@@ -632,6 +640,7 @@ export const projectsData = [
     {
     id: 7,
       title: "St. Louis Men's Soccer",
+    demoDevice: "laptop" as const,
       description: "I joined a local soccer club and noticed that their website was super outdated, so I decided to throw together a modernized website for them. The aim was to provide a cleaner, more pleasant layout along with an intuitive admin interface for easy schedule updates and content management. It was a fun experience incorporating all their data and meeting their requirements for a dynamic, user-friendly online presence.",
       backgroundImage: "/images/stlsoccer-image.png", 
       links: {
@@ -674,6 +683,7 @@ export const projectsData = [
     {      
     id: 8,
     title: "Practibot",
+    demoDevice: "laptop" as const,
     description: "Ever wanted a music tutor at your fingertips? 🎶 Practibot is here to help you learn and improve your music skills with the power of AI! Designed for musicians and aspiring learners alike, Practibot offers detailed guidance on music theory, composition, and practice techniques through a conversational, user-friendly chatbot.",
     backgroundImage: "/images/practibot-image.png", 
     links: {
@@ -721,6 +731,7 @@ export const projectsData = [
     {
     id: 9,
     title: "FutbolRules",
+    demoDevice: "laptop" as const,
     description: "What the heck is an offside rule? What makes a foul a foul? 🤷‍♂️ FutbolRules will help you get accurate, real-time answers to any question about soccer rules using Generative AI. It’s a user-friendly platform where users can input their queries, and the AI-powered backend responds with detailed answers, helping users better understand the intricacies of the game.",
     backgroundImage: "/images/futbolrules-image.png", 
     links: {
@@ -773,6 +784,7 @@ export const projectsData = [
     {
       id: 10,
       title: "Around the U.S.",
+      demoDevice: "laptop" as const,
       description: "Around the U.S. is a responsive web project that adapts seamlessly to different screen sizes and devices. It includes JavaScript-powered interactivity for uploading and saving data to a server. This project was developed using modular components and follows best practices such as the BEM methodology and OOP principles to ensure clean, reusable code.",
       backgroundImage: "/images/aroundtheus-image.png",
       links: {
