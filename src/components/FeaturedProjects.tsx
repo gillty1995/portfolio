@@ -191,6 +191,8 @@ function FeaturedProjects() {
               const image =
                 featuredProjectImages[project.id] ?? project.backgroundImage;
               const isCustomImage = Boolean(featuredProjectImages[project.id]);
+              // RSVPMe and Around the U.S. need extra clearance above the caption.
+              const useCompactMockup = project.id === 5 || project.id === 10;
 
               return (
                 <motion.div
@@ -257,6 +259,7 @@ function FeaturedProjects() {
                     draggable={false}
                     fill
                     sizes="(max-width: 768px) 92vw, 680px"
+                    style={useCompactMockup ? { transform: "scale(0.85)" } : undefined}
                     className={`absolute inset-0 h-full w-full select-none ${
                       isCustomImage ? "object-contain" : "object-cover"
                     }`}

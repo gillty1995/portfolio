@@ -15,6 +15,7 @@ import {
   projectCaseStudySummaries,
 } from "@/utils/ProjectData";
 import { keepMotionOnRenderLoop } from "@/utils/keepMotionOnRenderLoop";
+import ProjectDemoFrame from "@/components/ProjectDemoFrame";
 
 interface ProjectModalProps {
   project: {
@@ -29,6 +30,7 @@ interface ProjectModalProps {
     futureImprovements: string;
     finalThoughts: string;
     videoUrl: string;
+    demoDevice: "iphone" | "laptop";
     details: string;
   };
   position?: number;
@@ -59,6 +61,7 @@ export default function ProjectModal({
   const shouldReduceMotion = useReducedMotion();
   const [showDemo, setShowDemo] = useState(false);
   const [demoReady, setDemoReady] = useState(false);
+  const [mockupFadeComplete, setMockupFadeComplete] = useState(false);
   const [demoError, setDemoError] = useState(false);
 
   const summary = projectCaseStudySummaries[project.id];
@@ -66,6 +69,7 @@ export default function ProjectModal({
     featuredProjectImages[project.id] ?? project.backgroundImage;
   const titleId = `project-${project.id}-title`;
   const descriptionId = `project-${project.id}-description`;
+  const demoFrameVisible = showDemo && demoReady && mockupFadeComplete;
 
   useEffect(() => {
     setShowDemo(false);
@@ -75,10 +79,22 @@ export default function ProjectModal({
 
   useEffect(() => {
     if (!showDemo) {
+      setMockupFadeComplete(false);
       setDemoReady(false);
       setDemoError(false);
     }
   }, [showDemo]);
+
+  useEffect(() => {
+    if (!showDemo) return;
+
+    const fadeTimer = window.setTimeout(
+      () => setMockupFadeComplete(true),
+      shouldReduceMotion ? 0 : 520
+    );
+
+    return () => window.clearTimeout(fadeTimer);
+  }, [showDemo, shouldReduceMotion]);
 
   useEffect(() => {
     const previouslyFocused = document.activeElement as HTMLElement | null;
@@ -217,30 +233,46 @@ export default function ProjectModal({
               fill
               priority
               sizes="(max-width: 1024px) 92vw, 58vw"
-              className={`select-none object-contain transition-opacity duration-500 ${
-                showDemo && demoReady ? "opacity-0" : "opacity-100"
+              aria-hidden={showDemo}
+              className={`select-none object-contain transition-opacity ${
+                shouldReduceMotion ? "duration-0" : "duration-500"
+              } ${
+                showDemo ? "opacity-0" : "opacity-100"
               }`}
             />
             {showDemo && !demoError && (
-              <video
-                controls
-                autoPlay
-                muted
-                playsInline
-                preload="metadata"
-                poster={projectImage}
-                onLoadedData={() => setDemoReady(true)}
-                onCanPlay={() => setDemoReady(true)}
-                onError={() => {
-                  setDemoReady(false);
-                  setDemoError(true);
-                }}
-                className={`aspect-video max-h-[68vh] w-full max-w-full rounded-2xl bg-slate-950 object-contain shadow-[0_24px_80px_rgba(15,23,42,0.14)] transition-opacity duration-500 ${
-                  demoReady ? "opacity-100" : "opacity-0"
+              <ProjectDemoFrame
+                device={project.demoDevice}
+                className={`transition-opacity ${
+                  shouldReduceMotion ? "duration-0" : "duration-500"
+                } ${
+                  demoFrameVisible
+                    ? "visible pointer-events-auto opacity-100"
+                    : "invisible pointer-events-none opacity-0"
                 }`}
               >
-                <source src={project.videoUrl} />
-              </video>
+                <video
+                  aria-label={`${project.title} demo video`}
+                  controls
+                  autoPlay
+                  muted
+                  playsInline
+                  preload="metadata"
+                  onLoadedData={() => setDemoReady(true)}
+                  onCanPlay={() => setDemoReady(true)}
+                  onError={() => {
+                    setDemoReady(false);
+                    setDemoError(true);
+                  }}
+                  className={`h-full w-full ${
+                    project.demoDevice === "laptop"
+                      ? "bg-black object-contain"
+                      : "bg-slate-950 object-cover"
+                  }`}
+                >
+                  <source src={project.videoUrl} />
+                </video>
+              </ProjectDemoFrame>
             )}
             {showDemo && demoError && (
               <div className="flex min-h-[24vh] w-full max-w-md flex-col items-center justify-center gap-3 rounded-2xl border border-slate-300/60 bg-white/45 p-8 text-center shadow-[0_24px_80px_rgba(15,23,42,0.08)]">
@@ -265,7 +297,7 @@ export default function ProjectModal({
                 onClick={() => setShowDemo((current) => !current)}
                 aria-expanded={showDemo}
                 aria-controls={`project-${project.id}-demo-media`}
-                className="group inline-flex cursor-pointer items-center gap-2 rounded-full border border-slate-400/45 bg-white/30 px-4 py-2 text-[0.62rem] font-light tracking-[0.08em] text-slate-600 transition-colors hover:bg-white/75 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-500 sm:text-xs"
+                className="group mt-3 inline-flex cursor-pointer items-center gap-2 rounded-full border border-slate-400/45 bg-white/30 px-4 py-2 text-[0.62rem] font-light tracking-[0.08em] text-slate-600 transition-colors hover:bg-white/75 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-500 sm:text-xs lg:mt-4"
               >
                 <FiPlay aria-hidden="true" className="text-sm" />
                 {showDemo ? "Show mockup" : "Play demo"}
