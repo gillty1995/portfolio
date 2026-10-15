@@ -73,7 +73,7 @@ export default function Hero() {
 
       <div
         className="relative z-[2] mx-auto flex min-h-[100svh] w-full max-w-[1720px] flex-col justify-center gap-4 px-5 pb-7 pt-20 sm:justify-between sm:gap-0 sm:px-10 sm:pt-24 lg:px-16 lg:pb-10"
-        style={{ fontFamily: "LexendZetta, Arial, sans-serif" }}
+        style={{ fontFamily: "LexendZettaHero, Arial, sans-serif" }}
       >
         <div className="relative flex flex-none items-center justify-center pb-0 sm:flex-1 sm:pb-28 lg:pb-32">
           <div className="relative z-10 max-w-[1000px] translate-y-0 text-center sm:translate-y-[29%]">

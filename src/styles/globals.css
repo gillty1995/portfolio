@@ -55,6 +55,22 @@ html::-webkit-scrollbar-track {
   font-style: normal;
 }
 
+@font-face {
+  font-family: "LexendZettaHero";
+  src: url("/fonts/LexendZetta-Light.ttf") format("truetype");
+  font-weight: 300;
+  font-style: normal;
+  font-display: optional;
+}
+
+@font-face {
+  font-family: "LexendZettaHero";
+  src: url("/fonts/LexendZetta-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: optional;
+}
+
 body {
   font-family: "LexendZetta", sans-serif;
 }
